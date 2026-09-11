@@ -1,14 +1,14 @@
 {
   "_resourceType": "settings",
   "startSceneId": "3f2a49fc-1702-5e0c-bf04-b95af5bd795f",
-  "startX": 0,
-  "startY": 0,
+  "startX": 9,
+  "startY": 7,
   "startMoveSpeed": 1,
   "startAnimSpeed": 15,
   "startDirection": "down",
   "showCollisionExtraTiles": false,
   "showCollisionTileValues": false,
-  "collisionLayerOpacity": 50,
+  "collisionLayerOpacity": 40,
   "sgbEnabled": false,
   "customHead": "",
   "defaultBackgroundPaletteIds": [
@@ -50,7 +50,7 @@
     2,
     3
   ],
-  "defaultFontId": "4bd653f0-e08d-424e-9e5b-c1f3aaa21e47",
+  "defaultFontId": "8ed435d9-51cb-44e7-8b0d-ca85e63ca427",
   "defaultCharacterEncoding": "",
   "defaultPlayerSprites": {
     "TOPDOWN": "581d34d0-9591-4e6e-a609-1d94f203b0cd",

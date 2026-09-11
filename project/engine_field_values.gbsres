@@ -24,6 +24,10 @@
     {
       "id": "SHOOTER_WALL_COLLISION_GROUP",
       "value": "COLLISION_GROUP_NONE"
+    },
+    {
+      "id": "shooter_scroll_speed",
+      "value": 32
     }
   ]
 }

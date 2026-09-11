@@ -24,7 +24,7 @@
     {
       "command": "EVENT_TEXT",
       "args": {
-        "text": "<- BREAK ROOM",
+        "text": "THE PRINTER stirs.\nIt has never worked.\nIt is not sorry.",
         "avatarId": "",
         "clearPrevious": true
       },

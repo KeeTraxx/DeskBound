@@ -1,0 +1,102 @@
+{
+  "_resourceType": "sprite",
+  "id": "8eafb291-d678-411a-b026-7c0f08950bd0",
+  "name": "player_van02",
+  "symbol": "sprite_player_van02",
+  "states": [
+    {
+      "id": "a3787888-51f6-4780-bff9-58c93c93a7d6",
+      "name": "",
+      "animationType": "multi_movement",
+      "flipLeft": true,
+      "animations": [
+        {
+          "id": "2d93ced9-8cc6-418e-82f6-725d49f5049b",
+          "frames": [
+            {
+              "id": "f8f83222-8e6b-4409-af88-bd43b3482786",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "fd84b706-d084-413b-84ad-5ea5c3a33b72",
+          "frames": [
+            {
+              "id": "54035c85-8446-4653-ba81-71bda7ff2268",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "16d2481c-df64-446a-b761-42868a07a07f",
+          "frames": [
+            {
+              "id": "d23f4280-8cc3-44dc-bf9d-443b4f848102",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "bc0bbd43-ac2f-4dc0-b903-8016989bcfe1",
+          "frames": [
+            {
+              "id": "ce151d28-ff84-46ae-9893-5be7cccb50c0",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "89aab95e-aced-4deb-a7de-c4cc9e41a380",
+          "frames": [
+            {
+              "id": "4a10ac8a-79c7-4d00-8877-40d037d9a674",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "81d98f32-42eb-4c5c-9b94-d968e86e474a",
+          "frames": [
+            {
+              "id": "68bf3e90-023c-4b25-bdae-9ea3cf9017af",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "75d95cef-2cf9-48f6-b6ce-678cd4fdd815",
+          "frames": [
+            {
+              "id": "5de2a4cf-d8e3-4fc9-8577-e6417788ec0c",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "a139f937-eac1-4ece-b918-9881bfc03b3e",
+          "frames": [
+            {
+              "id": "3a2b1893-4412-4538-82f5-62b14f58b36e",
+              "tiles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "numTiles": 0,
+  "canvasOriginX": 0,
+  "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
+  "boundsX": 0,
+  "boundsY": -8,
+  "boundsWidth": 16,
+  "boundsHeight": 16,
+  "animSpeed": 15,
+  "filename": "player_van02.png",
+  "width": 64,
+  "height": 32,
+  "checksum": "54c4c2aa816a8d468af9a7a7c749f43c8130ede1"
+}

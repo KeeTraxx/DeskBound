@@ -71,21 +71,21 @@ Strictly alternating, player-first. No speed stat — it adds a turn-order branc
 without adding much fun.
 
 ```
-┌─ PLAYER TURN ────────────────────────────────┐
-│ Top menu: ACT / LOOK / FLEE                  │
-│   ACT  → submenu: FIX / TALK / EMAIL / SHRUG │
-│          → resolve per-enemy effect          │
-│   LOOK → flavour text only, no effect,       │
-│          does NOT consume the turn           │
-│   FLEE → attempt to escape (may fail)        │
-│ Apply damage → check enemy Composure ≤ 0     │
-└──────────────────┬───────────────────────────┘
+┌─ PLAYER TURN ──────────────────────────────────┐
+│ Top menu: ACT / LOOK / FLEE                    │
+│   ACT  → submenu: THINK / TALK / EMAIL / SHRUG │
+│          → resolve per-enemy effect            │
+│   LOOK → flavour text only, no effect,         │
+│          does NOT consume the turn             │
+│   FLEE → attempt to escape (may fail)          │
+│ Apply damage → check enemy Composure ≤ 0       │
+└──────────────────┬─────────────────────────────┘
                    ↓ enemy still standing
-┌─ ENEMY TURN ─────────────────────────────────┐
-│ Pick move via weighted rnd()                 │
-│ Show witty enemy line → resolve → apply dmg  │
-│ Check player Composure ≤ 0                   │
-└──────────────────┬───────────────────────────┘
+┌─ ENEMY TURN ───────────────────────────────────┐
+│ Pick move via weighted rnd()                   │
+│ Show witty enemy line → resolve → apply dmg    │
+│ Check player Composure ≤ 0                     │
+└──────────────────┬─────────────────────────────┘
                    ↓
              back to PLAYER TURN
 ```
@@ -115,8 +115,8 @@ Each verb is an *approach*, not an attack. None is universally good.
 
 | Verb | Approach |
 |---|---|
-| **FIX** | Engage with the problem practically. |
-| **TALK** | Reason with it. Address the thing as a person. |
+| **THINK** | Work out what is actually wrong. Diagnose it. |
+| **TALK** | Negotiate with it. Address the thing as a person. |
 | **EMAIL** | Escalate in writing. Paper trail. |
 | **SHRUG** | Disengage. Accept the absurdity. |
 
@@ -134,24 +134,24 @@ move does something other than damage.
 
 | Verb | Pow | Result |
 |---|---|---|
-| **FIX** | **12** | You descale it. It shudders with something like relief. *Strong.* |
+| **THINK** | **12** | You work out that nobody has descaled it since 2019. It shudders, seen at last. *Strong.* |
 | TALK | 4 | "You talk to the coffee machine. It gurgles noncommittally." |
 | EMAIL | 2 | "You email Facilities. The ticket is auto-closed as duplicate." *Weak.* |
 | **SHRUG** | **10** | You drink it black and bitter, like it wants. It respects this. *Strong.* |
 
-**Lesson taught:** practical action and acceptance both work. Escalation doesn't.
+**Lesson taught:** understanding it and accepting it both work. Escalation doesn't.
 
 #### The Printer · Composure 65 · Nerve 9 · Patience 8
 *It has never worked. It will never work. It is not sorry.*
 
 | Verb | Pow | Result |
 |---|---|---|
-| FIX | 3 | You open tray 2. There is no jam in tray 2. There is never a jam in tray 2. *Weak.* |
+| THINK | 3 | You deduce, correctly, that the jam is in tray 2. There is no jam in tray 2. There has never been a jam in tray 2. *Weak.* |
 | TALK | 0 | You say "please." The printer emits one sheet of a document from 2017. *No damage.* |
 | **EMAIL** | **16** | You CC the office manager. Bureaucracy is the only language it fears. *Strong.* |
 | SHRUG | 6 | You walk away. It beeps, wounded by the indifference. |
 
-**Lesson taught:** the verb that won last fight is now the worst one. FIX fails
+**Lesson taught:** the verb that won last fight is now the worst one. THINK fails
 here precisely because it succeeded against the coffee machine.
 
 #### The Meeting That Could've Been An Email · Composure 105 · Nerve 12 · Patience 10 · **BOSS**
@@ -159,12 +159,12 @@ here precisely because it succeeded against the coffee machine.
 
 | Verb | Pow | Result |
 |---|---|---|
-| FIX | 5 | You propose an agenda. Someone says "good point" and continues. *Weak.* |
+| THINK | 5 | You work out what this meeting is for. It is for nothing. Knowing this does not help. *Weak.* |
 | **TALK** | **14** | You say the quiet part: "Could this have been an email?" *Strong.* |
 | EMAIL | 8 | You send the follow-up email *during* the meeting. Deeply illegal. Effective. |
 | **SHRUG** | **2** | You stop resisting. **Restores 12 Composure** and still chips. Survival, mostly. |
 
-**Lesson taught:** the boss can't be fixed or escalated away — it must be named
+**Lesson taught:** the boss can't be reasoned out or escalated away — it must be named
 aloud, and SHRUG flips from attack to heal, so the fight has a sustain option.
 
 ### 3.6 Enemy Moves — all with flavour text
@@ -218,7 +218,7 @@ A single office floor, one in-game day, three battles.
 | 1 | **9:00 Arrival** | Intro, tutorial on movement. Coworker explains Composure. |
 | 2 | **Break Room** | Battle 1 — Dirty Coffee Machine. Teaches ACT verbs. |
 | 3 | **The Corridor** | Exploration, NPC chatter, hints about the printer. |
-| 4 | **Print Station** | Battle 2 — The Printer. Punishes reusing FIX. |
+| 4 | **Print Station** | Battle 2 — The Printer. Punishes reusing THINK. |
 | 5 | **17:00 Meeting Room** | Boss — The Meeting. Win → you go home. Credits. |
 
 Estimated playtime: 15–20 minutes. Deliberately small — a complete, polished
@@ -267,7 +267,7 @@ The one genuinely fiddly bit. GB Studio has no arrays, so the
 
 ```
 LookupPower(enemy_id, act_choice) → battle_power
-  if enemy_id == 1:  if act == FIX → 12, TALK → 4, EMAIL → 2, SHRUG → 10
+  if enemy_id == 1:  if act == THINK → 12, TALK → 4, EMAIL → 2, SHRUG → 10
   if enemy_id == 2:  ...
 ```
 
@@ -379,11 +379,11 @@ in a GB Studio project of this shape.
 - **Script complexity.** The §5.3 lookup is the main sprawl risk. Mitigation:
   custom events, aggressively.
 - **Menu text width.** The old 6-character menu limit was lifted, but screen
-  width still binds. `FIX/TALK/EMAIL/SHRUG` are all ≤5 chars — comfortably safe.
+  width still binds. `THINK/TALK/EMAIL/SHRUG` are all ≤5 chars — comfortably safe.
 - **Sprite height vs. tile geometry.** Sprites are 8x16, so the player occupies
   two vertical tiles and can never stand on the bottom row of a scene. Exit
   triggers must sit at `height - 2` or above, and arrival points must not
-  overlap a return trigger. Both are now checked by `tools/validate.py`.
+  overlap a return trigger.
 - ~~Project version upgrade.~~ **Resolved** — no format change between app 4.2.0 and 4.3.2; see §5.6.
 
 ### Resolved decisions
@@ -422,14 +422,15 @@ not outcome.
 
 #### Verified by simulation
 
-`tools/` constants were tuned against a simulation of the exact shipped
-formulas (3000 games per cell):
+The damage ranges in `enemies.yaml` were tuned by interpreting the *generated*
+`BattleScript` event tree directly (2000 games per cell), so the numbers below
+are the shipped script's behaviour, not a re-implementation of it:
 
-| Enemy | random | optimal | worst | always FIX | always SHRUG |
+| Enemy | random | always THINK | always TALK | always EMAIL | always SHRUG |
 |---|---|---|---|---|---|
-| Coffee (60 HP) | 100% · 5.0t | 100% · 3.9t | 100% · 7.4t | 100% · 3.9t | 100% · 4.1t |
-| Printer (65 HP) | 100% · 6.6t | 100% · 3.7t | 100% · 11.2t | 100% · 11.2t | 100% · 7.1t |
-| Meeting (105 HP) | 100% · 9.1t | 100% · 6.0t | 100% · 16.6t | 99.9% · 9.6t | 100% · 16.6t |
+| Coffee (60 HP) | 100% · 7.0t | 100% · 4.4t | 100% · 10.5t | 100% · 13.8t | 100% · 5.7t |
+| Printer (65 HP) | 100% · 7.6t | 99.9% · 14.8t | 100% · 11.3t | 100% · 4.0t | 100% · 8.6t |
+| Meeting (105 HP) | 100% · 10.1t | 100% · 12.1t | 100% · 6.7t | 100% · 11.0t | 100% · 12.8t |
 
 Every strategy wins; none stalls. Optimal play is ~2× faster than stubborn
 play, so reading the enemy is rewarded with pace rather than survival.

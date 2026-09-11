@@ -31,10 +31,10 @@
     {
       "command": "EVENT_SWITCH_SCENE",
       "args": {
-        "sceneId": "bbdeedd3-0438-5142-95c9-61b3377d322b",
+        "sceneId": "d9e207c3-c53b-4c0d-962b-64de79234d8c",
         "x": {
           "type": "number",
-          "value": 9
+          "value": 8
         },
         "y": {
           "type": "number",
@@ -42,7 +42,7 @@
         },
         "direction": "down",
         "fadeSpeed": 2,
-        "__collapse": true
+        "__collapse": false
       },
       "id": "f3738e43-d5bb-5c43-9bde-f5592e22f48e"
     }

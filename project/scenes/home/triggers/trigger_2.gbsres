@@ -1,0 +1,96 @@
+{
+  "_resourceType": "trigger",
+  "id": "187463e7-06bc-4bbc-a3ab-d71ce6328af0",
+  "name": "",
+  "prefabId": "",
+  "x": 14,
+  "y": 6,
+  "symbol": "trigger_1",
+  "prefabScriptOverrides": {},
+  "width": 4,
+  "height": 4,
+  "script": [
+    {
+      "command": "EVENT_TEXT",
+      "args": {
+        "text": [
+          "Sleep?"
+        ],
+        "__section": "text",
+        "avatarId": "",
+        "minHeight": 4,
+        "maxHeight": 7,
+        "textX": 1,
+        "textY": 1,
+        "textHeight": 5,
+        "position": "bottom",
+        "clearPrevious": true,
+        "showFrame": "true",
+        "speedIn": -1,
+        "speedOut": -1,
+        "closeWhen": "key",
+        "closeButton": "a",
+        "closeDelayTime": 0.5,
+        "closeDelayFrames": 30
+      },
+      "id": "4971ec34-616c-4a02-88fd-8cd03f88003e"
+    },
+    {
+      "command": "EVENT_CHOICE",
+      "args": {
+        "variable": "T0",
+        "trueText": "Yes",
+        "falseText": "No"
+      },
+      "id": "af3700e8-7cf6-44aa-b5cf-5c28c951fbb4"
+    },
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "eq",
+          "valueA": {
+            "type": "variable",
+            "value": "T0"
+          },
+          "valueB": {
+            "type": "true"
+          }
+        },
+        "__collapseElse": true
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_INC_VALUE",
+            "args": {
+              "variable": "25"
+            },
+            "id": "2a5714c7-0898-49b0-bf6a-e7fa0d0bd8b5"
+          },
+          {
+            "command": "EVENT_SWITCH_SCENE",
+            "args": {
+              "sceneId": "d9e207c3-c53b-4c0d-962b-64de79234d8c",
+              "x": {
+                "type": "number",
+                "value": 10
+              },
+              "y": {
+                "type": "number",
+                "value": 8
+              },
+              "direction": "",
+              "fadeSpeed": "2"
+            },
+            "id": "4772c63d-72ec-45ba-bcc1-7b9caed516bd"
+          }
+        ],
+        "false": []
+      },
+      "id": "21a4c0be-a185-4f6c-93a9-0e05973ba9da"
+    }
+  ],
+  "leaveScript": [],
+  "_index": 1
+}

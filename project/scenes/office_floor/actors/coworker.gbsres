@@ -71,7 +71,7 @@
                 {
                   "command": "EVENT_TEXT",
                   "args": {
-                    "text": "Coffee's fixed? Bold.\nThe printer's next.\nGood luck with that.",
+                    "text": "A DIRTY COFFEE MACHINE\nblocks the counter.\nIt is encrusted.",
                     "avatarId": "",
                     "clearPrevious": true
                   },
@@ -97,7 +97,7 @@
     {
       "command": "EVENT_TEXT",
       "args": {
-        "text": "Keep your Composure up.\nWhen it runs out, you\ngo home early.",
+        "text": "THE PRINTER stirs.\nIt has never worked.\nIt is not sorry.",
         "avatarId": "",
         "clearPrevious": true
       },

@@ -120,7 +120,46 @@
       "id": "23",
       "name": "loss_count",
       "symbol": "var_loss_count"
+    },
+    {
+      "id": "24",
+      "name": "transport",
+      "symbol": "var_transport"
+    },
+    {
+      "id": "25",
+      "name": "dayOfWeek",
+      "symbol": "var_dayofweek"
+    },
+    {
+      "id": "26",
+      "name": "commute_time",
+      "symbol": "var_commute_time"
+    },
+    {
+      "id": "187463e7-06bc-4bbc-a3ab-d71ce6328af0__L0",
+      "name": "Local 0",
+      "symbol": "var_local_1"
     }
   ],
-  "constants": []
+  "constants": [
+    {
+      "id": "df1e6324-eda2-434f-9f14-3d13fcfc32d2",
+      "name": "ENCOUNTER_STREET_BIKE",
+      "symbol": "const_encounter_street_bike",
+      "value": 0
+    },
+    {
+      "id": "3ff5bc0c-707f-45d3-b3da-5bc71e01077d",
+      "name": "",
+      "symbol": "const_constant_2",
+      "value": 0
+    },
+    {
+      "id": "9ad504d1-50de-4aa1-8538-0b628853dbda",
+      "name": "",
+      "symbol": "const_constant_3",
+      "value": 0
+    }
+  ]
 }

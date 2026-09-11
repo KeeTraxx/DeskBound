@@ -1,0 +1,183 @@
+{
+  "_resourceType": "sprite",
+  "id": "6a805e5e-e64d-4d3c-b1f8-8cfc10c0b6fe",
+  "name": "motorcycle01",
+  "symbol": "sprite_motorcycle01",
+  "states": [
+    {
+      "id": "7ee9f659-62c6-4c16-ac26-a0d4db30aba7",
+      "name": "",
+      "animationType": "multi",
+      "flipLeft": true,
+      "animations": [
+        {
+          "id": "819abe72-e731-4a9c-9de8-475306e07152",
+          "frames": [
+            {
+              "id": "d05565bc-cdd7-48c0-a3ef-e5db15292413",
+              "tiles": [
+                {
+                  "id": "a2a1d5d4-0a3a-40de-81e9-29a46e4d53fe",
+                  "x": 0,
+                  "y": 0,
+                  "sliceX": 32,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "7388be55-c8c0-4297-9472-acfb0ef6e1e8",
+                  "x": 8,
+                  "y": 0,
+                  "sliceX": 40,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "b74118f3-c7c2-412e-8d4d-aed47a41406c",
+          "frames": [
+            {
+              "id": "a1f11692-f636-4210-b14d-ce571b179974",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "5386ca91-ca8c-4ff5-802a-83737fcb9d5f",
+          "frames": [
+            {
+              "id": "2e89bbf2-de73-4e77-88df-fba60753fb18",
+              "tiles": [
+                {
+                  "id": "70d27a75-3d06-4427-b28e-e29a00df155d",
+                  "x": 0,
+                  "y": 0,
+                  "sliceX": 16,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "de252380-f6bf-4a69-9a0d-bb73bb626b7a",
+                  "x": 8,
+                  "y": 0,
+                  "sliceX": 24,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "854a8fef-0428-4e77-8715-e7e0fca8e45d",
+          "frames": [
+            {
+              "id": "6e74ff8d-40b5-4731-bed3-edb020aea9c5",
+              "tiles": [
+                {
+                  "id": "76aec473-ce3e-472b-96ce-9ffc134c556c",
+                  "x": 0,
+                  "y": 0,
+                  "sliceX": 0,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "9a435209-592f-41be-aaaf-6dce8a853b9c",
+                  "x": 8,
+                  "y": 0,
+                  "sliceX": 8,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "852112be-8f1c-43c0-87c3-0b2d27e57326",
+          "frames": [
+            {
+              "id": "7d46ff1b-565f-4d32-b44b-08d660610137",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "e8a76ff9-b97d-40aa-86cb-03fd951295fd",
+          "frames": [
+            {
+              "id": "da426713-a548-4a9d-b2a9-634175ea9024",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "67b6e11f-4731-44ef-a8c2-ee6722d324e1",
+          "frames": [
+            {
+              "id": "9d7a52fc-7e7c-4559-92a2-b3272c4a302f",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "b7729515-25c4-4a52-96ef-918e17969469",
+          "frames": [
+            {
+              "id": "564b90ce-126e-4f78-86ce-48c76c4e8f8f",
+              "tiles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "numTiles": 6,
+  "canvasOriginX": 0,
+  "canvasOriginY": 0,
+  "canvasWidth": 16,
+  "canvasHeight": 16,
+  "boundsX": 0,
+  "boundsY": -8,
+  "boundsWidth": 16,
+  "boundsHeight": 16,
+  "animSpeed": 15,
+  "filename": "motorcycle01.png",
+  "width": 48,
+  "height": 16,
+  "checksum": "04f150c4d22398545b37629215b660a8bf9339fa"
+}

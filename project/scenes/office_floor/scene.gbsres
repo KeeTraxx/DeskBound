@@ -14,8 +14,8 @@
   "collisions": "0f8+003+0fa+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f!003c+0f!0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f15+",
   "autoFadeSpeed": 1,
   "symbol": "scene_office_floor",
-  "x": 200,
-  "y": 300,
+  "x": 304,
+  "y": 432,
   "script": [
     {
       "command": "EVENT_IF",

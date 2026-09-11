@@ -1,0 +1,226 @@
+# DeskBound enemies.
+#
+# Compile with:  python3 tools/gen_enemies.py
+# That writes the GB Studio custom script "BattleScript", which the battle
+# scene runs On Init. The overworld picks the fight by setting `enemy_id`
+# before switching to the battle scene (see the Coffee Machine actor).
+#
+# `sprite` is a .png file under assets/sprites/ — the path as it sits on disk
+# ("actor.png", or "enemies/coffee.png" in a subfolder), not GB Studio's
+# internal sprite name.
+#
+# Every text field is a list of VARIANTS, and each variant is a list of STEPS:
+#
+#   look:
+#     - - "First box of variant one."
+#       - "Second box, same variant."
+#     - - "Variant two, shown instead."
+#
+# One variant is picked at random each time the line comes up, then its steps
+# play in order, one dialogue box each. Add variants freely — the repeated
+# lines (enemy moves, damage reports) are where a fight starts to feel stale.
+# Use \n for line breaks inside one step.
+#
+# Damage ranges are inclusive and may be written as 5, "3-6" or [3, 6].
+# Any text may use {damage}, {player_composure}, {player_composure_max},
+# {enemy_composure}, {enemy_composure_max} and {turn} — they are replaced with
+# GB Studio variable interpolation.
+
+player:
+  composure: 100
+
+# Composure meters. Each is an actor in the battle scene whose sprite has one
+# frame per fill level; BattleScript sets the frame through the generated
+# "SetBar" script whenever Composure changes. (A bar cannot poll its own value
+# in an On Update script: the battle runs in the scene's On Init, which holds
+# the VM lock for the whole fight, so no other thread runs.) `frames` is how
+# many fill levels the strip holds, empty (0) through full. Delete this section
+# to drop the bars entirely.
+bars:
+  sprite: composure_bar.png
+  frames: 17
+  width: 64          # px; must be a multiple of 8, one 8px column per sprite
+  height: 8          # px tall, centred in the 16px sprite cell
+  player: { x: 4, y: 15 }   # x is the bar's CENTRE: a 64px bar needs x >= 4
+  enemy: { x: 12, y: 3 }
+
+# The ACT submenu, in order. Every enemy must answer for each verb.
+actions: [THINK, TALK, EMAIL, SHRUG]
+
+menu:
+  act: ACT
+  look: LOOK
+  flee: FLEE
+
+flee:
+  chance: 3          # succeeds 3 times out of...
+  out_of: 4
+  success:
+    - - "You walk away. The\nproblem remains, but\nso do you."
+  failed:
+    - - "You get as far as the\ndoor and remember you\nneed coffee."
+    - - "You take one step.\nSomeone says your name."
+    - - "You reach for your bag.\nYou put it back down."
+  blocked:
+    - - "You can't leave. It's\nin your calendar."
+
+messages:
+  status:
+    - - "YOU  {player_composure}/{player_composure_max}\nTHEM {enemy_composure}/{enemy_composure_max}"
+  hit:
+    - - "It loses {damage}\nComposure."
+    - - "{damage} Composure.\nIt felt that."
+    - - "That's {damage} off\nits Composure."
+  no_effect:
+    - - "It barely notices."
+    - - "Nothing happens.\nNothing at all."
+    - - "It does not react.\nIt rarely does."
+  player_hit:
+    - - "You lose {damage}\nComposure."
+    - - "{damage} Composure.\nYou breathe through it."
+    - - "That's {damage} you\nwon't get back."
+
+lose:
+  - - "You have run out of\nComposure."
+    - "You quietly gather\nyour things."
+    - "You go home early.\nNobody notices.\n\nTomorrow, you try again."
+  - - "Your Composure is\ngone."
+    - "You put on your coat\nwith great dignity."
+    - "You go home early.\nNobody notices.\n\nTomorrow, you try again."
+
+enemies:
+  # take_damage keeps one variant per verb on purpose: those lines teach the
+  # enemy's weakness, and a lesson reads better when it reads the same twice.
+  - id: 1
+    name: Coffee Machine
+    sprite: actor.png
+    composure: 60
+    win_flag: story_flag_coffee
+    intro:
+      - - "A DIRTY COFFEE MACHINE\nblocks the counter.\nIt is encrusted."
+    look:
+      - - "Beneath the grime, a\nsticker: \"CLEAN ME :)\"\nIt is from 2019."
+      - - "Someone has written in\nthe dust. You decide\nnot to read it."
+    defeat:
+      - - "The coffee machine is\ndefeated. It dispenses,\nfinally, a decent cup."
+    take_damage:
+      THINK:
+        damage: 12-18
+        text:
+          - - "Nobody has descaled it\nsince 2019. It shudders,\nseen at last."
+      TALK:
+        damage: 4-8
+        text:
+          - - "You talk to it. It\ngurgles noncommittally."
+      EMAIL:
+        damage: 3-6
+        text:
+          - - "You email Facilities.\nAuto-closed as a\nduplicate ticket."
+      SHRUG:
+        damage: 9-14
+        text:
+          - - "You drink it black and\nbitter, like it wants.\nIt respects this."
+    moves:
+      - text:
+          - - "It dispenses something\nat exactly body\ntemperature."
+          - - "It produces a liquid.\nThe liquid is, at best,\nwithin spec."
+        damage: 5-9
+      - text:
+          - - "It drips. Onto the\ncounter you just\ncleaned."
+          - - "It gurgles, then stops.\nThen gurgles again.\nJust to be sure."
+        damage: 3-7
+      - text:
+          - - "OUT OF BEANS, it\nannounces, with beans\nclearly visible."
+          - - "DESCALE REQUIRED, it\nsays, having required\nthis since 2019."
+        damage: 0-2
+
+  - id: 2
+    name: The Printer
+    sprite: static.png
+    composure: 65
+    win_flag: story_flag_printer
+    intro:
+      - - "THE PRINTER stirs.\nIt has never worked.\nIt is not sorry."
+    look:
+      - - "Tray 2 is open. Tray 2\nis always open. There is\nnothing in tray 2."
+      - - "A queue of 47 jobs.\nNone of them yours.\nNone of them recent."
+    defeat:
+      - - "The printer is defeated.\nIt prints your document.\nIt prints it correctly."
+    take_damage:
+      THINK:
+        damage: 3-6
+        text:
+          - - "You deduce the jam is\nin tray 2. There is no\njam in tray 2."
+      TALK:
+        damage: 4-8
+        text:
+          - - "You say \"please.\" It\nemits one sheet of a\ndocument from 2017."
+      EMAIL:
+        damage: 16-22
+        text:
+          - - "You CC the office\nmanager. Bureaucracy is\nthe only language it fears."
+      SHRUG:
+        damage: 6-10
+        text:
+          - - "You walk away. It beeps,\nwounded by the\nindifference."
+    moves:
+      - text:
+          - - "PC LOAD LETTER. Nobody\nhas ever known what\nthis means."
+          - - "It asks for a paper size\nthat has not been made\nsince 1998."
+        damage: 5-9
+      - text:
+          - - "It reports a paper jam.\nThere is no paper.\nThere is no jam."
+          - - "It jams. On the one\npage you actually\nneeded."
+        damage: 4-8
+      - text:
+          - - "TONER LOW, it says,\nat 94% toner."
+          - - "It prints a test page.\nNobody asked for a\ntest page."
+        damage: 0-3
+
+  - id: 3
+    name: The Meeting
+    sprite: actor_animated.png
+    composure: 105
+    win_flag: story_flag_boss
+    can_flee: false
+    flee_blocked:
+      - - "You can't leave. It's\nin your calendar."
+      - - "You stand up. Eleven\npeople look at you.\nYou sit back down."
+      - - "The invite has no\ndecline button. You\ncheck. Twice."
+    intro:
+      - - "THE MEETING THAT COULD'VE\nBEEN AN EMAIL begins.\nIt has no agenda."
+    look:
+      - - "Twelve attendees. Eleven\nare on mute. One is\neating."
+      - - "The agenda field is\nempty. It has always\nbeen empty."
+    defeat:
+      - - "The meeting ends. It is\n17:02. You are free.\nYou go home."
+    take_damage:
+      THINK:
+        damage: 7-11
+        text:
+          - - "You work out what this\nmeeting is for: nothing.\nKnowing does not help."
+      TALK:
+        damage: 14-20
+        text:
+          - - "You say the quiet part:\n\"Could this have been\nan email?\""
+      EMAIL:
+        damage: 8-12
+        text:
+          - - "You send the follow-up\nemail DURING the meeting.\nDeeply illegal. Effective."
+      SHRUG:
+        damage: 7-10
+        text:
+          - - "You stop resisting.\nYou let it wash over you."
+    moves:
+      - text:
+          - - "Let's circle back to\nthat."
+          - - "Someone shares the\nwrong screen. We all\nwait."
+        damage: 5-8
+      - text:
+          - - "This'll be quick, it\nsays. It is 45 minutes."
+          - - "Sorry, you go ahead.\nNo, you go ahead.\nNo, you go ahead."
+        damage: 4-7
+      - text:
+          - - "Any other business?\nSomeone has other\nbusiness."
+          - - "Can everyone see my\nscreen? Nobody can\nsee the screen."
+        damage: 6-9
