@@ -1,0 +1,33 @@
+{
+  "_resourceType": "trigger",
+  "id": "50c2bf16-310e-58ce-ac27-8e704dead826",
+  "_index": 0,
+  "name": "to_office",
+  "symbol": "trigger_meeting_room_0",
+  "prefabId": "",
+  "prefabScriptOverrides": {},
+  "x": 8,
+  "y": 16,
+  "width": 3,
+  "height": 2,
+  "script": [
+    {
+      "command": "EVENT_SWITCH_SCENE",
+      "args": {
+        "sceneId": "bbdeedd3-0438-5142-95c9-61b3377d322b",
+        "x": {
+          "type": "number",
+          "value": 9
+        },
+        "y": {
+          "type": "number",
+          "value": 3
+        },
+        "direction": "down",
+        "fadeSpeed": 2
+      },
+      "id": "94538109-586f-5d7b-b395-30fba6d5cfd8"
+    }
+  ],
+  "leaveScript": []
+}

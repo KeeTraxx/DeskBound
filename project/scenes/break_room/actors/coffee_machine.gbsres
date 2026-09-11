@@ -1,0 +1,90 @@
+{
+  "_resourceType": "actor",
+  "id": "f1ae6c9e-5005-58e0-a427-61c3377de22d",
+  "_index": 0,
+  "name": "Coffee Machine",
+  "symbol": "actor_break_room_0",
+  "prefabId": "",
+  "coordinateType": "tiles",
+  "x": 9,
+  "y": 4,
+  "frame": 0,
+  "direction": "down",
+  "spriteSheetId": "581d34d0-9591-4e6e-a609-1d94f203b0cd",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "animate": false,
+  "script": [
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "eq",
+          "valueA": {
+            "type": "variable",
+            "value": "20"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 1
+          }
+        }
+      },
+      "id": "3e54069c-5acc-555c-baad-7aa068112641",
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_TEXT",
+            "args": {
+              "text": "The coffee machine hums,\npeacefully. You have an\nunderstanding.",
+              "avatarId": "",
+              "clearPrevious": true
+            },
+            "id": "b17ad767-f8f8-53fc-87f5-2592b7f85f1d"
+          }
+        ],
+        "false": [
+          {
+            "command": "EVENT_SET_VALUE",
+            "args": {
+              "variable": "4",
+              "value": {
+                "type": "number",
+                "value": 1
+              }
+            },
+            "id": "4b16dd45-18be-555c-8967-6906c2f1c38f"
+          },
+          {
+            "command": "EVENT_SWITCH_SCENE",
+            "args": {
+              "sceneId": "13cb60fc-6101-5a9a-b7a4-17bba6a14a66",
+              "x": {
+                "type": "number",
+                "value": 0
+              },
+              "y": {
+                "type": "number",
+                "value": 0
+              },
+              "direction": "down",
+              "fadeSpeed": 2
+            },
+            "id": "62b7d6f5-6fa8-583b-9fb7-15511894574d"
+          }
+        ]
+      }
+    }
+  ],
+  "startScript": [],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": []
+}

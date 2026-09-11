@@ -1,0 +1,33 @@
+{
+  "_resourceType": "trigger",
+  "id": "06e560b1-4d12-5edc-9944-c6cf226905f9",
+  "_index": 0,
+  "name": "to_office",
+  "symbol": "trigger_break_room_0",
+  "prefabId": "",
+  "prefabScriptOverrides": {},
+  "x": 18,
+  "y": 7,
+  "width": 2,
+  "height": 3,
+  "script": [
+    {
+      "command": "EVENT_SWITCH_SCENE",
+      "args": {
+        "sceneId": "bbdeedd3-0438-5142-95c9-61b3377d322b",
+        "x": {
+          "type": "number",
+          "value": 2
+        },
+        "y": {
+          "type": "number",
+          "value": 8
+        },
+        "direction": "right",
+        "fadeSpeed": 2
+      },
+      "id": "b95c929b-d33a-550c-8d75-036388a2db1c"
+    }
+  ],
+  "leaveScript": []
+}

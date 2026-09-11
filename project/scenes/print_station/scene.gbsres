@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "e4b71b81-075c-558a-839d-f0eb0ef50d91",
+  "_index": 3,
+  "name": "Print Station",
+  "backgroundId": "a9dc57e8-b7ea-562b-82de-db3572a6254f",
+  "tilesetId": "",
+  "width": 20,
+  "height": 18,
+  "type": "TOPDOWN",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "0f15+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f!0013+0f!0013+0f!0013+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f15+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_print_station",
+  "x": 380,
+  "y": 300,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

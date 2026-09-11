@@ -1,0 +1,55 @@
+{
+  "_resourceType": "scene",
+  "id": "bbdeedd3-0438-5142-95c9-61b3377d322b",
+  "_index": 1,
+  "name": "Office Floor",
+  "backgroundId": "a3a767ca-eee7-5bd7-8ee0-e479f08c6bf8",
+  "tilesetId": "",
+  "width": 20,
+  "height": 18,
+  "type": "TOPDOWN",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "0f8+003+0fa+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f!003c+0f!0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f15+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_office_floor",
+  "x": 200,
+  "y": 300,
+  "script": [
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "eq",
+          "valueA": {
+            "type": "variable",
+            "value": "22"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 1
+          }
+        }
+      },
+      "id": "160322a7-884a-54dd-b94f-de9cd1322684",
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_TEXT",
+            "args": {
+              "text": "You went home. The day\nis over. You won.",
+              "avatarId": "",
+              "clearPrevious": true
+            },
+            "id": "f7e16b16-3af8-574f-b413-872faf5fafad"
+          }
+        ],
+        "false": []
+      }
+    }
+  ],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

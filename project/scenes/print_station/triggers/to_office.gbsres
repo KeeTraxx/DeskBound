@@ -1,0 +1,33 @@
+{
+  "_resourceType": "trigger",
+  "id": "a764d186-e3e6-5346-989c-aac02c05366b",
+  "_index": 0,
+  "name": "to_office",
+  "symbol": "trigger_print_station_0",
+  "prefabId": "",
+  "prefabScriptOverrides": {},
+  "x": 0,
+  "y": 7,
+  "width": 2,
+  "height": 3,
+  "script": [
+    {
+      "command": "EVENT_SWITCH_SCENE",
+      "args": {
+        "sceneId": "bbdeedd3-0438-5142-95c9-61b3377d322b",
+        "x": {
+          "type": "number",
+          "value": 17
+        },
+        "y": {
+          "type": "number",
+          "value": 8
+        },
+        "direction": "left",
+        "fadeSpeed": 2
+      },
+      "id": "c04b5f6b-8b69-5ea8-bc8f-902e77db6521"
+    }
+  ],
+  "leaveScript": []
+}

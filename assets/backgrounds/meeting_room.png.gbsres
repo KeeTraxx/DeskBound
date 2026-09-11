@@ -1,0 +1,13 @@
+{
+  "_resourceType": "background",
+  "id": "b59c609e-01fe-538e-9d0d-1eca6ea7af5f",
+  "name": "meeting_room",
+  "symbol": "bg_meeting_room",
+  "tileColors": "",
+  "filename": "meeting_room.png",
+  "width": 20,
+  "height": 18,
+  "imageWidth": 160,
+  "imageHeight": 144,
+  "autoColor": false
+}

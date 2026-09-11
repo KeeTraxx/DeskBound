@@ -1,0 +1,12 @@
+build/
+cache/
+
+*.bak
+*.sav
+*.icloud
+
+user_settings.gbsres
+
+# Python tooling
+__pycache__/
+*.pyc

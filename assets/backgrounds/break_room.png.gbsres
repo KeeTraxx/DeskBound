@@ -1,0 +1,13 @@
+{
+  "_resourceType": "background",
+  "id": "55fe60fd-dc8a-506b-9add-6724f16fbdfe",
+  "name": "break_room",
+  "symbol": "bg_break_room",
+  "tileColors": "",
+  "filename": "break_room.png",
+  "width": 20,
+  "height": 18,
+  "imageWidth": 160,
+  "imageHeight": 144,
+  "autoColor": false
+}

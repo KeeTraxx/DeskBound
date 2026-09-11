@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "4f71adcc-9f8c-5493-ba03-aa13854385fc",
+  "_index": 2,
+  "name": "Break Room",
+  "backgroundId": "55fe60fd-dc8a-506b-9add-6724f16fbdfe",
+  "tilesetId": "",
+  "width": 20,
+  "height": 18,
+  "type": "TOPDOWN",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "0f15+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0013+0f!0013+0f!0013+0f!0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f2+0012+0f15+",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_break_room",
+  "x": 20,
+  "y": 300,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}

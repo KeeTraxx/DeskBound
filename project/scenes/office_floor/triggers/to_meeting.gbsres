@@ -1,0 +1,79 @@
+{
+  "_resourceType": "trigger",
+  "id": "15f3c013-df63-55c3-8ce4-241ad9914996",
+  "_index": 2,
+  "name": "to_meeting",
+  "symbol": "trigger_office_floor_2",
+  "prefabId": "",
+  "prefabScriptOverrides": {},
+  "x": 8,
+  "y": 0,
+  "width": 3,
+  "height": 2,
+  "script": [
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "and",
+          "valueA": {
+            "type": "eq",
+            "valueA": {
+              "type": "variable",
+              "value": "20"
+            },
+            "valueB": {
+              "type": "number",
+              "value": 1
+            }
+          },
+          "valueB": {
+            "type": "eq",
+            "valueA": {
+              "type": "variable",
+              "value": "21"
+            },
+            "valueB": {
+              "type": "number",
+              "value": 1
+            }
+          }
+        }
+      },
+      "id": "5f4791fd-3db4-5d25-a0ec-293ce34f814d",
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_SWITCH_SCENE",
+            "args": {
+              "sceneId": "80ca3b75-17aa-502f-a7bf-065eed55e06d",
+              "x": {
+                "type": "number",
+                "value": 9
+              },
+              "y": {
+                "type": "number",
+                "value": 15
+              },
+              "direction": "up",
+              "fadeSpeed": 2
+            },
+            "id": "51115339-64a6-5cce-a452-825de518db5d"
+          }
+        ],
+        "false": [
+          {
+            "command": "EVENT_TEXT",
+            "args": {
+              "text": "The meeting isn't until\n17:00. There is coffee\nand printing to survive\nfirst.",
+              "avatarId": "",
+              "clearPrevious": true
+            },
+            "id": "7ffd7414-89c1-5225-a33b-2a9986c97973"
+          }
+        ]
+      }
+    }
+  ],
+  "leaveScript": []
+}

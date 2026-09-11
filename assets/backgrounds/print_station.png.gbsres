@@ -1,0 +1,13 @@
+{
+  "_resourceType": "background",
+  "id": "a9dc57e8-b7ea-562b-82de-db3572a6254f",
+  "name": "print_station",
+  "symbol": "bg_print_station",
+  "tileColors": "",
+  "filename": "print_station.png",
+  "width": 20,
+  "height": 18,
+  "imageWidth": 160,
+  "imageHeight": 144,
+  "autoColor": false
+}

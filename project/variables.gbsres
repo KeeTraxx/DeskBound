@@ -1,0 +1,126 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "player_composure",
+      "symbol": "var_player_composure"
+    },
+    {
+      "id": "1",
+      "name": "player_composure_max",
+      "symbol": "var_player_composure_max"
+    },
+    {
+      "id": "2",
+      "name": "player_nerve",
+      "symbol": "var_player_nerve"
+    },
+    {
+      "id": "3",
+      "name": "player_patience",
+      "symbol": "var_player_patience"
+    },
+    {
+      "id": "4",
+      "name": "enemy_id",
+      "symbol": "var_enemy_id"
+    },
+    {
+      "id": "5",
+      "name": "enemy_composure",
+      "symbol": "var_enemy_composure"
+    },
+    {
+      "id": "6",
+      "name": "enemy_composure_max",
+      "symbol": "var_enemy_composure_max"
+    },
+    {
+      "id": "7",
+      "name": "enemy_nerve",
+      "symbol": "var_enemy_nerve"
+    },
+    {
+      "id": "8",
+      "name": "enemy_patience",
+      "symbol": "var_enemy_patience"
+    },
+    {
+      "id": "9",
+      "name": "enemy_last_move",
+      "symbol": "var_enemy_last_move"
+    },
+    {
+      "id": "10",
+      "name": "battle_menu_choice",
+      "symbol": "var_battle_menu_choice"
+    },
+    {
+      "id": "11",
+      "name": "battle_act_choice",
+      "symbol": "var_battle_act_choice"
+    },
+    {
+      "id": "12",
+      "name": "battle_power",
+      "symbol": "var_battle_power"
+    },
+    {
+      "id": "13",
+      "name": "battle_damage",
+      "symbol": "var_battle_damage"
+    },
+    {
+      "id": "14",
+      "name": "battle_temp",
+      "symbol": "var_battle_temp"
+    },
+    {
+      "id": "15",
+      "name": "battle_result",
+      "symbol": "var_battle_result"
+    },
+    {
+      "id": "16",
+      "name": "battle_turn_count",
+      "symbol": "var_battle_turn_count"
+    },
+    {
+      "id": "17",
+      "name": "battle_heal",
+      "symbol": "var_battle_heal"
+    },
+    {
+      "id": "18",
+      "name": "bar_filled",
+      "symbol": "var_bar_filled"
+    },
+    {
+      "id": "19",
+      "name": "bar_temp",
+      "symbol": "var_bar_temp"
+    },
+    {
+      "id": "20",
+      "name": "story_flag_coffee",
+      "symbol": "var_story_flag_coffee"
+    },
+    {
+      "id": "21",
+      "name": "story_flag_printer",
+      "symbol": "var_story_flag_printer"
+    },
+    {
+      "id": "22",
+      "name": "story_flag_boss",
+      "symbol": "var_story_flag_boss"
+    },
+    {
+      "id": "23",
+      "name": "loss_count",
+      "symbol": "var_loss_count"
+    }
+  ],
+  "constants": []
+}
