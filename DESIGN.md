@@ -490,8 +490,8 @@ Your Energy hits 0.
   → Next morning: Energy restored, dayOfWeek advances.
 ```
 
-The battle simply ends (`battle_result = 3`) and hands back to the overworld,
-which walks you home. Anything already beaten stays beaten — the story flags
+The battle ends (`battle_result = 3`), says its line, and calls the
+`player_fainted` hook — the `Faint` script — which is what walks you home. Anything already beaten stays beaten — the story flags
 are what persist. The enemy you collapsed against, though, is back at full
 Energy tomorrow: `BattleScript` re-initialises enemy Energy at the start of
 every fight. Persisting per-enemy damage would need a variable per enemy, and

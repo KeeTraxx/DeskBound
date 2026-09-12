@@ -1,0 +1,13 @@
+{
+  "_resourceType": "background",
+  "id": "9c4a1f72-3d58-4be6-8f1a-2e70c5d9b431",
+  "name": "stats",
+  "symbol": "bg_stats",
+  "tileColors": "",
+  "filename": "stats.png",
+  "width": 20,
+  "height": 18,
+  "imageWidth": 160,
+  "imageHeight": 144,
+  "autoColor": false
+}

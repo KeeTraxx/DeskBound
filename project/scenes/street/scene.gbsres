@@ -18,6 +18,24 @@
   "y": 232,
   "script": [
     {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "3a7c1b9e-5d24-4f08-9e61-c8b2d4a70f35"
+      },
+      "id": "079dba01-d5e7-5704-a621-93698a7061f9"
+    },
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "29",
+        "value": {
+          "type": "number",
+          "value": 0
+        }
+      },
+      "id": "eca817cb-564a-5de3-8541-7eeeb576e524"
+    },
+    {
       "command": "EVENT_SWITCH",
       "args": {
         "variable": "24",
@@ -182,7 +200,7 @@
                             "type": "rnd",
                             "value": {
                               "type": "number",
-                              "value": 3
+                              "value": 4
                             }
                           }
                         },

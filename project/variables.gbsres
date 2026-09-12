@@ -137,9 +137,54 @@
       "symbol": "var_commute_time"
     },
     {
+      "id": "27",
+      "name": "previous_player_x",
+      "symbol": "var_previous_player_x_0"
+    },
+    {
+      "id": "28",
+      "name": "previous_player_y",
+      "symbol": "var_previous_player_y"
+    },
+    {
+      "id": "29",
+      "name": "stats_return",
+      "symbol": "var_stats_return"
+    },
+    {
       "id": "187463e7-06bc-4bbc-a3ab-d71ce6328af0__L0",
       "name": "Local 0",
       "symbol": "var_local_1"
+    },
+    {
+      "id": "bbdeedd3-0438-5142-95c9-61b3377d322b__L0",
+      "name": "next_random_encounter",
+      "symbol": "var_next_random_encounter"
+    },
+    {
+      "id": "bbdeedd3-0438-5142-95c9-61b3377d322b__L1",
+      "name": "lox",
+      "symbol": "var_lox"
+    },
+    {
+      "id": "bbdeedd3-0438-5142-95c9-61b3377d322b__L2",
+      "name": "localx",
+      "symbol": "var_localx"
+    },
+    {
+      "id": "b3fd1890-45a7-49ac-a1c1-bf34bc74ca40__L0",
+      "name": "current_player_x",
+      "symbol": "var_current_player_x"
+    },
+    {
+      "id": "b3fd1890-45a7-49ac-a1c1-bf34bc74ca40__L1",
+      "name": "current_player_y",
+      "symbol": "var_current_player_y_0"
+    },
+    {
+      "id": "b3fd1890-45a7-49ac-a1c1-bf34bc74ca40__L2",
+      "name": "next_random_encounter",
+      "symbol": "var_next_random_encounter_0"
     }
   ],
   "constants": [

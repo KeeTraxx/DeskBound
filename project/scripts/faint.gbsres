@@ -1,0 +1,35 @@
+{
+  "_resourceType": "script",
+  "id": "34f1f436-43e8-4827-9313-837adc0ab3f7",
+  "name": "Faint",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_14",
+  "script": [
+    {
+      "command": "EVENT_INC_VALUE",
+      "args": {
+        "variable": "25"
+      },
+      "id": "0a340e00-91cf-4893-bc10-9c24474b7053"
+    },
+    {
+      "command": "EVENT_SWITCH_SCENE",
+      "args": {
+        "sceneId": "d9e207c3-c53b-4c0d-962b-64de79234d8c",
+        "x": {
+          "type": "number",
+          "value": 8
+        },
+        "y": {
+          "type": "number",
+          "value": 8
+        },
+        "direction": "",
+        "fadeSpeed": "2"
+      },
+      "id": "2923d849-8e4a-4dd5-97ff-8cc30c279fbb"
+    }
+  ]
+}

@@ -18,269 +18,312 @@
   "y": 30,
   "script": [
     {
-      "command": "EVENT_RNG_SEED",
+      "command": "EVENT_CALL_CUSTOM_EVENT",
       "args": {
-        "__collapse": false
+        "customEventId": "3a7c1b9e-5d24-4f08-9e61-c8b2d4a70f35"
       },
-      "id": "929f1faf-7dd1-4057-b1e8-ac114a53a8ca"
+      "id": "37cfdab4-ae32-5309-b81e-6e436fc588f4"
     },
     {
-      "command": "EVENT_SWITCH",
+      "command": "EVENT_IF",
       "args": {
-        "variable": "25",
-        "choices": 5,
-        "__collapseCase0": false,
-        "__collapseCase1": false,
-        "__collapseCase2": false,
-        "__collapseCase3": false,
-        "__collapseCase4": false,
-        "__collapseCase5": false,
-        "__collapseCase6": false,
-        "__collapseCase7": false,
-        "__collapseCase8": false,
-        "__collapseCase9": false,
-        "__collapseCase10": false,
-        "__collapseCase11": false,
-        "__collapseCase12": false,
-        "__collapseCase13": false,
-        "__collapseCase14": false,
-        "__collapseCase15": false,
+        "condition": {
+          "type": "eq",
+          "valueA": {
+            "type": "variable",
+            "value": "29"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 1
+          }
+        },
         "__collapseElse": false,
-        "value0": {
-          "type": "number",
-          "value": 0
-        },
-        "value1": {
-          "type": "number",
-          "value": 1
-        },
-        "value2": {
-          "type": "number",
-          "value": 2
-        },
-        "value3": {
-          "type": "number",
-          "value": 3
-        },
-        "value4": {
-          "type": "number",
-          "value": 4
-        },
-        "__collapse": false
+        "__label": "Returning from the stats screen?"
       },
       "children": {
-        "true0": [
+        "true": [
           {
-            "command": "EVENT_TEXT",
+            "command": "EVENT_SET_VALUE",
             "args": {
-              "text": [
-                "Monday. The week's\nunskippable intro.",
-                "Your inbox bred\nover the weekend."
-              ],
-              "__section": "text",
-              "avatarId": "",
-              "minHeight": 4,
-              "maxHeight": 7,
-              "textX": 1,
-              "textY": 1,
-              "textHeight": 5,
-              "position": "bottom",
-              "clearPrevious": true,
-              "showFrame": "true",
-              "speedIn": -1,
-              "speedOut": -1,
-              "closeWhen": "key",
-              "closeButton": "a",
-              "closeDelayTime": 0.5,
-              "closeDelayFrames": 30,
-              "__collapse": false
+              "variable": "29",
+              "value": {
+                "type": "number",
+                "value": 0
+              }
             },
-            "id": "7c0b5bb3-0322-45d3-9361-0f7d693eb905"
+            "id": "02aebeea-91b8-5351-98e4-ee9416bd62db"
           }
         ],
-        "true1": [
-          {
-            "command": "EVENT_TEXT",
-            "args": {
-              "text": [
-                "Tuesday. Monday's\nsequel. No budget.",
-                "Nobody ever wrote\na song about it."
-              ],
-              "__section": "text",
-              "avatarId": "",
-              "minHeight": 4,
-              "maxHeight": 7,
-              "textX": 1,
-              "textY": 1,
-              "textHeight": 5,
-              "position": "bottom",
-              "clearPrevious": true,
-              "showFrame": "true",
-              "speedIn": -1,
-              "speedOut": -1,
-              "closeWhen": "key",
-              "closeButton": "a",
-              "closeDelayTime": 0.5,
-              "closeDelayFrames": 30,
-              "__collapse": false
-            },
-            "id": "cb2f50ca-f1ff-4ca8-9dc8-b6680efeae9d"
-          }
-        ],
-        "true2": [
-          {
-            "command": "EVENT_TEXT",
-            "args": {
-              "text": [
-                "Wednesday. The\nweek's halftime.",
-                "It is all downhill\nfrom here. Right?"
-              ],
-              "__section": "text",
-              "avatarId": "",
-              "minHeight": 4,
-              "maxHeight": 7,
-              "textX": 1,
-              "textY": 1,
-              "textHeight": 5,
-              "position": "bottom",
-              "clearPrevious": true,
-              "showFrame": "true",
-              "speedIn": -1,
-              "speedOut": -1,
-              "closeWhen": "key",
-              "closeButton": "a",
-              "closeDelayTime": 0.5,
-              "closeDelayFrames": 30,
-              "__collapse": false
-            },
-            "id": "ea891083-2528-4bb0-ac6c-e4cf8e833a3c"
-          }
-        ],
-        "true3": [
-          {
-            "command": "EVENT_TEXT",
-            "args": {
-              "text": [
-                "Thursday. Friday's\nwaiting room.",
-                "So close you can\nsmell the weekend."
-              ],
-              "__section": "text",
-              "avatarId": "",
-              "minHeight": 4,
-              "maxHeight": 7,
-              "textX": 1,
-              "textY": 1,
-              "textHeight": 5,
-              "position": "bottom",
-              "clearPrevious": true,
-              "showFrame": "true",
-              "speedIn": -1,
-              "speedOut": -1,
-              "closeWhen": "key",
-              "closeButton": "a",
-              "closeDelayTime": 0.5,
-              "closeDelayFrames": 30,
-              "__collapse": false
-            },
-            "id": "3975b6ae-3485-425d-abeb-3e71c4ec0e28"
-          }
-        ],
-        "true4": [
-          {
-            "command": "EVENT_TEXT",
-            "args": {
-              "text": [
-                "Friday! Morale is\nsuspiciously high.",
-                "Nothing important\nhappens after 2pm."
-              ],
-              "__section": "text",
-              "avatarId": "",
-              "minHeight": 4,
-              "maxHeight": 7,
-              "textX": 1,
-              "textY": 1,
-              "textHeight": 5,
-              "position": "bottom",
-              "clearPrevious": true,
-              "showFrame": "true",
-              "speedIn": -1,
-              "speedOut": -1,
-              "closeWhen": "key",
-              "closeButton": "a",
-              "closeDelayTime": 0.5,
-              "closeDelayFrames": 30,
-              "__collapse": false
-            },
-            "id": "0b9b9b0a-2693-40d8-bf9c-4ad941cd9e9c"
-          }
-        ],
-        "true5": [],
-        "true6": [],
-        "true7": [],
-        "true8": [],
-        "true9": [],
-        "true10": [],
-        "true11": [],
-        "true12": [],
-        "true13": [],
-        "true14": [],
-        "true15": [],
         "false": [
           {
-            "command": "EVENT_TEXT",
+            "command": "EVENT_RNG_SEED",
             "args": {
-              "text": [
-                "The weekend at\nlast. No standups.",
-                "Just you and the\nlingering dread.",
-                "Let's see how you\nmanaged the week!"
-              ],
-              "__section": "text",
-              "avatarId": "",
-              "minHeight": 4,
-              "maxHeight": 7,
-              "textX": 1,
-              "textY": 1,
-              "textHeight": 5,
-              "position": "bottom",
-              "clearPrevious": true,
-              "showFrame": "true",
-              "speedIn": -1,
-              "speedOut": -1,
-              "closeWhen": "key",
-              "closeButton": "a",
-              "closeDelayTime": 0.5,
-              "closeDelayFrames": 30,
               "__collapse": false
             },
-            "id": "75757567-ecc8-4124-ae40-85c35dd119dc"
+            "id": "929f1faf-7dd1-4057-b1e8-ac114a53a8ca"
           },
           {
-            "command": "EVENT_SWITCH_SCENE",
+            "command": "EVENT_CALL_CUSTOM_EVENT",
             "args": {
-              "sceneId": "ed49c7c9-c1c8-4d39-ac93-6d8a492ed63d",
-              "x": {
-                "type": "number",
-                "value": 0
-              },
-              "y": {
-                "type": "number",
-                "value": 0
-              },
-              "direction": "",
-              "fadeSpeed": "2"
+              "customEventId": "5005eaf6-ea3d-4b2b-a49d-24a9cc823fda"
             },
-            "id": "ba862ab5-2699-46f4-bea8-221a82fa7bad"
+            "id": "e2662b39-baaa-4fc7-a608-22f7dcceeae6"
+          },
+          {
+            "command": "EVENT_SWITCH",
+            "args": {
+              "variable": "25",
+              "choices": 5,
+              "__collapseCase0": false,
+              "__collapseCase1": false,
+              "__collapseCase2": false,
+              "__collapseCase3": false,
+              "__collapseCase4": false,
+              "__collapseCase5": false,
+              "__collapseCase6": false,
+              "__collapseCase7": false,
+              "__collapseCase8": false,
+              "__collapseCase9": false,
+              "__collapseCase10": false,
+              "__collapseCase11": false,
+              "__collapseCase12": false,
+              "__collapseCase13": false,
+              "__collapseCase14": false,
+              "__collapseCase15": false,
+              "__collapseElse": false,
+              "value0": {
+                "type": "number",
+                "value": 0
+              },
+              "value1": {
+                "type": "number",
+                "value": 1
+              },
+              "value2": {
+                "type": "number",
+                "value": 2
+              },
+              "value3": {
+                "type": "number",
+                "value": 3
+              },
+              "value4": {
+                "type": "number",
+                "value": 4
+              },
+              "__collapse": true
+            },
+            "children": {
+              "true0": [
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "Monday. The week's\nunskippable intro.",
+                      "Your inbox bred\nover the weekend."
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30,
+                    "__collapse": false
+                  },
+                  "id": "7c0b5bb3-0322-45d3-9361-0f7d693eb905"
+                }
+              ],
+              "true1": [
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "Tuesday. Monday's\nsequel. No budget.",
+                      "Nobody ever wrote\na song about it."
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30,
+                    "__collapse": false
+                  },
+                  "id": "cb2f50ca-f1ff-4ca8-9dc8-b6680efeae9d"
+                }
+              ],
+              "true2": [
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "Wednesday. The\nweek's halftime.",
+                      "It is all downhill\nfrom here. Right?"
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30,
+                    "__collapse": false
+                  },
+                  "id": "ea891083-2528-4bb0-ac6c-e4cf8e833a3c"
+                }
+              ],
+              "true3": [
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "Thursday. Friday's\nwaiting room.",
+                      "So close you can\nsmell the weekend."
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30,
+                    "__collapse": false
+                  },
+                  "id": "3975b6ae-3485-425d-abeb-3e71c4ec0e28"
+                }
+              ],
+              "true4": [
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "Friday! Morale is\nsuspiciously high.",
+                      "Nothing important\nhappens after 2pm."
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30,
+                    "__collapse": false
+                  },
+                  "id": "0b9b9b0a-2693-40d8-bf9c-4ad941cd9e9c"
+                }
+              ],
+              "true5": [],
+              "true6": [],
+              "true7": [],
+              "true8": [],
+              "true9": [],
+              "true10": [],
+              "true11": [],
+              "true12": [],
+              "true13": [],
+              "true14": [],
+              "true15": [],
+              "false": [
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": [
+                      "The weekend at\nlast. No standups.",
+                      "Just you and the\nlingering dread.",
+                      "Let's see how you\nmanaged the week!"
+                    ],
+                    "__section": "text",
+                    "avatarId": "",
+                    "minHeight": 4,
+                    "maxHeight": 7,
+                    "textX": 1,
+                    "textY": 1,
+                    "textHeight": 5,
+                    "position": "bottom",
+                    "clearPrevious": true,
+                    "showFrame": "true",
+                    "speedIn": -1,
+                    "speedOut": -1,
+                    "closeWhen": "key",
+                    "closeButton": "a",
+                    "closeDelayTime": 0.5,
+                    "closeDelayFrames": 30,
+                    "__collapse": false
+                  },
+                  "id": "75757567-ecc8-4124-ae40-85c35dd119dc"
+                },
+                {
+                  "command": "EVENT_SWITCH_SCENE",
+                  "args": {
+                    "sceneId": "ed49c7c9-c1c8-4d39-ac93-6d8a492ed63d",
+                    "x": {
+                      "type": "number",
+                      "value": 0
+                    },
+                    "y": {
+                      "type": "number",
+                      "value": 0
+                    },
+                    "direction": "",
+                    "fadeSpeed": "2"
+                  },
+                  "id": "ba862ab5-2699-46f4-bea8-221a82fa7bad"
+                }
+              ]
+            },
+            "id": "1f1393b7-c5d0-4847-b239-172f78535a86"
           }
         ]
       },
-      "id": "1f1393b7-c5d0-4847-b239-172f78535a86"
-    },
-    {
-      "command": "EVENT_CALL_CUSTOM_EVENT",
-      "args": {
-        "customEventId": "5005eaf6-ea3d-4b2b-a49d-24a9cc823fda"
-      },
-      "id": "e2662b39-baaa-4fc7-a608-22f7dcceeae6"
+      "id": "bf73e520-9a72-5282-b6c2-a33a09aef3ca"
     }
   ],
   "playerHit1Script": [],

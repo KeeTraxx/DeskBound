@@ -34,8 +34,19 @@ That writes two scripts and nothing else — no scene, no actors:
 
 | File | Contents |
 |---|---|
-| `project/scripts/battlescript.gbsres` | the `BattleScript` custom script — the whole turn loop |
+| `project/scripts/battlescript.gbsres` | the `BattleScript` custom script — the turn loop |
+| `project/scripts/battle_<enemy>.gbsres` | one per enemy: its dialogue, verbs, moves and reward |
 | `project/scripts/setbar.gbsres` | `SetBar` — shows a value on a bar actor (only with `bars:`) |
+
+**Why one script per enemy:** a compiled script is a single module, and a
+module must fit in one 16KB ROM bank. With every enemy inlined, `BattleScript`
+reached 26KB at eight enemies and the linker rejected it
+(`BankPack: ERROR! Area _CODE_, bank 255, size 26044 is too large`). Each enemy
+now compiles to its own module — roughly 3KB each — dispatched on a phase
+parameter (`setup / act / look / flee / move / defeat`) that `BattleScript`
+passes when it calls in. Only `BattleScript` is bound to the scene; the enemy
+scripts are called, never wired by hand. Renaming or deleting an enemy removes
+its old script on the next run (only files this tool stamped are touched).
 
 (`--draw-bar-art` additionally redraws the placeholder bar sprite under
 `assets/sprites/`.)
@@ -59,11 +70,21 @@ A `hooks:` block calls a script *you* wrote whenever the battle moves a value:
 ```yaml
 hooks:
   player_changed: PlayerValuesChanged
+  player_fainted: Faint
 ```
 
 The script is resolved by name from `project/scripts/` and is never rewritten
-by the tool. `player_changed` fires after every write to `player_energy` —
-battle setup, and each enemy hit.
+by the tool.
+
+| Hook | Fires |
+|---|---|
+| `player_changed` | after every write to `player_energy` — battle setup, each enemy hit, and a reward |
+| `player_fainted` | once, when Energy reaches 0, after the lose text and before the scene pops |
+
+`player_fainted` is where going home and sleeping belongs (DESIGN.md §9.2). If
+that script switches scenes, `BattleScript`'s closing Scene Pop State never
+runs — a scene change kills every running script — so the hook can take over
+the flow entirely.
 
 **A hook is called with no arguments** and reads globals directly, which a
 custom script can do: only `V0`-`V9` are parameters, every other variable

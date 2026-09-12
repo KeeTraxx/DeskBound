@@ -46,8 +46,8 @@
       "args": {
         "variable": "0",
         "value": {
-          "type": "number",
-          "value": 100
+          "type": "variable",
+          "value": "1"
         }
       },
       "id": "578125ca-078e-41aa-a684-e5544facaa6f"

@@ -1,0 +1,60 @@
+{
+  "_resourceType": "script",
+  "id": "3a7c1b9e-5d24-4f08-9e61-c8b2d4a70f35",
+  "name": "AttachStatsButton",
+  "description": "Binds START to the Stats scene. Call this from every scene's On Init that should offer the stats screen — the engine clears all input scripts on every scene change (events_init on EXCEPTION_CHANGE_SCENE), so the binding cannot be made once and left. Not called from Battle: the fight runs inside that scene's On Init, which holds VM_LOCK for its whole duration, and input scripts only fire while the VM is unlocked.",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_attach_stats_button",
+  "script": [
+    {
+      "command": "EVENT_SET_INPUT_SCRIPT",
+      "args": {
+        "input": [
+          "start"
+        ],
+        "override": true,
+        "__scriptTabs": "press",
+        "__label": "START opens the stats screen"
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_SET_VALUE",
+            "args": {
+              "variable": "29",
+              "value": {
+                "type": "number",
+                "value": 1
+              }
+            },
+            "id": "1f6d0a83-47bc-4e91-b2d5-08c73ea9146f"
+          },
+          {
+            "command": "EVENT_SCENE_PUSH_STATE",
+            "args": {},
+            "id": "2b84e5c1-9f30-4a76-8d12-5c60ba7f3e48"
+          },
+          {
+            "command": "EVENT_SWITCH_SCENE",
+            "args": {
+              "sceneId": "7b3e2a41-9c05-4d8e-a6f2-1d4b8e30c957",
+              "x": {
+                "type": "number",
+                "value": 0
+              },
+              "y": {
+                "type": "number",
+                "value": 0
+              },
+              "direction": "",
+              "fadeSpeed": "1"
+            },
+            "id": "3c95f6d2-a081-4b58-9e34-7d21cb604f59"
+          }
+        ]
+      },
+      "id": "0e73b4a9-5c16-4d82-a7f0-9b48e2d5106c"
+    }
+  ]
+}

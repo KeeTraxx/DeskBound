@@ -30,5 +30,6 @@
   ],
   "playerHit1Script": [],
   "playerHit2Script": [],
-  "playerHit3Script": []
+  "playerHit3Script": [],
+  "playerSpriteSheetId": "df4043e3-8809-4960-806e-fd5329cf7614"
 }

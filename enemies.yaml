@@ -54,11 +54,13 @@ bars:
 # Hand-written scripts to call when the battle moves a value. Resolved by name
 # from project/scripts/ — this tool reads the script's parameter list and never
 # rewrites the script itself. player_changed fires on every write to
-# player_energy (each time the enemy lands a hit, plus once at battle start
-# so a HUD can draw the current value). Hooks
+# player_energy (each time the enemy lands a hit, plus once at battle start so
+# a HUD can draw the current value); player_fainted fires once when Energy hits
+# 0, after the lose text — that is where going home and sleeping belongs. Hooks
 # are called with no arguments — read the globals you need directly.
 hooks:
   player_changed: PlayerValuesChanged
+  player_fainted: Faint
 
 # The ACT submenu, in order. Every enemy must answer for each verb.
 actions: [THINK, TALK, EMAIL, SHRUG]
@@ -115,7 +117,240 @@ enemies:
   #
   # take_damage keeps one variant per verb on purpose: those lines teach the
   # enemy's weakness, and a lesson reads better when it reads the same twice.
+  # --- The commute (ids 0-4) --------------------------------------------
+  # Picked at random by the street scene: enemy_id = rnd(5). Short fights,
+  # small stakes — you are trying to get to work, not win anything.
   - id: 0
+    name: Dog
+    sprite: actor.png
+    energy: 18
+    intro:
+      - - "A DOG launches itself\ninto the road.\nIt is thrilled."
+    look:
+      - - "No collar, no owner,\nno plan."
+      - - "It has the face of an\nanimal never once\ntold no."
+    defeat:
+      - - "The dog loses interest\nand trots off to ruin\nsomeone else's morning."
+    reward:
+      energy: 2
+      text:
+        - - "It was, briefly, nice.\n\n+2 Energy."
+    take_damage:
+      THINK:
+        damage: 4-7
+        text:
+          - - "You calculate its\ntrajectory. The dog does\nnot use trajectories."
+      TALK:
+        damage: 9-14
+        text:
+          - - "You say GOOD BOY in\nthe voice. It has no\ndefence against this."
+      EMAIL:
+        damage: 1-3
+        text:
+          - - "You email nobody.\nIt is a dog. It does\nnot have an inbox."
+      SHRUG:
+        damage: 6-10
+        text:
+          - - "You stop pedalling and\nwait. The dog respects\nthis enormously."
+    moves:
+      - text:
+          - - "It barks at your front\nwheel, for the wheel's\nown good."
+          - - "It keeps pace with you,\ndelighted."
+        damage: 2-4
+      - text:
+          - - "It stops dead. It has\nseen another dog."
+          - - "It circles back to check\nyou are still fun."
+        damage: 3-5
+      - text:
+          - - "It stares. You blink\nfirst."
+        damage: 0-2
+
+  - id: 1
+    name: Grandma
+    sprite: actor_animated.png
+    energy: 22
+    intro:
+      - - "A GRANDMOTHER begins\ncrossing. The lights\nare in her favour."
+    look:
+      - - "She is 40% across.\nShe has been 40% across\nfor some time."
+      - - "Her shopping trolley has\none wheel that disagrees\nwith the others."
+    defeat:
+      - - "She reaches the kerb.\nShe nods at you. You\nhave been approved."
+    reward:
+      energy: 3
+      text:
+        - - "She gives you a sweet\nfrom 2011.\n\n+3 Energy."
+    take_damage:
+      THINK:
+        damage: 5-8
+        text:
+          - - "You work out she has\nright of way. She had\nit regardless."
+      TALK:
+        damage: 7-11
+        text:
+          - - "You say good morning.\nShe says something\nabout the weather."
+      EMAIL:
+        damage: 1-3
+        text:
+          - - "There is nobody to CC\nabout a grandmother."
+      SHRUG:
+        damage: 10-15
+        text:
+          - - "You wait. This turns out\nto be the entire\nsolution."
+    moves:
+      - text:
+          - - "She stops to check her\nlist. It is a long list."
+          - - "She reads a receipt in\nthe middle of the road."
+        damage: 2-4
+      - text:
+          - - "She waves you on, then\ndoes not move."
+          - - "You wave her on. She\nwaves you on. Nobody\nmoves."
+        damage: 3-5
+      - text:
+          - - "A second grandmother\njoins her."
+        damage: 0-3
+
+  - id: 2
+    name: Boss Call
+    sprite: static.png
+    energy: 25
+    intro:
+      - - "YOUR PHONE RINGS.\nIt is your boss.\nYou are not in yet."
+    look:
+      - - "The screen says QUICK\nQUESTION. It is never\na quick question."
+      - - "Three missed calls, all\nin the last ninety\nseconds."
+    defeat:
+      - - "The call ends. You have\nagreed to nothing.\nA small miracle."
+    reward:
+      brains: 1
+      text:
+        - - "You have learned the\nshape of a deflection.\n\n+1 Brains."
+    take_damage:
+      THINK:
+        damage: 5-9
+        text:
+          - - "You rehearse a reason\nfor being late. All of\nthem are true."
+      TALK:
+        damage: 4-8
+        text:
+          - - "You answer. You say the\nword \"circling\". It\nbuys you a minute."
+      EMAIL:
+        damage: 12-18
+        text:
+          - - "\"I'll put that in an\nemail.\" The call loses\nall of its power."
+      SHRUG:
+        damage: 6-10
+        text:
+          - - "You let it ring. A ring\nis only a sound."
+    moves:
+      - text:
+          - - "\"Quick question -\""
+          - - "\"Sorry, one more\nthing -\""
+        damage: 3-6
+      - text:
+          - - "\"Are you in yet?\""
+          - - "\"Did you see my\nmessage?\""
+        damage: 2-5
+      - text:
+          - - "It calls again.\nImmediately."
+        damage: 4-7
+
+  - id: 3
+    name: Tractor
+    sprite: moped01.png
+    energy: 30
+    intro:
+      - - "A TRACTOR pulls out.\nIt is doing eleven.\nThe road is single lane."
+    look:
+      - - "The trailer is stacked\nwith something damp.\nSome of it is leaving."
+      - - "A sticker on the back:\nHOW'S MY DRIVING.\nThere is no number."
+    defeat:
+      - - "It turns off into a\nfield. You are free.\nYou had earned it."
+    reward:
+      energy: 2
+      text:
+        - - "You had time to think\nback there.\n\n+2 Energy."
+    take_damage:
+      THINK:
+        damage: 11-16
+        text:
+          - - "You find the one\nstraight stretch and\ntake it. Textbook."
+      TALK:
+        damage: 2-5
+        text:
+          - - "You say something polite.\nNobody in there has heard\nanything since 1994."
+      EMAIL:
+        damage: 1-4
+        text:
+          - - "You compose a strongly\nworded email to a\nfield."
+      SHRUG:
+        damage: 7-11
+        text:
+          - - "You accept eleven\nkilometres an hour.\nThe hedges are nice."
+    moves:
+      - text:
+          - - "It indicates left for a\nvery long time."
+          - - "It indicates left.\nIt turns right."
+        damage: 3-6
+      - text:
+          - - "Mud arrives. Some of it\nis on you."
+          - - "Something falls off the\ntrailer. It was probably\nimportant."
+        damage: 4-7
+      - text:
+          - - "It slows down for a\nreason you will never\nlearn."
+        damage: 2-5
+
+  - id: 4
+    name: Construction
+    sprite: motorcycle01.png
+    energy: 35
+    can_flee: false
+    flee_blocked:
+      - - "There is no way round.\nThat is rather the point\nof a road."
+      - - "You look for a gap.\nThe gap is a trench."
+    intro:
+      - - "A CONSTRUCTION SITE.\nThe road is gone.\nIt was here yesterday."
+    look:
+      - - "Four workers. One is\ndigging. Three are\nsupervising."
+      - - "The temporary lights\nhave been temporary\nsince spring."
+    defeat:
+      - - "You find a way through.\nSomeone waves you past\nlike it was their idea."
+    reward:
+      brains: 1
+      text:
+        - - "You know the back\nstreets now.\n\n+1 Brains."
+    take_damage:
+      THINK:
+        damage: 12-18
+        text:
+          - - "You picture the map.\nThere is a back street.\nBrains are for this."
+      TALK:
+        damage: 6-10
+        text:
+          - - "You ask a worker. He\npoints at another\nworker."
+      EMAIL:
+        damage: 3-6
+        text:
+          - - "You email the council.\nAn auto-reply thanks you\nfor your patience."
+      SHRUG:
+        damage: 4-8
+        text:
+          - - "You wait at the\ntemporary lights. They\nare in no hurry."
+    moves:
+      - text:
+          - - "The light stays red.\nNothing is coming the\nother way."
+          - - "The light turns green\nfor one and a half cars."
+        damage: 3-6
+      - text:
+          - - "A man holds a STOP sign\nand a sandwich."
+          - - "The STOP sign turns to\nSLOW. Then back."
+        damage: 2-5
+      - text:
+          - - "The detour sign points\nat another detour sign."
+        damage: 4-8
+
+  # --- The office (ids 10-12) -------------------------------------------
+  - id: 10
     name: Coffee Machine
     sprite: actor.png
     energy: 60
@@ -162,7 +397,7 @@ enemies:
           - - "DESCALE REQUIRED, it\nsays, having required\nthis since 2019."
         damage: 0-2
 
-  - id: 1
+  - id: 11
     name: The Printer
     sprite: static.png
     energy: 65
@@ -210,7 +445,7 @@ enemies:
           - - "It prints a test page.\nNobody asked for a\ntest page."
         damage: 0-3
 
-  - id: 2
+  - id: 12
     name: The Meeting
     sprite: actor_animated.png
     energy: 105

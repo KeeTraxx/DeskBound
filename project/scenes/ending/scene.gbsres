@@ -16,7 +16,26 @@
   "symbol": "scene_9",
   "x": 800,
   "y": 30,
-  "script": [],
+  "script": [
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "3a7c1b9e-5d24-4f08-9e61-c8b2d4a70f35"
+      },
+      "id": "c8ab7d04-965d-5e29-ab52-02d313b30769"
+    },
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "29",
+        "value": {
+          "type": "number",
+          "value": 0
+        }
+      },
+      "id": "fb73b438-958a-5ae8-bcae-33b8349fc1ad"
+    }
+  ],
   "playerHit1Script": [],
   "playerHit2Script": [],
   "playerHit3Script": []

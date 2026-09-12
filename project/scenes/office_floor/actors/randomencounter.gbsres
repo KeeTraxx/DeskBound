@@ -1,0 +1,168 @@
+{
+  "_resourceType": "actor",
+  "id": "b3fd1890-45a7-49ac-a1c1-bf34bc74ca40",
+  "name": "RandomEncounter",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "df4043e3-8809-4960-806e-fd5329cf7614",
+  "prefabId": "",
+  "direction": "down",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": true,
+  "collisionGroup": "",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_0",
+  "script": [],
+  "startScript": [
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "L2",
+        "value": {
+          "type": "add",
+          "valueA": {
+            "type": "number",
+            "value": 10
+          },
+          "valueB": {
+            "type": "rnd",
+            "value": {
+              "type": "number",
+              "value": 10
+            }
+          }
+        }
+      },
+      "id": "da8b5471-32d2-42a4-a62a-99bfad11f9f0"
+    }
+  ],
+  "updateScript": [
+    {
+      "command": "EVENT_ACTOR_GET_POSITION",
+      "args": {
+        "actorId": "player",
+        "vectorX": "L0",
+        "vectorY": "L1",
+        "__collapse": false
+      },
+      "id": "6fa4da1a-e656-44ab-aa19-bde503f5772f"
+    },
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "or",
+          "valueA": {
+            "type": "ne",
+            "valueA": {
+              "type": "variable",
+              "value": "L0"
+            },
+            "valueB": {
+              "type": "variable",
+              "value": "27"
+            }
+          },
+          "valueB": {
+            "type": "ne",
+            "valueA": {
+              "type": "variable",
+              "value": "L1"
+            },
+            "valueB": {
+              "type": "variable",
+              "value": "28"
+            }
+          }
+        },
+        "__collapseElse": true,
+        "__collapse": true
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_DEC_VALUE",
+            "args": {
+              "variable": "L2"
+            },
+            "id": "6e832dc8-8527-420b-8721-18e7c9a52b94"
+          },
+          {
+            "command": "EVENT_IF",
+            "args": {
+              "condition": {
+                "type": "lte",
+                "valueA": {
+                  "type": "variable",
+                  "value": "L2"
+                },
+                "valueB": {
+                  "type": "number",
+                  "value": 0
+                }
+              },
+              "__collapseElse": true
+            },
+            "children": {
+              "true": [
+                {
+                  "command": "EVENT_SET_VALUE",
+                  "args": {
+                    "variable": "4",
+                    "value": {
+                      "type": "add",
+                      "valueA": {
+                        "type": "number",
+                        "value": 10
+                      },
+                      "valueB": {
+                        "type": "rnd",
+                        "value": {
+                          "type": "number",
+                          "value": 4
+                        }
+                      }
+                    }
+                  },
+                  "id": "47fd13f4-00bd-4b3b-b356-bffcf55ea097"
+                },
+                {
+                  "command": "EVENT_CALL_CUSTOM_EVENT",
+                  "args": {
+                    "customEventId": "064f9361-36bf-4f42-ba7c-f99fda9a11ed"
+                  },
+                  "id": "f13b750f-ebb5-4d2e-90b8-32c39d8a77f0"
+                }
+              ],
+              "false": []
+            },
+            "id": "95ae7a52-660d-4881-b60c-d11d539f9ef8"
+          }
+        ],
+        "false": []
+      },
+      "id": "38e8566b-9ed2-4b1f-be09-e0342bd9fa15"
+    },
+    {
+      "command": "EVENT_ACTOR_GET_POSITION",
+      "args": {
+        "actorId": "player",
+        "vectorX": "27",
+        "vectorY": "28",
+        "__collapse": false
+      },
+      "id": "5bf07801-12f0-4580-8c13-8c3428e4f880"
+    }
+  ],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 37,
+  "y": 51,
+  "_index": 0
+}
