@@ -150,10 +150,10 @@
                       {
                         "command": "EVENT_SET_VALUE",
                         "args": {
-                          "variable": "5",
+                          "variable": "6",
                           "value": {
                             "type": "number",
-                            "value": 105
+                            "value": 65
                           }
                         },
                         "id": "74d9051e-3c14-5702-917d-3e63325c8d19"
@@ -180,7 +180,7 @@
                       {
                         "command": "EVENT_TEXT",
                         "args": {
-                          "text": "THE MEETING THAT COULD'VE\nBEEN AN EMAIL begins.\nIt has no agenda.",
+                          "text": "THE PRINTER stirs.\nIt has never worked.\nIt is not sorry.",
                           "avatarId": "",
                           "clearPrevious": true
                         },

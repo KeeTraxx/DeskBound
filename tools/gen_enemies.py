@@ -6,19 +6,18 @@ turn loop — one branch per enemy, per verb, per move — is miserable to autho
 in the GUI. This tool keeps the *content* in enemies.yaml and compiles it into
 a single GB Studio custom script named "BattleScript".
 
-It writes these files and touches nothing else in the project:
+It writes two scripts and nothing else — no scene, no actors:
 
-  project/scripts/battlescript.gbsres           the "BattleScript" custom script
-  project/scripts/setbar.gbsres                 "SetBar" (only with "bars:")
-  project/scenes/battle/actors/enemy.gbsres     actor whose sprite the script swaps
-  project/scenes/battle/actors/playerbar.gbsres Composure meter (only with "bars:")
-  project/scenes/battle/actors/enemybar.gbsres  Composure meter (only with "bars:")
-  project/scenes/battle/scene.gbsres            On Init -> call BattleScript(Enemy)
+  project/scripts/battlescript.gbsres  the "BattleScript" custom script
+  project/scripts/setbar.gbsres        "SetBar" (only with "bars:")
 
-A GB Studio custom script cannot reference a scene actor by id (the compiler
-rejects it with "Unknown arg actor ..."), so the enemy sprite is an actor
-*parameter* of the script, bound at the call site in the battle scene. That is
-why this tool also owns the battle scene's On Init script and the enemy actor.
+(--draw-bar-art additionally redraws the placeholder bar sprite in assets/.)
+
+A GB Studio custom script cannot reference a scene actor by id — the compiler
+rejects it with "Unknown arg actor ..." — so the actors the battle touches are
+actor *parameters*: Enemy, and PlayerBar / EnemyBar when bars are configured.
+Drop BattleScript into the battle scene's On Init and bind them from its
+parameter dropdowns. Everything scene-side is yours.
 
 The Composure bars are set by BattleScript through a second generated script,
 "SetBar". They cannot poll instead: a scene's On Init script is compiled with
@@ -80,8 +79,8 @@ REQUIRED_VARS = [
 RESULT_ONGOING, RESULT_WIN, RESULT_FLED, RESULT_LOST = 0, 1, 2, 3
 
 DEFAULT_MESSAGES = {
-    "status": "YOU  {player_composure}/{player_composure_max}\n"
-              "THEM {enemy_composure}/{enemy_composure_max}",
+    # No running Composure totals: the bars show those. Define a "status"
+    # message in enemies.yaml to bring a per-round text readout back.
     "hit": "It loses {damage}\nComposure.",
     "no_effect": "It barely notices.",
     "player_hit": "You lose {damage}\nComposure.",
@@ -97,11 +96,11 @@ DEFAULT_FLEE = {
 
 MAX_VAR_VALUE = 32767  # GB Studio 4 globals are 16-bit
 
-# Actor animSpeed is the engine's anim_tick. 255 is the editor's "None" — the
-# only way to stop a sprite cycling its frames, since the `animate` flag is not
+# animSpeed is the engine's anim_tick. 255 is the editor's "None" — the only
+# way to stop a sprite cycling its frames, since the `animate` flag is not
 # emitted for actors in 4.2 and EVENT_ACTOR_SET_ANIMATE is deprecated and
-# unimplemented. A bar whose frame *is* its value must never self-animate.
-ANIM_SPEED_DEFAULT = 15
+# unimplemented. A bar actor whose frame *is* its value must be set to None in
+# the GUI, or it animates on its own regardless of Composure.
 ANIM_SPEED_NONE = 255
 
 
@@ -325,19 +324,6 @@ def load_sprites():
             continue  # sidecar without its image; GB Studio ignores it too
         sprites[os.path.relpath(png, SPRITE_DIR)] = load_json(sidecar)["id"]
     return sprites
-
-
-def find_battle_scene():
-    """Locate the scene named "Battle" (falling back to scenes/battle/)."""
-    for path in sorted(glob.glob(os.path.join(ROOT, "project", "scenes", "*",
-                                              "scene.gbsres"))):
-        if load_json(path).get("name", "").strip().lower() == "battle":
-            return path
-    fallback = os.path.join(ROOT, "project", "scenes", "battle", "scene.gbsres")
-    if os.path.exists(fallback):
-        return fallback
-    fail("no scene named \"Battle\" found under project/scenes/ — create one "
-         "in GB Studio first")
 
 
 # --------------------------------------------------------------- yaml loading
@@ -596,13 +582,9 @@ class Config:
                 self.win_flags[e.id] = variables[e.win_flag]
 
         unknown = set(raw) - {"enemies", "actions", "player", "messages",
-                              "menu", "flee", "lose", "battle", "bars"}
+                              "menu", "flee", "lose", "bars"}
         if unknown:
             fail(f"enemies.yaml: unknown top-level keys {sorted(unknown)}")
-
-        battle = raw.get("battle") or {}
-        self.enemy_x = battle.get("x", 9)
-        self.enemy_y = battle.get("y", 5)
 
         self.bars = self._read_bars(raw.get("bars"), sprites)
 
@@ -633,18 +615,13 @@ class Config:
             if e.composure > headroom:
                 fail(f"bars: enemy '{e.name}' composure {e.composure} × "
                      f"{frames - 1} frames overflows a 16-bit variable")
-        unknown = set(bars) - {"sprite", "frames", "width", "height",
-                               "player", "enemy"}
+        unknown = set(bars) - {"sprite", "frames", "width", "height"}
         if unknown:
             fail(f"bars: unknown keys {sorted(unknown)}")
-        place = lambda key, dx, dy: ((bars.get(key) or {}).get("x", dx),
-                                     (bars.get(key) or {}).get("y", dy))
         return {
             "sprite": sprite,
             "sprite_id": sprites[sprite],
             "frames": frames,
-            "player": place("player", 1, 15),
-            "enemy": place("enemy", 11, 3),
         }
 
 
@@ -713,7 +690,8 @@ def build_battle_script(cfg, V, setbar_id):
         set_var(V["battle_turn_count"],
                 add(var(V["battle_turn_count"]), num(1))),
         set_var(V["battle_damage"], num(0)),
-        *say(cfg.messages["status"]),
+        # "status" is optional and unset by default — the bars report Composure.
+        *(say(cfg.messages["status"]) if "status" in cfg.messages else []),
         menu(V["battle_menu_choice"],
              [cfg.menu["act"], cfg.menu["look"], cfg.menu["flee"]],
              layout="menu"),
@@ -878,50 +856,6 @@ def write_script_resource(cfg, V, setbar_id, dry_run):
     return script_id, path, resource["script"]
 
 
-def write_actor(scene_dir, key, name, index, sprite_id, pos, dry_run,
-                update_script=(), pinned=False,
-                anim_speed=ANIM_SPEED_DEFAULT):
-    """Write one battle-scene actor.
-
-    An existing file keeps its position, so nudging an actor in the GUI
-    survives a regeneration; everything else is regenerated.
-    """
-    path = os.path.join(scene_dir, "actors", f"{key}.gbsres")
-    existing = load_json(path) if os.path.exists(path) else {}
-    actor = {
-        "_resourceType": "actor",
-        "id": existing.get("id", stable_id(f"battle_{key}_actor")),
-        "_index": index,
-        "name": name,
-        "symbol": f"actor_battle_{index}",
-        "prefabId": "",
-        "coordinateType": "tiles",
-        "x": existing.get("x", pos[0]),
-        "y": existing.get("y", pos[1]),
-        "frame": 0,
-        "direction": "down",
-        "spriteSheetId": sprite_id,
-        "moveSpeed": 1,
-        "animSpeed": anim_speed,
-        "paletteId": "",
-        "isPinned": pinned,
-        "persistent": False,
-        "collisionGroup": "",
-        "collisionExtraFlags": [],
-        "prefabScriptOverrides": {},
-        "animate": False,
-        "script": [],
-        "startScript": [],
-        "updateScript": list(update_script),
-        "hit1Script": [],
-        "hit2Script": [],
-        "hit3Script": [],
-    }
-    if not dry_run:
-        save_json(path, actor)
-    return actor["id"], path
-
-
 # Placeholder bar art. GB Studio sprite tiles are 8x16, so a bar cell is
 # CELL_H tall and its width must divide into 8px columns.
 CELL_H = 16
@@ -1042,47 +976,6 @@ def bar_fill_expression(frames, value_var, max_var):
                divisor)
 
 
-def write_battle_actors(cfg, V, scene_dir, dry_run):
-    """The Enemy actor, plus the two Composure bars when 'bars:' is set."""
-    written = []
-    bars = {}
-    enemy_id, path = write_actor(
-        scene_dir, "enemy", ENEMY_ACTOR_NAME, 0,
-        # Placeholder only — BattleScript sets the real sprite on init.
-        cfg.enemies[0].sprite_id, (cfg.enemy_x, cfg.enemy_y), dry_run)
-    written.append((ENEMY_ACTOR_NAME, path))
-
-    if cfg.bars:
-        for index, (key, name, slot, pos) in enumerate((
-            ("playerbar", PLAYER_BAR_NAME, PLAYER_BAR_SLOT,
-             cfg.bars["player"]),
-            ("enemybar", ENEMY_BAR_NAME, ENEMY_BAR_SLOT, cfg.bars["enemy"]),
-        ), start=1):
-            # No On Update script: the battle runs inside the scene's On Init,
-            # which the compiler emits with VM_LOCK, and a locked context is
-            # the *only* one the VM scheduler runs. An update script here would
-            # never execute a single instruction. BattleScript calls SetBar
-            # instead, at each Composure change.
-            bar_id, path = write_actor(
-                scene_dir, key, name, index, cfg.bars["sprite_id"], pos,
-                dry_run, pinned=True, anim_speed=ANIM_SPEED_NONE)
-            bars[slot] = bar_id
-            written.append((name, path))
-    return enemy_id, bars, written
-
-
-def wire_battle_scene(scene_path, script_id, actor_id, bars, dry_run):
-    """Point the battle scene's On Init at BattleScript, actors bound."""
-    scene = load_json(scene_path)
-    args = {f"$actor[{ENEMY_ACTOR_SLOT}]$": actor_id}
-    for slot, bar_id in bars.items():
-        args[f"$actor[{slot}]$"] = bar_id
-    scene["script"] = [call_custom(script_id, args)]
-    if not dry_run:
-        save_json(scene_path, scene)
-    return scene_path
-
-
 # ------------------------------------------------------------------ simulation
 # Balance is checked by *interpreting the generated event tree* rather than by
 # re-implementing the damage rules, so what gets measured is what ships.
@@ -1199,15 +1092,9 @@ def main():
     cfg = Config(raw, variables, sprites)
     V = {name: variables[name] for name in REQUIRED_VARS}
 
-    scene_path = find_battle_scene()
-    scene_dir = os.path.dirname(scene_path)
-
     setbar_id, setbar_path = write_setbar_resource(cfg, args.dry_run)
     script_id, script_path, script = write_script_resource(
         cfg, V, setbar_id, args.dry_run)
-    actor_id, bars, actors = write_battle_actors(cfg, V, scene_dir,
-                                                 args.dry_run)
-    wire_battle_scene(scene_path, script_id, actor_id, bars, args.dry_run)
 
     prefix = "would write" if args.dry_run else "wrote"
     rel = lambda p: os.path.relpath(p, ROOT)
@@ -1216,12 +1103,16 @@ def main():
     if setbar_path:
         print(f"{prefix} {rel(setbar_path)}  ({SETBAR_NAME}: bar actor, "
               "value, max)")
-    for name, path in actors:
-        print(f"{prefix} {rel(path)}  ({name} actor)")
-    print(f"{prefix} {rel(scene_path)}  (On Init -> {SCRIPT_NAME})")
     if cfg.bars:
         print(f"  bars: {cfg.bars['sprite']}, {cfg.bars['frames']} frames, "
               f"set via {SETBAR_NAME} at each Composure change")
+    print(f"  wire it in GB Studio: add {SCRIPT_NAME} to the battle scene's "
+          "On Init, then bind its actor parameters —")
+    print(f"    {ENEMY_ACTOR_NAME} -> the actor whose sprite the fight swaps "
+          "per enemy")
+    if cfg.bars:
+        print(f"    {PLAYER_BAR_NAME} / {ENEMY_BAR_NAME} -> two actors using "
+              f"{cfg.bars['sprite']}, each with Animation Speed: None")
     for e in cfg.enemies:
         flags = "" if e.can_flee else ", no flee"
         print(f"  #{e.id} {e.name}: composure {e.composure}, "

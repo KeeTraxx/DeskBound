@@ -30,16 +30,27 @@ compile into a GB Studio custom script named **BattleScript**:
 python3 tools/gen_enemies.py            # --dry-run to validate without writing
 ```
 
-That writes these files and touches nothing else:
+That writes two scripts and nothing else — no scene, no actors:
 
 | File | Contents |
 |---|---|
 | `project/scripts/battlescript.gbsres` | the `BattleScript` custom script — the whole turn loop |
 | `project/scripts/setbar.gbsres` | `SetBar` — shows a value on a bar actor (only with `bars:`) |
-| `project/scenes/battle/actors/enemy.gbsres` | the actor whose sprite `BattleScript` swaps per enemy |
-| `project/scenes/battle/actors/playerbar.gbsres` | Composure meter for `player_composure` (only with `bars:`) |
-| `project/scenes/battle/actors/enemybar.gbsres` | Composure meter for `enemy_composure` (only with `bars:`) |
-| `project/scenes/battle/scene.gbsres` | On Init → call `BattleScript`, with all three actors bound |
+
+(`--draw-bar-art` additionally redraws the placeholder bar sprite under
+`assets/sprites/`.)
+
+**Wiring is yours.** A custom script can't name a scene actor by id, so the
+actors the battle touches are actor *parameters*. Drop `BattleScript` into the
+battle scene's On Init and bind them from its dropdowns:
+
+| Parameter | Bind to |
+|---|---|
+| `Enemy` | the actor whose sprite the fight swaps per enemy |
+| `PlayerBar` / `EnemyBar` | two actors using `composure_bar.png`, each set to **Animation Speed: None** |
+
+`SetBar` is a normal custom script too — drag it into any script to refresh a
+bar by hand.
 
 The overworld starts a fight the way it already does: set `enemy_id`, push
 scene state, switch to the battle scene. `BattleScript` reads `enemy_id`, sets
@@ -68,10 +79,10 @@ Ranges are inclusive and accept `5`, `"3-6"` or `[3, 6]`. Any text may use
 `{damage}`, `{player_composure}`, `{enemy_composure}` and friends, which become
 GB Studio variable interpolation.
 
-> **Editing caution:** the battle scene's On Init script, its `Enemy` actor and
-> `BattleScript` are regenerated wholesale. Edit `enemies.yaml`, not those.
-> Everything else in the project is safe to edit in the GUI. The tool never
-> touches `project/variables.gbsres` — the globals it needs (`enemy_id`,
+> **Editing caution:** `BattleScript` and `SetBar` are rewritten wholesale on
+> every run — edit `enemies.yaml`, not them. Everything else, scenes and actors
+> included, is yours to edit in the GUI; the tool never opens those files. Nor
+> does it touch `project/variables.gbsres` — the globals it needs (`enemy_id`,
 > `battle_result`, …) must already exist there.
 
 ### Resource layout matters
@@ -81,7 +92,8 @@ Actors and triggers **must** live in `project/scenes/<scene>/actors/` and
 directory — it groups them on the path segment before `/actors/` or
 `/triggers/`. Files written flat next to `scene.gbsres` load as orphans
 belonging to no scene, and the next save in the GUI **silently deletes them**.
-`gen_enemies.py` writes the `Enemy` actor into that layout for this reason.
+(`gen_enemies.py` writes no actors, but the rule bites anything you add by
+hand outside the GUI.)
 
 ### Adding a position-based transition
 
@@ -139,8 +151,8 @@ that mask is marked `Unknown`, and `Unknown` matches **any** tile during
 deduplication — so wrongly-placed tiles silently collapse frames into each
 other and every frame renders the same. At canvas width 16 the origin is 0 and
 the two conventions coincide, which hides the mistake until you widen a sprite.
-The same convention means the actor's x is the **centre** of the bar, so a 64px
-bar needs `x >= 4` tiles to stay on screen.
+The same convention means the actor's x is the **centre** of the bar, so place
+a 64px bar at `x >= 4` tiles to keep it on screen.
 
 **The width costs hardware sprites.** GB Studio sprite tiles are 8×16, so a
 64px bar is **8 OAM sprites**, and the Game Boy drops anything past **10
@@ -148,6 +160,24 @@ sprites on one scanline**. Each bar sits on its own rows, so they don't compete
 with each other — but keep the enemy sprite off those rows, or parts of the bar
 will flicker out. VRAM is not the problem: the 136 tile slots in the strip are
 only **3 distinct tiles** (empty, half, full) once GB Studio dedupes them.
+
+### Returning to a Shoot Em' Up scene sets its scroll direction
+
+`shmup_init` starts with `shooter_direction = PLAYER.dir` — a SHMUP scene takes
+its scroll axis from whichever way the player happens to be facing when the
+scene loads. In free movement `shmup_update` rewrites `PLAYER.dir` to UP or DOWN
+as soon as you press up or down, and `Scene Push State` saves that direction,
+which `Scene Pop State` restores *before* `state_init` runs.
+
+So a battle entered while dodging vertically returns Street to a **vertically**
+scrolling shooter: the horizontal auto-scroll stops and left/right steer freely.
+Street is 200x18 tiles — exactly one screen tall — so there is nowhere to scroll
+vertically and it just looks like the scene lost its type.
+
+The fix belongs at *push* time, not on return: `StartBattle` faces the player
+along the scroll axis (Actor Set Direction → Player → Right) **before** Scene
+Push State, so the direction that comes back is the one the scene needs. Setting
+it in the scene's On Init is too late — `state_init` has already read it.
 
 ### Why the generated branches are nested if/else
 

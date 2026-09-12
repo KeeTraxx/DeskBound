@@ -8,6 +8,17 @@
   "symbol": "script_1",
   "script": [
     {
+      "command": "EVENT_ACTOR_SET_DIRECTION",
+      "args": {
+        "actorId": "player",
+        "direction": {
+          "type": "direction",
+          "value": "right"
+        }
+      },
+      "id": "0b1f4c2e-5a61-4d2e-9a7c-6f1f3d9c8a10"
+    },
+    {
       "command": "EVENT_SCENE_PUSH_STATE",
       "args": {},
       "id": "d3bb11d9-4b6e-4475-8d97-c37ee420b583"

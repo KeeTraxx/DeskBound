@@ -29,20 +29,19 @@
 player:
   composure: 100
 
-# Composure meters. Each is an actor in the battle scene whose sprite has one
-# frame per fill level; BattleScript sets the frame through the generated
-# "SetBar" script whenever Composure changes. (A bar cannot poll its own value
-# in an On Update script: the battle runs in the scene's On Init, which holds
-# the VM lock for the whole fight, so no other thread runs.) `frames` is how
-# many fill levels the strip holds, empty (0) through full. Delete this section
-# to drop the bars entirely.
+# Composure meters. A bar is an actor you place in the battle scene, using a
+# sprite with one frame per fill level; BattleScript sets the frame through the
+# generated "SetBar" script whenever Composure changes, via its PlayerBar and
+# EnemyBar actor parameters. (A bar cannot poll its own value in an On Update
+# script: the battle runs in the scene's On Init, which holds the VM lock for
+# the whole fight, so no other thread runs.) Give each bar actor Animation
+# Speed: None, or the engine cycles the frames by itself. Delete this section
+# to drop the bars and their parameters entirely.
 bars:
   sprite: composure_bar.png
-  frames: 17
+  frames: 17         # fill levels in the strip, empty (0) through full
   width: 64          # px; must be a multiple of 8, one 8px column per sprite
   height: 8          # px tall, centred in the 16px sprite cell
-  player: { x: 4, y: 15 }   # x is the bar's CENTRE: a 64px bar needs x >= 4
-  enemy: { x: 12, y: 3 }
 
 # The ACT submenu, in order. Every enemy must answer for each verb.
 actions: [THINK, TALK, EMAIL, SHRUG]
@@ -65,8 +64,10 @@ flee:
     - - "You can't leave. It's\nin your calendar."
 
 messages:
-  status:
-    - - "YOU  {player_composure}/{player_composure_max}\nTHEM {enemy_composure}/{enemy_composure_max}"
+  # The Composure bars report the totals, so there is no per-round readout.
+  # Add one back by defining `status`, e.g.:
+  #   status:
+  #     - - "YOU  {player_composure}/{player_composure_max}\nTHEM {enemy_composure}/{enemy_composure_max}"
   hit:
     - - "It loses {damage}\nComposure."
     - - "{damage} Composure.\nIt felt that."

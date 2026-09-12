@@ -53,10 +53,10 @@
           {
             "command": "EVENT_SET_VALUE",
             "args": {
-              "variable": "4",
+              "variable": "1",
               "value": {
                 "type": "number",
-                "value": 2
+                "value": 100
               }
             },
             "id": "fdc07909-5409-54e4-83d4-6f9860b354ac"
