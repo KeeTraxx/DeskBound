@@ -14,7 +14,7 @@
   "collisions": "00258+0f190+00708+0f258+00c8+",
   "autoFadeSpeed": 1,
   "symbol": "scene_8",
-  "x": 60,
+  "x": 64,
   "y": 232,
   "script": [
     {
@@ -133,11 +133,11 @@
                     "sceneId": "bbdeedd3-0438-5142-95c9-61b3377d322b",
                     "x": {
                       "type": "number",
-                      "value": 9
+                      "value": 18
                     },
                     "y": {
                       "type": "number",
-                      "value": 9
+                      "value": 50
                     },
                     "direction": "up",
                     "fadeSpeed": "2"
@@ -152,6 +152,53 @@
                     "variable": "26"
                   },
                   "id": "7326167e-fcd2-4610-ab64-cb0aa4fd2ddd"
+                },
+                {
+                  "command": "EVENT_IF",
+                  "args": {
+                    "condition": {
+                      "type": "eq",
+                      "valueA": {
+                        "type": "rnd",
+                        "value": {
+                          "type": "number",
+                          "value": 5
+                        }
+                      },
+                      "valueB": {
+                        "type": "number",
+                        "value": 0
+                      }
+                    },
+                    "__collapseElse": true
+                  },
+                  "children": {
+                    "true": [
+                      {
+                        "command": "EVENT_SET_VALUE",
+                        "args": {
+                          "variable": "4",
+                          "value": {
+                            "type": "rnd",
+                            "value": {
+                              "type": "number",
+                              "value": 3
+                            }
+                          }
+                        },
+                        "id": "66dd3ab6-5f66-4b6b-89f3-2bb99c6fa4de"
+                      },
+                      {
+                        "command": "EVENT_CALL_CUSTOM_EVENT",
+                        "args": {
+                          "customEventId": "064f9361-36bf-4f42-ba7c-f99fda9a11ed"
+                        },
+                        "id": "d802d8a7-52ab-4fef-81b3-0b2db1e38624"
+                      }
+                    ],
+                    "false": []
+                  },
+                  "id": "58e1de77-a904-4e1a-aa57-6c4e7d345b1d"
                 }
               ]
             },
@@ -160,65 +207,6 @@
         ]
       },
       "id": "40447214-0002-4577-9fc5-a61057305f66"
-    },
-    {
-      "command": "EVENT_SET_TIMER_SCRIPT",
-      "args": {
-        "timer": 1,
-        "duration": 3,
-        "frames": 30,
-        "__scriptTabs": "end",
-        "__label": "RandomEncounter"
-      },
-      "children": {
-        "script": [
-          {
-            "command": "EVENT_IF",
-            "args": {
-              "condition": {
-                "type": "mod",
-                "valueA": {
-                  "type": "variable",
-                  "value": "26"
-                },
-                "valueB": {
-                  "type": "number",
-                  "value": 6
-                }
-              },
-              "__collapseElse": true
-            },
-            "children": {
-              "true": [
-                {
-                  "command": "EVENT_SET_VALUE",
-                  "args": {
-                    "variable": "4",
-                    "value": {
-                      "type": "rnd",
-                      "value": {
-                        "type": "number",
-                        "value": 4
-                      }
-                    }
-                  },
-                  "id": "66dd3ab6-5f66-4b6b-89f3-2bb99c6fa4de"
-                },
-                {
-                  "command": "EVENT_CALL_CUSTOM_EVENT",
-                  "args": {
-                    "customEventId": "064f9361-36bf-4f42-ba7c-f99fda9a11ed"
-                  },
-                  "id": "d802d8a7-52ab-4fef-81b3-0b2db1e38624"
-                }
-              ],
-              "false": []
-            },
-            "id": "17d44f73-35e0-4d91-9dde-7f0714a211a3"
-          }
-        ]
-      },
-      "id": "a973e91a-bd99-4563-aa26-e158e6b36ed2"
     }
   ],
   "playerHit1Script": [],

@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "3fec3d80-5494-4381-9f06-ad019295430e",
+  "name": "5 colors (transparent)",
+  "symbol": "tileset_colors_transparen_0",
+  "width": 128,
+  "height": 128,
+  "imageWidth": 1024,
+  "imageHeight": 1024,
+  "filename": "5 colors (transparent).png"
+}

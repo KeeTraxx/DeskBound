@@ -472,9 +472,13 @@ class Enemy:
             fail(f"enemies[{index}]: expected a mapping")
         self.name = require(raw, "name", f"enemies[{index}]")
         where = f"enemy '{self.name}'"
+        # Ids may start at 0, which suits an overworld that picks a fight with
+        # a bare rnd(n). Left out, an id is the enemy's position in the list
+        # counting from 1, so omitting ids never renumbers an existing project.
         self.id = raw.get("id", index + 1)
-        if not isinstance(self.id, int) or self.id < 1:
-            fail(f"{where}: id must be a positive integer")
+        if not isinstance(self.id, int) or isinstance(self.id, bool) \
+                or self.id < 0:
+            fail(f"{where}: id must be 0 or a positive integer")
 
         sprite_name = require(raw, "sprite", where)
         if sprite_name not in sprites:
@@ -1075,9 +1079,30 @@ def draw_bar_art(bars, dry_run):
             for y in range(top + 1, top + height - 1):
                 px[ox + x, y] = BAR_FILL if x < filled else BAR_EMPTY
 
+    columns = width // 8
+
+    # numTiles is taken at face value by both the editor's "sprite tiles used"
+    # counter and the compiler's per-scene budget (compileData's
+    # getSpriteTileCount reads the resource; nothing recomputes it from the
+    # image). Count what GB Studio will actually keep: unique 8x16 tiles after
+    # deduplication, matching readSpriteData's flip-aware comparison.
+    def unique_tile_count():
+        seen = []
+        for k in range(frames):
+            for col in range(columns):
+                ox = k * width + col * 8
+                tile = tuple(tuple(px[ox + x, y] for x in range(8))
+                             for y in range(CELL_H))
+                flips = {tile,
+                         tuple(row[::-1] for row in tile),
+                         tuple(tile[::-1]),
+                         tuple(row[::-1] for row in tile[::-1])}
+                if not any(t in seen for t in flips):
+                    seen.append(tile)
+        return len(seen)
+
     png_path = os.path.join(SPRITE_DIR, name)
     sidecar_path = png_path + ".gbsres"
-    columns = width // 8
     sid = lambda k: str(uuid.uuid5(_ART_NS, f"{name}:{k}"))
 
     # Tile x/y are ORIGIN-relative, not canvas-relative. GB Studio's tile
@@ -1111,7 +1136,7 @@ def draw_bar_art(bars, dry_run):
         "symbol": "sprite_" + slugify(name.rsplit(".", 1)[0]),
         "states": [{"id": sid("state"), "name": "", "animationType": "fixed",
                     "flipLeft": False, "animations": animations}],
-        "numTiles": frames * columns,
+        "numTiles": unique_tile_count(),
         "canvasOriginX": 0, "canvasOriginY": 0,
         "canvasWidth": width, "canvasHeight": CELL_H,
         "boundsX": 0, "boundsY": 0,
@@ -1301,6 +1326,10 @@ def main():
     if cfg.bars:
         print(f"    {PLAYER_BAR_NAME} / {ENEMY_BAR_NAME} -> two actors using "
               f"{cfg.bars['sprite']}, each with Animation Speed: None")
+    if any(e.id == 0 for e in cfg.enemies):
+        zero = next(e.name for e in cfg.enemies if e.id == 0)
+        print(f"  note: '{zero}' is enemy 0, and a GB Studio variable starts "
+              "at 0 — an unset enemy_id will pick this fight")
     for e in cfg.enemies:
         flags = "" if e.can_flee else ", no flee"
         gains = ", ".join(

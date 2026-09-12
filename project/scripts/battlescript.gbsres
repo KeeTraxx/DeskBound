@@ -45,7 +45,7 @@
           },
           "valueB": {
             "type": "number",
-            "value": 1
+            "value": 0
           }
         }
       },
@@ -120,7 +120,7 @@
                 },
                 "valueB": {
                   "type": "number",
-                  "value": 2
+                  "value": 1
                 }
               }
             },
@@ -195,7 +195,7 @@
                       },
                       "valueB": {
                         "type": "number",
-                        "value": 3
+                        "value": 2
                       }
                     }
                   },
@@ -417,7 +417,7 @@
                       },
                       "valueB": {
                         "type": "number",
-                        "value": 1
+                        "value": 0
                       }
                     }
                   },
@@ -648,7 +648,7 @@
                             },
                             "valueB": {
                               "type": "number",
-                              "value": 2
+                              "value": 1
                             }
                           }
                         },
@@ -879,7 +879,7 @@
                                   },
                                   "valueB": {
                                     "type": "number",
-                                    "value": 3
+                                    "value": 2
                                   }
                                 }
                               },
@@ -1376,7 +1376,7 @@
                             },
                             "valueB": {
                               "type": "number",
-                              "value": 1
+                              "value": 0
                             }
                           }
                         },
@@ -1451,7 +1451,7 @@
                                   },
                                   "valueB": {
                                     "type": "number",
-                                    "value": 2
+                                    "value": 1
                                   }
                                 }
                               },
@@ -1526,7 +1526,7 @@
                                         },
                                         "valueB": {
                                           "type": "number",
-                                          "value": 3
+                                          "value": 2
                                         }
                                       }
                                     },
@@ -1611,7 +1611,7 @@
                             },
                             "valueB": {
                               "type": "number",
-                              "value": 1
+                              "value": 0
                             }
                           }
                         },
@@ -1775,7 +1775,7 @@
                                   },
                                   "valueB": {
                                     "type": "number",
-                                    "value": 2
+                                    "value": 1
                                   }
                                 }
                               },
@@ -1939,7 +1939,7 @@
                                         },
                                         "valueB": {
                                           "type": "number",
-                                          "value": 3
+                                          "value": 2
                                         }
                                       }
                                     },
@@ -2125,7 +2125,7 @@
                       },
                       "valueB": {
                         "type": "number",
-                        "value": 1
+                        "value": 0
                       }
                     }
                   },
@@ -2904,7 +2904,7 @@
                             },
                             "valueB": {
                               "type": "number",
-                              "value": 2
+                              "value": 1
                             }
                           }
                         },
@@ -3683,7 +3683,7 @@
                                   },
                                   "valueB": {
                                     "type": "number",
-                                    "value": 3
+                                    "value": 2
                                   }
                                 }
                               },
@@ -4528,7 +4528,7 @@
                 },
                 "valueB": {
                   "type": "number",
-                  "value": 1
+                  "value": 0
                 }
               }
             },
@@ -4625,7 +4625,7 @@
                       },
                       "valueB": {
                         "type": "number",
-                        "value": 2
+                        "value": 1
                       }
                     }
                   },
@@ -4740,7 +4740,7 @@
                             },
                             "valueB": {
                               "type": "number",
-                              "value": 3
+                              "value": 2
                             }
                           }
                         },

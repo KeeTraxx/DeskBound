@@ -107,9 +107,15 @@ lose:
     - "You go home early.\nNobody notices.\n\nTomorrow, you try again."
 
 enemies:
+  # `id` is what the overworld puts in enemy_id before switching to the battle
+  # scene. It may start at 0, which lets a picker use a bare rnd(n) — but note
+  # that a GB Studio variable starts at 0 too, so an enemy 0 is also whatever
+  # an *unset* enemy_id selects. Omit `id` and it defaults to the position in
+  # this list, counting from 1.
+  #
   # take_damage keeps one variant per verb on purpose: those lines teach the
   # enemy's weakness, and a lesson reads better when it reads the same twice.
-  - id: 1
+  - id: 0
     name: Coffee Machine
     sprite: actor.png
     energy: 60
@@ -156,7 +162,7 @@ enemies:
           - - "DESCALE REQUIRED, it\nsays, having required\nthis since 2019."
         damage: 0-2
 
-  - id: 2
+  - id: 1
     name: The Printer
     sprite: static.png
     energy: 65
@@ -204,7 +210,7 @@ enemies:
           - - "It prints a test page.\nNobody asked for a\ntest page."
         damage: 0-3
 
-  - id: 3
+  - id: 2
     name: The Meeting
     sprite: actor_animated.png
     energy: 105

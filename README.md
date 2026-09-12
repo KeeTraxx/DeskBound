@@ -111,6 +111,9 @@ because Energy is already 0.
 
 Adding an enemy is a YAML block — name, sprite, energy, `take_damage` per
 ACT verb, `look`/`intro`/`defeat` text, and moves with their own damage ranges.
+Its `id` is what the overworld writes to `enemy_id`; ids may start at 0 so a
+picker can use a bare `rnd(n)`, though bear in mind an unset `enemy_id` is also
+0. Omitted, an id is the enemy's position in the list counting from 1.
 `sprite` is a `.png` under `assets/sprites/` (`actor.png`, or
 `enemies/coffee.png` in a subfolder), resolved through that file's `.gbsres`
 sidecar. Every text field is a list of **variants**, each variant a list of
@@ -206,6 +209,14 @@ the two conventions coincide, which hides the mistake until you widen a sprite.
 The same convention means the actor's x is the **centre** of the bar, so place
 a 64px bar at `x >= 4` tiles to keep it on screen.
 
+**`numTiles` in a sprite sidecar is believed, not recomputed.** Both the
+editor's "sprite tiles used in scene" counter and the compiler's per-scene
+budget (`compileData.ts` → `getSpriteTileCount`) read the value straight from
+the `.gbsres`; nothing derives it from the image. `--draw-bar-art` therefore
+counts the unique 8x16 tiles the way `readSpriteData.ts` does — after
+deduplication, flips included — rather than the number of tile *slots*. For the
+64px bar that is **3**, not 136.
+
 **The width costs hardware sprites.** GB Studio sprite tiles are 8×16, so a
 64px bar is **8 OAM sprites**, and the Game Boy drops anything past **10
 sprites on one scanline**. Each bar sits on its own rows, so they don't compete
@@ -230,6 +241,25 @@ The fix belongs at *push* time, not on return: `StartBattle` faces the player
 along the scroll axis (Actor Set Direction → Player → Right) **before** Scene
 Push State, so the direction that comes back is the one the scene needs. Setting
 it in the scene's On Init is too late — `state_init` has already read it.
+
+### The Enemy actor should start as the *largest* enemy sprite
+
+`BattleScript` swaps the Enemy actor's sprite through an actor *parameter*, and
+that defeats GB Studio's reservation for swapped sprites. `compileData.ts` keys
+its `actorsExclusiveLookup` by `event.args.actorId` — for a parameter that is
+the literal slot `"0"`, never the scene actor's id — so `generateGBVMData.ts`
+emits `reserve_tiles: 0` for the actor that actually gets swapped.
+
+With `reserve_tiles` at 0 the engine puts that actor in the *shared* sprite
+pool (`data_manager.c`), and `vm_actor_set_spritesheet` then does
+`load_sprite(actor->base_tile, …)` with no bounds check. Swapping in a sprite
+with more tiles than the actor's base sprite writes straight over the tiles
+that follow it.
+
+So give the Enemy actor a default sprite at least as large as the biggest
+enemy it can become. Today `actor_animated.png` is 8 unique tiles while the
+actor's base `actor.png` is 3 — five tiles of overspill whenever the boss
+appears.
 
 ### Why the generated branches are nested if/else
 

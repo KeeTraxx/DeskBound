@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "d3d5f688-0323-49b0-b196-808a091a187c",
+  "name": "4 colors (filled roofs)",
+  "symbol": "tileset_4_colors_filled_roo",
+  "width": 128,
+  "height": 128,
+  "imageWidth": 1024,
+  "imageHeight": 1024,
+  "filename": "4 colors (filled roofs).png"
+}

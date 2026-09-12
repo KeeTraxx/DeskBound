@@ -11,12 +11,19 @@
   "colorModeOverride": "none",
   "paletteIds": [],
   "spritePaletteIds": [],
-  "collisions": "0f31+00!0f48+00d+0f7+00d+0f7+00d+0f7+0010+0f4+002+0f4+00a+0f4+002+0f4+00a+0f4+002+0f4+00a+0f4+002+0f4+00a+0f4+0010+0f4+0010+0fb+002+0f12+002+0f9+",
+  "collisions": "0f7a+00d+0f7+00d+0f7+00d+0f7+0010+0f4+002+0f4+00a+0f4+002+0f4+00a+0f4+002+0f4+00a+0f4+002+0f4+00a+0f4+0010+0f4+0010+0fb+002+0f12+002+0f9+",
   "autoFadeSpeed": 1,
   "symbol": "scene_7",
   "x": 304,
   "y": 30,
   "script": [
+    {
+      "command": "EVENT_RNG_SEED",
+      "args": {
+        "__collapse": false
+      },
+      "id": "929f1faf-7dd1-4057-b1e8-ac114a53a8ca"
+    },
     {
       "command": "EVENT_SWITCH",
       "args": {

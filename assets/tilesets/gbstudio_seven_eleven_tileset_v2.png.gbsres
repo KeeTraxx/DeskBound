@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "096ad846-1054-49c9-b1d7-7e45f67964cd",
+  "name": "gbstudio_seven_eleven_tileset_v2",
+  "symbol": "tileset_gbstudio_seven_elev",
+  "width": 13,
+  "height": 30,
+  "imageWidth": 104,
+  "imageHeight": 240,
+  "filename": "gbstudio_seven_eleven_tileset_v2.png"
+}

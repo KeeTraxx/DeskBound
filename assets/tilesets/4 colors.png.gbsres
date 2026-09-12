@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "7dc3d639-2329-4b14-884b-cfe60a6199e4",
+  "name": "4 colors",
+  "symbol": "tileset_4_colors",
+  "width": 128,
+  "height": 128,
+  "imageWidth": 1024,
+  "imageHeight": 1024,
+  "filename": "4 colors.png"
+}

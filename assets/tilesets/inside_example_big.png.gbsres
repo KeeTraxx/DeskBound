@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "613e00e4-8718-4759-9ed0-1631b79d7bac",
+  "name": "inside_example_big",
+  "symbol": "tileset_inside_example_big",
+  "width": 88,
+  "height": 80,
+  "imageWidth": 704,
+  "imageHeight": 640,
+  "filename": "inside_example_big.png"
+}

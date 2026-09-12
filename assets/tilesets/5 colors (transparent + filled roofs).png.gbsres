@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "b3474dac-c103-438e-b2cf-cfee061730cd",
+  "name": "5 colors (transparent + filled roofs)",
+  "symbol": "tileset_5_colors_transparen",
+  "width": 128,
+  "height": 128,
+  "imageWidth": 1024,
+  "imageHeight": 1024,
+  "filename": "5 colors (transparent + filled roofs).png"
+}
