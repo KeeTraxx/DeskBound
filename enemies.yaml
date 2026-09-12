@@ -21,27 +21,44 @@
 # lines (enemy moves, damage reports) are where a fight starts to feel stale.
 # Use \n for line breaks inside one step.
 #
+# Winning can hand some of it back: an enemy's optional `reward` block raises
+# player_energy, player_energy_max and/or player_brains. Amounts take the same
+# forms as damage (5, "3-6", [3, 6]). A max_energy gain also adds the same
+# amount to current Energy, so the bar never looks emptier for getting bigger,
+# and an energy gain is clamped to the maximum. Put the number in the text
+# yourself — reward text has no {amount} placeholder.
+#
+# The player's Energy is NOT set here: player_energy and
+# player_energy_max are globals owned by the overworld, so they carry across
+# battles. BattleScript only ever subtracts from them.
+#
 # Damage ranges are inclusive and may be written as 5, "3-6" or [3, 6].
-# Any text may use {damage}, {player_composure}, {player_composure_max},
-# {enemy_composure}, {enemy_composure_max} and {turn} — they are replaced with
+# Any text may use {damage}, {player_energy}, {player_energy_max},
+# {enemy_energy}, {enemy_energy_max} and {turn} — they are replaced with
 # GB Studio variable interpolation.
 
-player:
-  composure: 100
-
-# Composure meters. A bar is an actor you place in the battle scene, using a
+# Energy meters. A bar is an actor you place in the battle scene, using a
 # sprite with one frame per fill level; BattleScript sets the frame through the
-# generated "SetBar" script whenever Composure changes, via its PlayerBar and
+# generated "SetBar" script whenever Energy changes, via its PlayerBar and
 # EnemyBar actor parameters. (A bar cannot poll its own value in an On Update
 # script: the battle runs in the scene's On Init, which holds the VM lock for
 # the whole fight, so no other thread runs.) Give each bar actor Animation
 # Speed: None, or the engine cycles the frames by itself. Delete this section
 # to drop the bars and their parameters entirely.
 bars:
-  sprite: composure_bar.png
+  sprite: energy_bar.png
   frames: 17         # fill levels in the strip, empty (0) through full
   width: 64          # px; must be a multiple of 8, one 8px column per sprite
   height: 8          # px tall, centred in the 16px sprite cell
+
+# Hand-written scripts to call when the battle moves a value. Resolved by name
+# from project/scripts/ — this tool reads the script's parameter list and never
+# rewrites the script itself. player_changed fires on every write to
+# player_energy (each time the enemy lands a hit, plus once at battle start
+# so a HUD can draw the current value). Hooks
+# are called with no arguments — read the globals you need directly.
+hooks:
+  player_changed: PlayerValuesChanged
 
 # The ACT submenu, in order. Every enemy must answer for each verb.
 actions: [THINK, TALK, EMAIL, SHRUG]
@@ -64,28 +81,28 @@ flee:
     - - "You can't leave. It's\nin your calendar."
 
 messages:
-  # The Composure bars report the totals, so there is no per-round readout.
+  # The Energy bars report the totals, so there is no per-round readout.
   # Add one back by defining `status`, e.g.:
   #   status:
-  #     - - "YOU  {player_composure}/{player_composure_max}\nTHEM {enemy_composure}/{enemy_composure_max}"
+  #     - - "YOU  {player_energy}/{player_energy_max}\nTHEM {enemy_energy}/{enemy_energy_max}"
   hit:
-    - - "It loses {damage}\nComposure."
-    - - "{damage} Composure.\nIt felt that."
-    - - "That's {damage} off\nits Composure."
+    - - "It loses {damage}\nEnergy."
+    - - "{damage} Energy.\nIt felt that."
+    - - "That's {damage} off\nits Energy."
   no_effect:
     - - "It barely notices."
     - - "Nothing happens.\nNothing at all."
     - - "It does not react.\nIt rarely does."
   player_hit:
-    - - "You lose {damage}\nComposure."
-    - - "{damage} Composure.\nYou breathe through it."
+    - - "You lose {damage}\nEnergy."
+    - - "{damage} Energy.\nYou breathe through it."
     - - "That's {damage} you\nwon't get back."
 
 lose:
-  - - "You have run out of\nComposure."
+  - - "You have run out of\nEnergy."
     - "You quietly gather\nyour things."
     - "You go home early.\nNobody notices.\n\nTomorrow, you try again."
-  - - "Your Composure is\ngone."
+  - - "Your Energy is\ngone."
     - "You put on your coat\nwith great dignity."
     - "You go home early.\nNobody notices.\n\nTomorrow, you try again."
 
@@ -95,7 +112,7 @@ enemies:
   - id: 1
     name: Coffee Machine
     sprite: actor.png
-    composure: 60
+    energy: 60
     win_flag: story_flag_coffee
     intro:
       - - "A DIRTY COFFEE MACHINE\nblocks the counter.\nIt is encrusted."
@@ -104,6 +121,10 @@ enemies:
       - - "Someone has written in\nthe dust. You decide\nnot to read it."
     defeat:
       - - "The coffee machine is\ndefeated. It dispenses,\nfinally, a decent cup."
+    reward:
+      energy: 12
+      text:
+        - - "You drink it. It is\nactually good.\n\n+12 Energy."
     take_damage:
       THINK:
         damage: 12-18
@@ -138,7 +159,7 @@ enemies:
   - id: 2
     name: The Printer
     sprite: static.png
-    composure: 65
+    energy: 65
     win_flag: story_flag_printer
     intro:
       - - "THE PRINTER stirs.\nIt has never worked.\nIt is not sorry."
@@ -147,6 +168,11 @@ enemies:
       - - "A queue of 47 jobs.\nNone of them yours.\nNone of them recent."
     defeat:
       - - "The printer is defeated.\nIt prints your document.\nIt prints it correctly."
+    reward:
+      energy: 8
+      brains: 1
+      text:
+        - - "You know its ways now.\n\n+8 Energy, +1 Brains."
     take_damage:
       THINK:
         damage: 3-6
@@ -181,7 +207,7 @@ enemies:
   - id: 3
     name: The Meeting
     sprite: actor_animated.png
-    composure: 105
+    energy: 105
     win_flag: story_flag_boss
     can_flee: false
     flee_blocked:
@@ -195,6 +221,12 @@ enemies:
       - - "The agenda field is\nempty. It has always\nbeen empty."
     defeat:
       - - "The meeting ends. It is\n17:02. You are free.\nYou go home."
+    reward:
+      max_energy: 10
+      brains: 2
+      text:
+        - - "You survived the\nunsurvivable. Something\nin you hardened."
+          - "+10 Max Energy,\n+2 Brains."
     take_damage:
       THINK:
         damage: 7-11

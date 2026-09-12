@@ -1,7 +1,7 @@
 {
   "_resourceType": "scene",
   "id": "d9e207c3-c53b-4c0d-962b-64de79234d8c",
-  "_index": 6,
+  "_index": 3,
   "name": "Home",
   "backgroundId": "28e64afc-9138-4c36-988b-7d842f38606e",
   "tilesetId": "",
@@ -58,7 +58,8 @@
         "value4": {
           "type": "number",
           "value": 4
-        }
+        },
+        "__collapse": false
       },
       "children": {
         "true0": [
@@ -266,6 +267,13 @@
         ]
       },
       "id": "1f1393b7-c5d0-4847-b239-172f78535a86"
+    },
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "5005eaf6-ea3d-4b2b-a49d-24a9cc823fda"
+      },
+      "id": "e2662b39-baaa-4fc7-a608-22f7dcceeae6"
     }
   ],
   "playerHit1Script": [],

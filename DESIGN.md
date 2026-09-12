@@ -9,8 +9,8 @@
 
 ## 1. Concept
 
-You are **the New Guy**, hired Monday morning into an open-plan office. The
-building's objects have opinions. The coffee machine is passive-aggressive. The
+You are **the New Guy**, hired Monday morning into an open-plan office, with
+one work week ahead of you. The building's objects have opinions. The coffee machine is passive-aggressive. The
 printer has never once worked. The meeting that could have been an email is,
 somehow, sentient.
 
@@ -31,18 +31,32 @@ of a Game Boy manual.
 
 ## 2. Core Loop
 
+The game is **one work week**. You wake up at home on Monday; Friday evening the
+credits roll. Everything else nests inside that.
+
 ```
-Explore office floor  →  Encounter an infuriating thing  →  Turn-based battle
-        ↑                                                          │
-        └───────────  Gain Composure / story progress  ←───────────┘
+WEEK    Monday ─ Tuesday ─ Wednesday ─ Thursday ─ Friday  →  ending
+          │
+DAY       wake at home → commute → office floor → go home → sleep
+                                        │    ↑
+BATTLE                             encounter → turn-based fight
 ```
 
-1. **Explore** the office in top-down view. Talk to coworkers, read the
+1. **Wake** at home. The opening line depends on which day it is.
+2. **Commute** through the street — dodging traffic, not fighting it.
+3. **Explore** the office in top-down view. Talk to coworkers, read the
    passive-aggressive fridge notes.
-2. **Encounter** an office thing by interacting with it (no random encounters —
+4. **Encounter** an office thing by interacting with it (no random encounters —
    see §7 Design Decisions).
-3. **Battle** it in a turn-based fight on a dedicated battle scene.
-4. **Progress**: winning unlocks the next area of the floor. The day advances.
+5. **Battle** it in a turn-based fight on a dedicated battle scene.
+6. **Go home** — by walking out at the end of the day, or because your Energy
+   ran out and the day ended without asking you (§9.2).
+7. **Sleep.** Energy comes back, the day advances. After Friday, the game ends.
+
+**Energy is the week's currency, not the battle's.** It does not reset between
+fights — it carries from one encounter to the next and only returns when you
+sleep. A bad fight is therefore paid for in *daylight*: the one resource the
+game will never give you more of is days, and there are five.
 
 ---
 
@@ -58,12 +72,12 @@ choice is driven by *which enemy you're facing*, not by spending a currency.
 
 | Stat | Meaning |
 |---|---|
-| **Composure (HP)** | How much nonsense you can absorb before you snap. Hits 0 → you lose. |
-| **Nerve (ATK)** | How hard your moves land. |
+| **Energy (HP)** | How much nonsense you can absorb before you snap. Hits 0 → you lose. |
+| **Brains (ATK)** | How sharply your moves land. |
 | **Patience (DEF)** | How well you absorb theirs. |
 
 Variables are 16-bit (0–65535) in GB Studio 4, so there's no need to squeeze
-numbers into a byte. Realistic ranges: Composure 20–120, Nerve/Patience 5–40.
+numbers into a byte. Realistic ranges: Energy 20–120, Brains/Patience 5–40.
 
 ### 3.2 Turn Structure
 
@@ -78,13 +92,13 @@ without adding much fun.
 │   LOOK → flavour text only, no effect,         │
 │          does NOT consume the turn             │
 │   FLEE → attempt to escape (may fail)          │
-│ Apply damage → check enemy Composure ≤ 0       │
+│ Apply damage → check enemy Energy ≤ 0          │
 └──────────────────┬─────────────────────────────┘
                    ↓ enemy still standing
 ┌─ ENEMY TURN ───────────────────────────────────┐
 │ Pick move via weighted rnd()                   │
 │ Show witty enemy line → resolve → apply dmg    │
-│ Check player Composure ≤ 0                     │
+│ Check player Energy ≤ 0                        │
 └──────────────────┬─────────────────────────────┘
                    ↓
              back to PLAYER TURN
@@ -99,7 +113,7 @@ actual content of the game.
 Kept simple and readable as a GB Studio math expression:
 
 ```
-damage = max(1, (move_power + player_Nerve) - (enemy_Patience / 2) + rnd(4))
+damage = max(1, (move_power + player_Brains) - (enemy_Patience / 2) + rnd(4))
 ```
 
 - `max(1, …)` guarantees every hit does *something* — no frustrating zero-damage turns.
@@ -129,7 +143,7 @@ its two good verbs, and the comedy lives in the mismatches.
 Power values below feed `move_power` in §3.3. Negative or zero power means the
 move does something other than damage.
 
-#### Dirty Coffee Machine · Composure 60 · Nerve 6 · Patience 4
+#### Dirty Coffee Machine · Energy 60 · Brains 6 · Patience 4
 *Encrusted. Judgmental. Has seen things.*
 
 | Verb | Pow | Result |
@@ -141,7 +155,7 @@ move does something other than damage.
 
 **Lesson taught:** understanding it and accepting it both work. Escalation doesn't.
 
-#### The Printer · Composure 65 · Nerve 9 · Patience 8
+#### The Printer · Energy 65 · Brains 9 · Patience 8
 *It has never worked. It will never work. It is not sorry.*
 
 | Verb | Pow | Result |
@@ -154,7 +168,7 @@ move does something other than damage.
 **Lesson taught:** the verb that won last fight is now the worst one. THINK fails
 here precisely because it succeeded against the coffee machine.
 
-#### The Meeting That Could've Been An Email · Composure 105 · Nerve 12 · Patience 10 · **BOSS**
+#### The Meeting That Could've Been An Email · Energy 105 · Brains 12 · Patience 10 · **BOSS**
 *It has no agenda. It has twelve attendees. It has already run over.*
 
 | Verb | Pow | Result |
@@ -162,7 +176,7 @@ here precisely because it succeeded against the coffee machine.
 | THINK | 5 | You work out what this meeting is for. It is for nothing. Knowing this does not help. *Weak.* |
 | **TALK** | **14** | You say the quiet part: "Could this have been an email?" *Strong.* |
 | EMAIL | 8 | You send the follow-up email *during* the meeting. Deeply illegal. Effective. |
-| **SHRUG** | **2** | You stop resisting. **Restores 12 Composure** and still chips. Survival, mostly. |
+| **SHRUG** | **2** | You stop resisting. **Restores 12 Energy** and still chips. Survival, mostly. |
 
 **Lesson taught:** the boss can't be reasoned out or escalated away — it must be named
 aloud, and SHRUG flips from attack to heal, so the fight has a sustain option.
@@ -177,14 +191,14 @@ the enemy turn is a punchline delivery system.
 |---|---|---|
 | Lukewarm Betrayal | dmg | "It dispenses something at exactly body temperature." |
 | Passive Drip | dmg, low | "It drips. Slowly. Onto the counter you just cleaned." |
-| Out Of Beans | −2 Nerve | "OUT OF BEANS, it announces, with beans clearly visible." |
+| Out Of Beans | −2 Brains | "OUT OF BEANS, it announces, with beans clearly visible." |
 
 **The Printer**
 | Move | Effect | Line |
 |---|---|---|
 | PC LOAD LETTER | dmg, halves Patience | "PC LOAD LETTER. No one has ever known what this means." |
 | Phantom Jam | dmg | "It reports a paper jam. There is no paper. There is no jam." |
-| Toner Low | −2 Nerve | "TONER LOW, it says, at 94% toner." |
+| Toner Low | −2 Brains | "TONER LOW, it says, at 94% toner." |
 
 **The Meeting**
 | Move | Effect | Line |
@@ -211,15 +225,25 @@ emotes — perfect for this).
 
 ## 4. Structure & Content (v1 scope)
 
-A single office floor, one in-game day, three battles.
+One office floor, one work week, five days that all end the same way: at home,
+asleep.
 
-| # | Beat | Content |
+| Day | Beat | Content |
 |---|---|---|
-| 1 | **9:00 Arrival** | Intro, tutorial on movement. Coworker explains Composure. |
-| 2 | **Break Room** | Battle 1 — Dirty Coffee Machine. Teaches ACT verbs. |
-| 3 | **The Corridor** | Exploration, NPC chatter, hints about the printer. |
-| 4 | **Print Station** | Battle 2 — The Printer. Punishes reusing THINK. |
-| 5 | **17:00 Meeting Room** | Boss — The Meeting. Win → you go home. Credits. |
+| **Monday** | First day | Intro, movement tutorial. A coworker explains Energy. Break room: **Dirty Coffee Machine**. |
+| **Tuesday** | It repeats | Print station: **The Printer** — punishes reusing the verb that won yesterday. |
+| **Wednesday** | Midweek | *Open.* Exploration and NPC chatter today; room for enemy #4. |
+| **Thursday** | Nearly | *Open.* Foreshadows the invite that has already appeared in your calendar. |
+| **Friday** | 17:00 | Boss — **The Meeting That Could've Been An Email**. Win → you go home for the weekend. Credits. |
+
+Three enemies exist today, so Wednesday and Thursday currently pass as commute
+and exploration. Adding an enemy is a block in `enemies.yaml`, not a new scene
+— the week has the slots, the content just isn't written yet.
+
+**Friday always arrives.** The week is not a series of gates: it runs out on
+schedule whether or not you have beaten anything, and the ending reflects what
+you actually got done. There is no failure state, only a Friday with more or
+fewer things crossed off.
 
 Estimated playtime: 15–20 minutes. Deliberately small — a complete, polished
 short game beats an unfinished sprawling one.
@@ -233,11 +257,17 @@ short game beats an unfinished sprawling one.
 | Scene | Type | Purpose |
 |---|---|---|
 | `title` | LOGO | Title screen, press START |
+| `home` | TOPDOWN | Wake up, choose transport, sleep at the end of the day |
+| `street` | SHMUP | The commute — dodge traffic, don't fight it |
 | `office_floor` | TOPDOWN | Main explorable area |
 | `break_room` | TOPDOWN | Coffee machine encounter |
 | `print_station` | TOPDOWN | Printer encounter |
 | `meeting_room` | TOPDOWN | Boss encounter |
 | `battle` | POINTNCLICK | **Shared battle scene** (see below) |
+| `ending` | TOPDOWN | Friday evening. What you got done |
+
+`home` is both ends of a day: the wake-up that advances `dayOfWeek` and restores
+Energy, and the bed you are sent to when Energy hits 0.
 
 **Key architectural decision:** *one* reusable battle scene, not one per enemy.
 Before triggering a battle, the overworld sets `enemy_id`; the battle scene's
@@ -250,15 +280,24 @@ around during a fight.
 ### 5.2 Variables
 
 ```
-Player:   player_composure, player_composure_max, player_nerve, player_patience
-Enemy:    enemy_id, enemy_composure, enemy_composure_max,
-          enemy_nerve, enemy_patience, enemy_last_move
+Player:   player_energy, player_energy_max, player_brains, player_patience
+Enemy:    enemy_id, enemy_energy, enemy_energy_max,
+          enemy_brains, enemy_patience, enemy_last_move
 Battle:   battle_menu_choice, battle_act_choice, battle_power,
           battle_damage, battle_temp, battle_result, battle_turn_count
+Week:     dayOfWeek, transport, commute_time
 Progress: story_flag_coffee, story_flag_printer, story_flag_boss
 ```
 
 Notably absent: caffeine/MP and all item counters.
+
+**`player_energy` belongs to the overworld, not the battle.** `BattleScript`
+subtracts damage from it and adds a win's reward to it, but never initialises
+it, so damage carries between fights within a day; the
+wake-up script at `home` is the only thing that puts Energy back, and
+`dayOfWeek` is the only thing that says the week has ended. Keeping the restore
+out of the battle is what makes the day — rather than the fight — the unit of
+difficulty.
 
 ### 5.3 The effect lookup
 
@@ -286,7 +325,7 @@ extend. Flavour text is selected by the same branch.
 ### 5.5 Health Bars
 
 Drawn as a row of text characters in the dialogue box rather than as sprites:
-`[████░░░░]` computed by `bar_filled = (composure * 8) / composure_max`. Costs
+`[████░░░░]` computed by `bar_filled = (energy * 8) / energy_max`. Costs
 no tiles and no art, and reads clearly on a DMG screen.
 
 ### 5.6 Build & verification
@@ -405,7 +444,10 @@ in a GB Studio project of this shape.
 Easy does not mean *frictionless* — it means the player never feels stuck or
 punished. Concretely:
 
-- **Player stats are generous:** Composure 100, Nerve 8, Patience 12.
+- **Player stats are generous:** Energy 100 to start the day, Brains 8,
+  Patience 12. Energy is a *daily* budget spent across every fight before
+  bedtime, so "generous" means a day holds several encounters, not that each
+  fight starts full.
 - **`max(1, …)` in the damage formula** means no turn is ever wasted.
 - **Weak verbs have a damage floor** (`WEAK_VERB_FLOOR = 3`, and `7` for the
   boss). Without it, a player who stubbornly repeats one verb can hit an
@@ -435,26 +477,41 @@ are the shipped script's behaviour, not a re-implementation of it:
 Every strategy wins; none stalls. Optimal play is ~2× faster than stubborn
 play, so reading the enemy is rewarded with pace rather than survival.
 
-### 9.2 Losing (0 Composure)
+### 9.2 Running out of Energy
 
-You don't get a game over. You **go home early.**
+You don't get a game over. You **go home and sleep.**
 
 ```
-Your Composure hits 0.
-  → "You have run out of Composure."
+Your Energy hits 0.
+  → "You have run out of Energy."
   → "You quietly gather your things."
-  → "You go home. It's 14:30. Nobody notices."
-  → Fade out. Next morning. Same day, again.
-  → Re-enter the battle at full Composure.
+  → "You go home early. Nobody notices."
+  → Fade out. You sleep.
+  → Next morning: Energy restored, dayOfWeek advances.
 ```
 
-The enemy keeps any damage you already did **the first time you retry** — so a
-second attempt is always shorter. This is invisible generosity: it reads as
-comedy, functions as difficulty relief, and means even a losing player advances.
+The battle simply ends (`battle_result = 3`) and hands back to the overworld,
+which walks you home. Anything already beaten stays beaten — the story flags
+are what persist. The enemy you collapsed against, though, is back at full
+Energy tomorrow: `BattleScript` re-initialises enemy Energy at the start of
+every fight. Persisting per-enemy damage would need a variable per enemy, and
+the week already provides the difficulty relief that partial damage used to.
 
-Repeated losses add escalating one-liners on the way out ("You go home early.
+**The cost is the day, not the progress.** That is the whole reason the week
+exists. A player who collapses every afternoon still reaches Friday; they just
+arrive with fewer things crossed off, and the ending says so. Failure is a
+shorter day, which is exactly how the joke should land — the game cannot bring
+itself to punish you, it can only let time pass.
+
+Repeated collapses add escalating one-liners on the way out ("You go home early.
 Again." / "HR has noticed."), turning failure into a joke generator rather than
 a wall.
+
+**Open: how much Energy sleep gives back.** Full restore keeps the comedic
+promise that every morning is a clean slate. A partial restore would let a bad
+Monday echo into Tuesday and make the week genuinely tense. This is the main
+difficulty dial left, and it is a single value in the overworld's wake-up
+script — the battle never touches it (§5.2).
 
 ### 9.3 FLEE
 

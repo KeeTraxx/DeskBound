@@ -19,7 +19,7 @@ actor *parameters*: Enemy, and PlayerBar / EnemyBar when bars are configured.
 Drop BattleScript into the battle scene's On Init and bind them from its
 parameter dropdowns. Everything scene-side is yours.
 
-The Composure bars are set by BattleScript through a second generated script,
+The Energy bars are set by BattleScript through a second generated script,
 "SetBar". They cannot poll instead: a scene's On Init script is compiled with
 VM_LOCK, and while a context holds that lock the VM scheduler runs no other
 thread, so an actor On Update script never executes during a battle.
@@ -69,21 +69,30 @@ SETBAR_MAX_SLOT = "V1"
 # Globals the battle needs. They must already exist in project/variables.gbsres
 # (create them in the GUI) — this tool never edits the variable list.
 REQUIRED_VARS = [
-    "enemy_id", "enemy_composure", "enemy_composure_max",
-    "player_composure", "player_composure_max",
+    "enemy_id", "enemy_energy", "enemy_energy_max",
+    "player_energy", "player_energy_max",
     "battle_menu_choice", "battle_act_choice", "battle_damage",
     "battle_temp", "battle_result", "battle_turn_count",
 ]
+
+# Stats a win can raise, and the global each one moves. A reward is the only
+# thing in the battle that *adds* to the player's Energy — everything else
+# subtracts (see the note on ownership in enemies.yaml).
+REWARD_VARS = {
+    "energy": "player_energy",
+    "max_energy": "player_energy_max",
+    "brains": "player_brains",
+}
 
 # battle_result values, also readable from the overworld after the fight.
 RESULT_ONGOING, RESULT_WIN, RESULT_FLED, RESULT_LOST = 0, 1, 2, 3
 
 DEFAULT_MESSAGES = {
-    # No running Composure totals: the bars show those. Define a "status"
+    # No running Energy totals: the bars show those. Define a "status"
     # message in enemies.yaml to bring a per-round text readout back.
-    "hit": "It loses {damage}\nComposure.",
+    "hit": "It loses {damage}\nEnergy.",
     "no_effect": "It barely notices.",
-    "player_hit": "You lose {damage}\nComposure.",
+    "player_hit": "You lose {damage}\nEnergy.",
 }
 DEFAULT_MENU = {"act": "ACT", "look": "LOOK", "flee": "FLEE"}
 DEFAULT_FLEE = {
@@ -100,7 +109,7 @@ MAX_VAR_VALUE = 32767  # GB Studio 4 globals are 16-bit
 # way to stop a sprite cycling its frames, since the `animate` flag is not
 # emitted for actors in 4.2 and EVENT_ACTOR_SET_ANIMATE is deprecated and
 # unimplemented. A bar actor whose frame *is* its value must be set to None in
-# the GUI, or it animates on its own regardless of Composure.
+# the GUI, or it animates on its own regardless of Energy.
 ANIM_SPEED_NONE = 255
 
 
@@ -157,6 +166,10 @@ def rnd(a):
 
 def vmax(a, b):
     return {"type": "max", "valueA": a, "valueB": b}
+
+
+def vmin(a, b):
+    return {"type": "min", "valueA": a, "valueB": b}
 
 
 def eq(a, b):
@@ -309,6 +322,19 @@ def load_variables():
 SPRITE_DIR = os.path.join(ROOT, "assets", "sprites")
 
 
+SCRIPTS_DIR = os.path.join(ROOT, "project", "scripts")
+
+
+def load_scripts():
+    """name -> custom script resource, for hooks written by hand in the GUI."""
+    scripts = {}
+    for path in glob.glob(os.path.join(SCRIPTS_DIR, "*.gbsres")):
+        data = load_json(path)
+        if data.get("_resourceType") == "script" and data.get("name"):
+            scripts[data["name"]] = data
+    return scripts
+
+
 def load_sprites():
     """png file -> sprite sheet id, keyed the way enemies.yaml names sprites.
 
@@ -335,15 +361,15 @@ def var_ref(var_id):
 class Substituter:
     """Replaces {damage}-style placeholders in any text with variable refs.
 
-    Lets the YAML say "It loses {damage} Composure." instead of "$13$", which
+    Lets the YAML say "It loses {damage} Energy." instead of "$13$", which
     would otherwise bake variable *indices* into the writing.
     """
 
     def __init__(self, variables):
         self.tokens = {
             name: var_ref(variables[name]) for name in
-            ("player_composure", "player_composure_max", "enemy_composure",
-             "enemy_composure_max", "battle_turn_count", "enemy_id")
+            ("player_energy", "player_energy_max", "enemy_energy",
+             "enemy_energy_max", "battle_turn_count", "enemy_id")
         }
         self.tokens["damage"] = var_ref(variables["battle_damage"])
         self.tokens["turn"] = var_ref(variables["battle_turn_count"])
@@ -460,10 +486,10 @@ class Enemy:
         self.sprite_id = sprites[sprite_name]
         self.sprite_name = sprite_name
 
-        self.composure = require(raw, "composure", where)
-        if not isinstance(self.composure, int) or not (
-                0 < self.composure <= MAX_VAR_VALUE):
-            fail(f"{where}: composure must be a positive integer")
+        self.energy = require(raw, "energy", where)
+        if not isinstance(self.energy, int) or not (
+                0 < self.energy <= MAX_VAR_VALUE):
+            fail(f"{where}: energy must be a positive integer")
 
         self.intro = dialogue(require(raw, "intro", where),
                               f"{where} intro", subst)
@@ -498,6 +524,8 @@ class Enemy:
                      "and 'damage'")
             self.moves.append(Effect(move, f"{where} moves[{i}]", subst))
 
+        self.reward = self._read_reward(raw.get("reward"), where, subst)
+
         self.can_flee = raw.get("can_flee", True)
         self.flee_blocked = raw.get("flee_blocked")
         if self.flee_blocked:
@@ -506,14 +534,40 @@ class Enemy:
         self.win_flag = raw.get("win_flag")
 
         unknown = set(raw) - {
-            "id", "name", "sprite", "composure", "intro", "look", "defeat",
-            "take_damage", "moves", "can_flee", "flee_blocked", "win_flag"}
+            "id", "name", "sprite", "energy", "intro", "look", "defeat",
+            "take_damage", "moves", "can_flee", "flee_blocked", "win_flag",
+            "reward"}
         if unknown:
             fail(f"{where}: unknown keys {sorted(unknown)}")
 
+    @staticmethod
+    def _read_reward(reward, where, subst):
+        """What beating this enemy gives back. Only applied on a win."""
+        if not reward:
+            return None
+        if not isinstance(reward, dict):
+            fail(f"{where} reward: expected a mapping of stat -> amount")
+        unknown = set(reward) - set(REWARD_VARS) - {"text"}
+        if unknown:
+            fail(f"{where} reward: unknown keys {sorted(unknown)}. "
+                 f"Stats: {', '.join(REWARD_VARS)}")
+        out = {"text": dialogue(reward["text"], f"{where} reward.text", subst)
+                       if "text" in reward else None}
+        for stat in REWARD_VARS:
+            if stat in reward:
+                lo, hi = parse_range(reward[stat], f"{where} reward.{stat}")
+                if hi < 1:
+                    fail(f"{where} reward.{stat}: a reward must be able to "
+                         "give at least 1")
+                out[stat] = (lo, hi)
+        if not any(stat in out for stat in REWARD_VARS) and not out["text"]:
+            fail(f"{where} reward: empty — give a stat or some text, or drop "
+                 "the key")
+        return out
+
 
 class Config:
-    def __init__(self, raw, variables, sprites):
+    def __init__(self, raw, variables, sprites, scripts):
         if not isinstance(raw, dict):
             fail("enemies.yaml must be a mapping")
         subst = Substituter(variables)
@@ -544,12 +598,6 @@ class Config:
                 fail(f"duplicate enemy name '{e.name}'")
             seen_names[e.name] = True
 
-        player = raw.get("player") or {}
-        self.player_composure = player.get("composure", 100)
-        if not isinstance(self.player_composure, int) or not (
-                0 < self.player_composure <= MAX_VAR_VALUE):
-            fail("player.composure must be a positive integer")
-
         self.messages = dict(DEFAULT_MESSAGES)
         self.messages.update(raw.get("messages") or {})
         self.messages = {k: dialogue(v, f"messages.{k}", subst)
@@ -569,9 +617,18 @@ class Config:
             self.flee[key] = dialogue(self.flee[key], f"flee.{key}", subst)
 
         self.lose = dialogue(raw.get("lose") or [
-            "You have run out of\nComposure.",
+            "You have run out of\nEnergy.",
             "You quietly gather\nyour things.",
         ], "lose", subst)
+
+        for e in self.enemies:
+            for stat in (e.reward or {}):
+                if stat == "text":
+                    continue
+                if REWARD_VARS[stat] not in variables:
+                    fail(f"enemy '{e.name}' reward.{stat}: needs a variable "
+                         f"named '{REWARD_VARS[stat]}' in "
+                         "project/variables.gbsres")
 
         self.win_flags = {}
         for e in self.enemies:
@@ -581,15 +638,56 @@ class Config:
                          "variable in project/variables.gbsres")
                 self.win_flags[e.id] = variables[e.win_flag]
 
-        unknown = set(raw) - {"enemies", "actions", "player", "messages",
-                              "menu", "flee", "lose", "bars"}
+        unknown = set(raw) - {"enemies", "actions", "messages",
+                              "menu", "flee", "lose", "bars", "hooks"}
         if unknown:
             fail(f"enemies.yaml: unknown top-level keys {sorted(unknown)}")
 
+        self.hooks = self._read_hooks(raw.get("hooks"), scripts)
         self.bars = self._read_bars(raw.get("bars"), sprites)
 
+    def _read_hooks(self, hooks, scripts):
+        """Optional hand-written scripts to call when the battle moves a value.
+
+        Resolved by name from project/scripts/ so the script stays yours: this
+        tool reads its parameter list and never rewrites it.
+        """
+        if not hooks:
+            return {}
+        if not isinstance(hooks, dict):
+            fail("enemies.yaml: 'hooks' must be a mapping")
+        unknown = set(hooks) - {"player_changed"}
+        if unknown:
+            fail(f"hooks: unknown keys {sorted(unknown)}. Supported: "
+                 "player_changed")
+        resolved = {}
+        for key, name in hooks.items():
+            if name is None:
+                continue
+            if name not in scripts:
+                fail(f"hooks.{key}: no script named '{name}' in "
+                     "project/scripts/. Available: "
+                     + ", ".join(sorted(scripts)))
+            script = scripts[name]
+            if name in (SCRIPT_NAME, SETBAR_NAME):
+                fail(f"hooks.{key}: '{name}' is generated by this tool — "
+                     "calling it would recurse")
+            # Hooks are called with no arguments, so anything the script
+            # declares as a parameter would be left unbound — and an unbound
+            # arg does not fail the GB Studio build, it silently compiles to
+            # whichever variable the context defaults to.
+            params = list(script.get("variables") or {}) + [
+                f"actor {a}" for a in (script.get("actors") or {})]
+            if params:
+                fail(f"hooks.{key}: '{name}' declares parameters {params}, but "
+                     "a hook is called with none — it reads globals directly. "
+                     "In GB Studio, change the script to reference the global "
+                     "variable instead of V0 and the parameter disappears.")
+            resolved[key] = {"name": name, "id": script["id"]}
+        return resolved
+
     def _read_bars(self, bars, sprites):
-        """Optional Composure meters. Absent 'bars:' means none are generated.
+        """Optional Energy meters. Absent 'bars:' means none are generated.
 
         GB Studio has no hook that fires when a variable changes, so each bar
         is an actor that polls its variable in its own On Update script.
@@ -606,14 +704,13 @@ class Config:
         if not isinstance(frames, int) or frames < 2:
             fail("bars.frames must be an integer of 2 or more (one sprite "
                  "frame per fill level, empty through full)")
-        # frame = composure * (frames - 1) / max, computed in 16-bit ints.
+        # frame = energy * (frames - 1) / max, computed in 16-bit ints.
+        # Only the enemies can be checked here; the player's Energy is a
+        # global set by the overworld, so keep it under this ceiling too.
         headroom = MAX_VAR_VALUE // (frames - 1)
-        if self.player_composure > headroom:
-            fail(f"bars: player.composure {self.player_composure} × "
-                 f"{frames - 1} frames overflows a 16-bit variable")
         for e in self.enemies:
-            if e.composure > headroom:
-                fail(f"bars: enemy '{e.name}' composure {e.composure} × "
+            if e.energy > headroom:
+                fail(f"bars: enemy '{e.name}' energy {e.energy} × "
                      f"{frames - 1} frames overflows a 16-bit variable")
         unknown = set(bars) - {"sprite", "frames", "width", "height"}
         if unknown:
@@ -632,12 +729,26 @@ def build_setbar_script(cfg):
     refresh a bar too — drag SetBar in, pick the actor, pass the two values.
     """
     return [
-        comment("Generated by tools/gen_enemies.py — sets a Composure bar's "
+        comment("Generated by tools/gen_enemies.py — sets a Energy bar's "
                 "frame from a value and its maximum"),
         actor_set_frame("0", bar_fill_expression(cfg.bars["frames"],
                                                  SETBAR_VALUE_SLOT,
                                                  SETBAR_MAX_SLOT)),
     ]
+
+
+def make_hook(cfg):
+    """Emit a call to a hand-written hook.
+
+    Hooks take no arguments: a custom script reads globals directly (only
+    V0-V9 are parameters), so the hook just looks at player_energy itself.
+    """
+
+    def hook(key):
+        spec = cfg.hooks.get(key)
+        return [call_custom(spec["id"])] if spec else []
+
+    return hook
 
 
 def make_set_bar(cfg, V, setbar_id):
@@ -660,6 +771,12 @@ def build_battle_script(cfg, V, setbar_id):
     """The whole fight, as one GB Studio custom script."""
     say = make_say(V["battle_temp"])
     set_bar = make_set_bar(cfg, V, setbar_id)
+    hook = make_hook(cfg)
+
+    def player_energy_changed():
+        return (set_bar(PLAYER_BAR_SLOT, "player_energy",
+                        "player_energy_max")
+                + hook("player_changed"))
 
     def per_enemy(body_of):
         """Branch on enemy_id, one case per enemy."""
@@ -672,25 +789,25 @@ def build_battle_script(cfg, V, setbar_id):
     # --- setup: look up the enemy the overworld asked for -------------------
     s.append(comment("Load enemy from enemy_id"))
     s += per_enemy(lambda e: [
-        set_var(V["enemy_composure"], num(e.composure)),
-        set_var(V["enemy_composure_max"], num(e.composure)),
+        set_var(V["enemy_energy"], num(e.energy)),
+        set_var(V["enemy_energy_max"], num(e.energy)),
         actor_set_sprite(ENEMY_ACTOR_SLOT, e.sprite_id),
-    ] + set_bar(ENEMY_BAR_SLOT, "enemy_composure", "enemy_composure_max")
+    ] + set_bar(ENEMY_BAR_SLOT, "enemy_energy", "enemy_energy_max")
       + say(e.intro))
 
     s += [
-        set_var(V["player_composure"], num(cfg.player_composure)),
-        set_var(V["player_composure_max"], num(cfg.player_composure)),
+        # player_energy / player_energy_max are NOT set here: they are
+        # global, owned by the overworld, and carry across battles.
         set_var(V["battle_turn_count"], num(0)),
         set_var(V["battle_result"], num(RESULT_ONGOING)),
-    ] + set_bar(PLAYER_BAR_SLOT, "player_composure", "player_composure_max")
+    ] + player_energy_changed()
 
     # --- one round ----------------------------------------------------------
     turn = [
         set_var(V["battle_turn_count"],
                 add(var(V["battle_turn_count"]), num(1))),
         set_var(V["battle_damage"], num(0)),
-        # "status" is optional and unset by default — the bars report Composure.
+        # "status" is optional and unset by default — the bars report Energy.
         *(say(cfg.messages["status"]) if "status" in cfg.messages else []),
         menu(V["battle_menu_choice"],
              [cfg.menu["act"], cfg.menu["look"], cfg.menu["flee"]],
@@ -711,10 +828,10 @@ def build_battle_script(cfg, V, setbar_id):
     act = [menu(V["battle_act_choice"], cfg.actions, layout="dialogue")]
     act += per_enemy(verbs_against)
     act += [
-        set_var(V["enemy_composure"],
-                vmax(num(0), sub(var(V["enemy_composure"]),
+        set_var(V["enemy_energy"],
+                vmax(num(0), sub(var(V["enemy_energy"]),
                                  var(V["battle_damage"])))),
-    ] + set_bar(ENEMY_BAR_SLOT, "enemy_composure", "enemy_composure_max") + [
+    ] + set_bar(ENEMY_BAR_SLOT, "enemy_energy", "enemy_energy_max") + [
         if_value(gt(var(V["battle_damage"]), num(0)),
                  say(cfg.messages["hit"]),
                  say(cfg.messages["no_effect"])),
@@ -744,7 +861,7 @@ def build_battle_script(cfg, V, setbar_id):
         [if_value(eq(var(V["battle_menu_choice"]), num(2)), look, flee)]))
 
     # Win check runs before the enemy replies, so a killing blow ends it.
-    turn.append(if_value(lte(var(V["enemy_composure"]), num(0)),
+    turn.append(if_value(lte(var(V["enemy_energy"]), num(0)),
                          [set_var(V["battle_result"], num(RESULT_WIN))]))
 
     # --- enemy turn (skipped after LOOK, a successful flee, or a win) -------
@@ -753,11 +870,10 @@ def build_battle_script(cfg, V, setbar_id):
         for i, move in enumerate(e.moves):
             hit = say(move.text) + [
                 set_var(V["battle_damage"], damage_value(move.lo, move.hi)),
-                set_var(V["player_composure"],
-                        vmax(num(0), sub(var(V["player_composure"]),
+                set_var(V["player_energy"],
+                        vmax(num(0), sub(var(V["player_energy"]),
                                          var(V["battle_damage"])))),
-            ] + set_bar(PLAYER_BAR_SLOT, "player_composure",
-                        "player_composure_max")
+            ] + player_energy_changed()
             hit.append(if_value(gt(var(V["battle_damage"]), num(0)),
                                 say(cfg.messages["player_hit"])))
             cases.append((i, hit))
@@ -773,14 +889,67 @@ def build_battle_script(cfg, V, setbar_id):
              eq(var(V["battle_result"]), num(RESULT_ONGOING))),
         enemy_turn))
 
-    turn.append(if_value(lte(var(V["player_composure"]), num(0)),
+    turn.append(if_value(lte(var(V["player_energy"]), num(0)),
                          [set_var(V["battle_result"], num(RESULT_LOST))]))
 
     s.append(loop_while(eq(var(V["battle_result"]), num(RESULT_ONGOING)), turn))
 
     # --- resolution ---------------------------------------------------------
+    def reward_of(e):
+        """Apply a win's stat gains, then show the flavour line.
+
+        Order matters: the gains land before the text, so the bar has already
+        grown by the time the player reads about it. A max_energy gain raises
+        current Energy by the same amount, so widening the tank never leaves
+        the bar looking emptier than it was a moment ago.
+        """
+        reward = e.reward
+        if not reward:
+            return []
+
+        def amount(stat):
+            """The gain as a script value, rolling a range into battle_temp.
+
+            battle_temp is free here — the fight is over and nothing is
+            dispatching on it — but a range must be rolled once and reused,
+            not re-rolled per use.
+            """
+            lo, hi = reward[stat]
+            if lo == hi:
+                return [], num(lo)
+            return ([set_var(V["battle_temp"], damage_value(lo, hi))],
+                    var(V["battle_temp"]))
+
+        out, touched_energy = [], False
+        if "max_energy" in reward:
+            roll, value = amount("max_energy")
+            out += roll + [
+                set_var(V["player_energy_max"],
+                        add(var(V["player_energy_max"]), value)),
+                # same amount into current Energy, so the bar keeps its fill
+                set_var(V["player_energy"], add(var(V["player_energy"]), value)),
+            ]
+            touched_energy = True
+        if "energy" in reward:
+            roll, value = amount("energy")
+            out += roll + [
+                set_var(V["player_energy"],
+                        vmin(var(V["player_energy_max"]),
+                             add(var(V["player_energy"]), value))),
+            ]
+            touched_energy = True
+        if "brains" in reward:
+            roll, value = amount("brains")
+            out.append(set_var(V["player_brains"],
+                               add(var(V["player_brains"]), value)))
+        if touched_energy:
+            out += player_energy_changed()
+        if reward["text"]:
+            out += say(reward["text"])
+        return out
+
     def defeat_of(e):
-        body = say(e.defeat)
+        body = say(e.defeat) + reward_of(e)
         if e.id in cfg.win_flags:
             body.append(set_var(cfg.win_flags[e.id], num(1)))
         return body
@@ -965,10 +1134,10 @@ def slugify(name):
 
 
 def bar_fill_expression(frames, value_var, max_var):
-    """Frame index for a Composure value: which fill level to show.
+    """Frame index for a Energy value: which fill level to show.
 
     Ceiling, not truncation: (value * steps + divisor - 1) / divisor, so a
-    player on 1 Composure still shows a sliver and only a real 0 reads empty.
+    player on 1 Energy still shows a sliver and only a real 0 reads empty.
     The divisor is floored at 1 so the bar is harmless before a maximum is set.
     """
     divisor = vmax(num(1), var(max_var))
@@ -989,7 +1158,8 @@ def _eval(value, V):
         return random.randrange(_eval(value["value"], V))
     a, b = _eval(value["valueA"], V), _eval(value["valueB"], V)
     ops = {
-        "add": lambda: a + b, "sub": lambda: a - b, "max": lambda: max(a, b),
+        "add": lambda: a + b, "sub": lambda: a - b,
+        "max": lambda: max(a, b), "min": lambda: min(a, b),
         "mul": lambda: a * b,
         # GBVM divides integers, truncating; the generator floors divisors at 1.
         "div": lambda: a // b if b else 0,
@@ -1029,19 +1199,22 @@ def _run(events, V, choose, budget):
             fail(f"simulation: unhandled event '{command}'")
 
 
-def simulate(cfg, V, script, runs):
+def simulate(cfg, V, script, runs, player_energy):
     """Win rate and average turn count per strategy, per enemy."""
     strategies = ["random"] + list(cfg.actions)
     width = max(12, max(len(s) for s in strategies) + 6)
     header = f"{'enemy':>16}" + "".join(f"{s:>{width}}" for s in strategies)
-    print("\nbalance (%d games per cell)\n%s" % (runs, header))
+    print("\nbalance (%d games per cell, player starting on %d Energy)\n%s"
+          % (runs, player_energy, header))
 
     for enemy in cfg.enemies:
         row = f"{enemy.name:>16}"
         for strategy in strategies:
             wins, turns = 0, 0
             for _ in range(runs):
-                state = {V["enemy_id"]: enemy.id}
+                state = {V["enemy_id"]: enemy.id,
+                         V["player_energy"]: player_energy,
+                         V["player_energy_max"]: player_energy}
 
                 def choose(variable, options, strategy=strategy):
                     if variable == V["battle_menu_choice"]:
@@ -1063,8 +1236,12 @@ def main():
                     help="path to enemies.yaml (default: repo root)")
     ap.add_argument("--dry-run", action="store_true",
                     help="validate and report without writing any file")
+    ap.add_argument("--player-energy", type=int, default=100, metavar="N",
+                    help="starting Energy to assume when simulating; the "
+                         "battle itself reads the global, which the overworld "
+                         "owns (default 100)")
     ap.add_argument("--draw-bar-art", action="store_true",
-                    help="redraw the placeholder Composure bar strip and its "
+                    help="redraw the placeholder Energy bar strip and its "
                          "sprite sidecar from the 'bars:' section, then carry "
                          "on as normal")
     ap.add_argument("--simulate", nargs="?", type=int, const=2000,
@@ -1089,8 +1266,14 @@ def main():
     sprites = load_sprites()
     if not sprites:
         fail("no sprites found under assets/sprites/")
-    cfg = Config(raw, variables, sprites)
+    cfg = Config(raw, variables, sprites, load_scripts())
     V = {name: variables[name] for name in REQUIRED_VARS}
+    # Reward stats are only needed when an enemy actually grants them; Config
+    # has already checked that each one exists in the project.
+    for enemy in cfg.enemies:
+        for stat in (enemy.reward or {}):
+            if stat != "text":
+                V[REWARD_VARS[stat]] = variables[REWARD_VARS[stat]]
 
     setbar_id, setbar_path = write_setbar_resource(cfg, args.dry_run)
     script_id, script_path, script = write_script_resource(
@@ -1105,7 +1288,12 @@ def main():
               "value, max)")
     if cfg.bars:
         print(f"  bars: {cfg.bars['sprite']}, {cfg.bars['frames']} frames, "
-              f"set via {SETBAR_NAME} at each Composure change")
+              f"set via {SETBAR_NAME} at each Energy change")
+    for key, spec in cfg.hooks.items():
+        print(f"  hook {key}: calls {spec['name']}() after every write to "
+              "player_energy")
+    print("  the overworld owns player_energy and player_energy_max — "
+          "BattleScript subtracts damage and adds rewards, never sets them")
     print(f"  wire it in GB Studio: add {SCRIPT_NAME} to the battle scene's "
           "On Init, then bind its actor parameters —")
     print(f"    {ENEMY_ACTOR_NAME} -> the actor whose sprite the fight swaps "
@@ -1115,11 +1303,16 @@ def main():
               f"{cfg.bars['sprite']}, each with Animation Speed: None")
     for e in cfg.enemies:
         flags = "" if e.can_flee else ", no flee"
-        print(f"  #{e.id} {e.name}: composure {e.composure}, "
-              f"sprite {e.sprite_name}, {len(e.moves)} moves{flags}")
+        gains = ", ".join(
+            f"+{lo}" + (f"-{hi}" if hi != lo else "") + f" {stat}"
+            for stat, (lo, hi) in sorted(
+                (k, v) for k, v in (e.reward or {}).items() if k != "text"))
+        print(f"  #{e.id} {e.name}: energy {e.energy}, "
+              f"sprite {e.sprite_name}, {len(e.moves)} moves{flags}"
+              + (f", reward {gains}" if gains else ""))
 
     if args.simulate:
-        simulate(cfg, V, script, args.simulate)
+        simulate(cfg, V, script, args.simulate, args.player_energy)
 
 
 if __name__ == "__main__":

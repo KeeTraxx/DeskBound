@@ -47,17 +47,69 @@ battle scene's On Init and bind them from its dropdowns:
 | Parameter | Bind to |
 |---|---|
 | `Enemy` | the actor whose sprite the fight swaps per enemy |
-| `PlayerBar` / `EnemyBar` | two actors using `composure_bar.png`, each set to **Animation Speed: None** |
+| `PlayerBar` / `EnemyBar` | two actors using `energy_bar.png`, each set to **Animation Speed: None** |
 
 `SetBar` is a normal custom script too — drag it into any script to refresh a
 bar by hand.
+
+### Hooks
+
+A `hooks:` block calls a script *you* wrote whenever the battle moves a value:
+
+```yaml
+hooks:
+  player_changed: PlayerValuesChanged
+```
+
+The script is resolved by name from `project/scripts/` and is never rewritten
+by the tool. `player_changed` fires after every write to `player_energy` —
+battle setup, and each enemy hit.
+
+**A hook is called with no arguments** and reads globals directly, which a
+custom script can do: only `V0`-`V9` are parameters, every other variable
+reference is the global itself. So a hook must declare **no parameters** —
+generation fails if it does, because an unbound argument doesn't fail the GB
+Studio build, it silently compiles to whichever variable the context defaults
+to.
 
 The overworld starts a fight the way it already does: set `enemy_id`, push
 scene state, switch to the battle scene. `BattleScript` reads `enemy_id`, sets
 the enemy sprite and stats, runs the fight, sets `battle_result`
 (1 = win, 2 = fled, 3 = lost) plus the enemy's `win_flag`, and pops back.
 
-Adding an enemy is a YAML block — name, sprite, composure, `take_damage` per
+### Battle rewards
+
+An enemy may carry a `reward:` block, applied only on a win:
+
+```yaml
+reward:
+  energy: 12          # healed, clamped to player_energy_max
+  max_energy: 10      # widens the tank — and adds the same to current Energy
+  brains: 1           # player_brains
+  text:
+    - - "You drink it. It is\nactually good.\n\n+12 Energy."
+```
+
+Amounts take the same forms as damage (`5`, `"3-6"`, `[3, 6]`); a range is
+rolled once and reused, so a ranged `max_energy` moves the maximum and the
+current value by the same number. Gains land *before* the text, so the bar has
+already grown by the time the player reads about it, and each one fires the
+`player_changed` hook. Reward text has no amount placeholder — if the number is
+fixed, write it into the line yourself.
+
+`brains` is raised but nothing in the battle reads it: damage comes from the
+per-verb ranges in `enemies.yaml`, not a stat. It is there for the overworld
+(and for a future damage formula) to use.
+
+**The player's Energy is the overworld's**, not the battle's:
+`player_energy` and `player_energy_max` are globals that `BattleScript` only
+ever subtracts damage from and adds rewards to — it never initialises them — so
+damage carries from one fight to the next. Two consequences to handle outside the battle — set
+`player_energy_max` before the first fight (the bar divides by it), and
+restore Energy after a loss, or the next battle ends on its first round
+because Energy is already 0.
+
+Adding an enemy is a YAML block — name, sprite, energy, `take_damage` per
 ACT verb, `look`/`intro`/`defeat` text, and moves with their own damage ranges.
 `sprite` is a `.png` under `assets/sprites/` (`actor.png`, or
 `enemies/coffee.png` in a subfolder), resolved through that file's `.gbsres`
@@ -76,7 +128,7 @@ play in order, one Display Text each. That's where extra flavour goes — enemy
 moves and damage reports repeat a dozen times per fight.
 
 Ranges are inclusive and accept `5`, `"3-6"` or `[3, 6]`. Any text may use
-`{damage}`, `{player_composure}`, `{enemy_composure}` and friends, which become
+`{damage}`, `{player_energy}`, `{enemy_energy}` and friends, which become
 GB Studio variable interpolation.
 
 > **Editing caution:** `BattleScript` and `SetBar` are rewritten wholesale on
@@ -103,18 +155,18 @@ player walking somewhere later. Scenes have no update-script slot.
 (`$self$` also doesn't resolve to the player in a scene script — the player is
 referenced as `"player"`.)
 
-### Composure bars are pushed, not polled
+### Energy bars are pushed, not polled
 
 A bar is an actor whose sprite has one frame per fill level; showing a value
 means setting its animation frame. `BattleScript` does that through a second
 generated script, **`SetBar`** (parameters: the bar actor, a value, a maximum),
-called at every point Composure changes:
+called at every point Energy changes:
 
 ```
 SetBar:  Set Frame on Bar = (value * 16 + max - 1) / max     # 17 frames, ceiling
 ```
 
-The ceiling means only a real 0 shows an empty bar; 1 Composure still shows a
+The ceiling means only a real 0 shows an empty bar; 1 Energy still shows a
 sliver. The divisor is floored at 1 so the bar is harmless before a maximum is
 set. `BattleScript` takes the two bars as actor parameters (`PlayerBar`,
 `EnemyBar`) and forwards them to `SetBar` — the compiler allows that, because
@@ -131,12 +183,12 @@ frozen. A polled bar shows frame 0 forever.
 
 A bar actor must also have **Animation Speed: None** (`animSpeed: 255`), or the
 engine cycles its 17 frames on its own and the bar fills and empties on a loop
-regardless of Composure. The actor `animate` flag does *not* prevent this — in
+regardless of Energy. The actor `animate` flag does *not* prevent this — in
 4.2 it isn't emitted for actors at all, `EVENT_ACTOR_SET_ANIMATE` is deprecated,
 and `actorSetAnimate` logs "not implemented". The only control that reaches the
 engine is `anim_tick`, which is what `animSpeed` compiles to.
 
-`assets/sprites/composure_bar.png` is placeholder art: a 17-frame strip,
+`assets/sprites/energy_bar.png` is placeholder art: a 17-frame strip,
 64×16 per cell, empty through full, `#65FF00` as transparency. Change
 `bars.width` / `bars.height` / `bars.frames` and re-run with `--draw-bar-art`
 to redraw it and its sidecar; redraw it by hand at the same dimensions and the
@@ -241,7 +293,7 @@ all need a real playtest.
 - No audio (the GB Studio template's `template.mod` is still the only track)
 - Enemies point at placeholder sprites (`actor`, `static`) — drop real enemy
   sprite `.png`s into `assets/sprites/` and point `enemies.yaml` at them
-- `composure_bar.png` is a programmer-drawn 17-frame strip; bar placement
+- `energy_bar.png` is a programmer-drawn 17-frame strip; bar placement
   (`bars.player` / `bars.enemy` in `enemies.yaml`) is a guess until playtested
 - No save/load
 - Rooms are open floor apart from the outer walls; desks and tables are drawn

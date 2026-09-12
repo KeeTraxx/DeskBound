@@ -3,18 +3,18 @@
   "variables": [
     {
       "id": "0",
-      "name": "player_composure",
-      "symbol": "var_player_composure"
+      "name": "player_energy",
+      "symbol": "var_player_energy"
     },
     {
       "id": "1",
-      "name": "player_composure_max",
-      "symbol": "var_player_composure_max"
+      "name": "player_energy_max",
+      "symbol": "var_player_energy_max"
     },
     {
       "id": "2",
-      "name": "player_nerve",
-      "symbol": "var_player_nerve"
+      "name": "player_brains",
+      "symbol": "var_player_brains"
     },
     {
       "id": "3",
@@ -28,18 +28,18 @@
     },
     {
       "id": "5",
-      "name": "enemy_composure",
-      "symbol": "var_enemy_composure"
+      "name": "enemy_energy",
+      "symbol": "var_enemy_energy"
     },
     {
       "id": "6",
-      "name": "enemy_composure_max",
-      "symbol": "var_enemy_composure_max"
+      "name": "enemy_energy_max",
+      "symbol": "var_enemy_energy_max"
     },
     {
       "id": "7",
-      "name": "enemy_nerve",
-      "symbol": "var_enemy_nerve"
+      "name": "enemy_brains",
+      "symbol": "var_enemy_brains"
     },
     {
       "id": "8",

@@ -1,0 +1,56 @@
+{
+  "_resourceType": "script",
+  "id": "5005eaf6-ea3d-4b2b-a49d-24a9cc823fda",
+  "name": "NewDay",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_5",
+  "script": [
+    {
+      "command": "EVENT_IF",
+      "args": {
+        "condition": {
+          "type": "eq",
+          "valueA": {
+            "type": "variable",
+            "value": "25"
+          },
+          "valueB": {
+            "type": "number",
+            "value": 0
+          }
+        },
+        "__collapseElse": true
+      },
+      "children": {
+        "true": [
+          {
+            "command": "EVENT_SET_VALUE",
+            "args": {
+              "variable": "1",
+              "value": {
+                "type": "number",
+                "value": 100
+              }
+            },
+            "id": "65d864a9-d923-4cf6-89a9-a8b3befe24e1"
+          }
+        ],
+        "false": []
+      },
+      "id": "0b1c8ce0-2ded-4fb6-a825-7017356ab73d"
+    },
+    {
+      "command": "EVENT_SET_VALUE",
+      "args": {
+        "variable": "0",
+        "value": {
+          "type": "number",
+          "value": 100
+        }
+      },
+      "id": "578125ca-078e-41aa-a684-e5544facaa6f"
+    }
+  ]
+}

@@ -270,35 +270,13 @@
     {
       "command": "EVENT_SET_VALUE",
       "args": {
-        "variable": "0",
-        "value": {
-          "type": "number",
-          "value": 100
-        }
-      },
-      "id": "3855e520-c186-5cb8-bf35-798cc06cf931"
-    },
-    {
-      "command": "EVENT_SET_VALUE",
-      "args": {
-        "variable": "1",
-        "value": {
-          "type": "number",
-          "value": 100
-        }
-      },
-      "id": "fdc07909-5409-54e4-83d4-6f9860b354ac"
-    },
-    {
-      "command": "EVENT_SET_VALUE",
-      "args": {
         "variable": "16",
         "value": {
           "type": "number",
           "value": 0
         }
       },
-      "id": "0c9c7de1-7f3d-52b8-b85d-2dbfa651b4d3"
+      "id": "3855e520-c186-5cb8-bf35-798cc06cf931"
     },
     {
       "command": "EVENT_SET_VALUE",
@@ -309,7 +287,7 @@
           "value": 0
         }
       },
-      "id": "6c18cb91-6428-5073-a96f-5f5c4612eb76"
+      "id": "fdc07909-5409-54e4-83d4-6f9860b354ac"
     },
     {
       "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -325,7 +303,14 @@
           "value": "1"
         }
       },
-      "id": "a8621a88-6964-5812-80fa-ab8cba17a062"
+      "id": "22abd601-35f8-5f2e-b6ca-99aff2801128"
+    },
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+      },
+      "id": "2716e22a-7c6d-5422-af3d-254e0ce8732b"
     },
     {
       "command": "EVENT_LOOP_WHILE",
@@ -342,7 +327,7 @@
           }
         }
       },
-      "id": "72034ac1-67ac-5a16-b52d-51a29f914977",
+      "id": "a83d258a-2b4e-5911-9ed7-88c87ccf49e1",
       "children": {
         "true": [
           {
@@ -361,7 +346,7 @@
                 }
               }
             },
-            "id": "f5bc3504-8809-55f5-baac-e8bf18731ac3"
+            "id": "ae50990a-1637-5686-bf89-03295cd9ff3b"
           },
           {
             "command": "EVENT_SET_VALUE",
@@ -372,7 +357,7 @@
                 "value": 0
               }
             },
-            "id": "a4286821-b215-55d3-906d-0dfb70475d2d"
+            "id": "f5bc3504-8809-55f5-baac-e8bf18731ac3"
           },
           {
             "command": "EVENT_MENU",
@@ -386,7 +371,7 @@
               "option2": "LOOK",
               "option3": "FLEE"
             },
-            "id": "13c9452a-516e-59ee-bf73-b6a168ba97bd"
+            "id": "91c2e410-bc83-55e8-9c33-cda820ec3c5d"
           },
           {
             "command": "EVENT_IF",
@@ -403,7 +388,7 @@
                 }
               }
             },
-            "id": "65f16f0c-503c-5f83-919b-1f5d6abf7558",
+            "id": "55b7afab-6f27-550b-8539-9200cf39e661",
             "children": {
               "true": [
                 {
@@ -419,7 +404,7 @@
                     "option3": "EMAIL",
                     "option4": "SHRUG"
                   },
-                  "id": "55f757ec-dd10-572a-b918-9f7e8eeced1d"
+                  "id": "13c9452a-516e-59ee-bf73-b6a168ba97bd"
                 },
                 {
                   "command": "EVENT_IF",
@@ -436,7 +421,7 @@
                       }
                     }
                   },
-                  "id": "bef71c94-e441-5267-99f0-8bd57a0491d2",
+                  "id": "ea28e0e7-e601-5ba9-beb2-1f82ac4a736f",
                   "children": {
                     "true": [
                       {
@@ -454,7 +439,7 @@
                             }
                           }
                         },
-                        "id": "a7909d8a-5f59-5315-9675-a31a6d9be756",
+                        "id": "163ca784-22ee-5411-a80e-42acb4911686",
                         "children": {
                           "true": [
                             {
@@ -464,7 +449,7 @@
                                 "avatarId": "",
                                 "clearPrevious": true
                               },
-                              "id": "714111ed-d963-5c39-8d0d-c8b494a130a5"
+                              "id": "7b10a837-7382-53aa-9dd1-a9f696a15eb0"
                             },
                             {
                               "command": "EVENT_SET_VALUE",
@@ -485,7 +470,7 @@
                                   }
                                 }
                               },
-                              "id": "02e8e6cf-3625-578d-905a-c6e376edd8b2"
+                              "id": "947f441b-9369-5790-b81f-23fef3dcf483"
                             }
                           ],
                           "false": [
@@ -504,7 +489,7 @@
                                   }
                                 }
                               },
-                              "id": "163ca784-22ee-5411-a80e-42acb4911686",
+                              "id": "1a38c52a-b5f8-5f93-bec5-7bb367571a34",
                               "children": {
                                 "true": [
                                   {
@@ -514,7 +499,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "4e04c1b8-8c9d-51f1-a10b-6343d04bf210"
+                                    "id": "92070c09-c5d3-5b8f-9283-3ba41066da0b"
                                   },
                                   {
                                     "command": "EVENT_SET_VALUE",
@@ -535,7 +520,7 @@
                                         }
                                       }
                                     },
-                                    "id": "d13a9650-50f6-59ba-9071-d3f89723945f"
+                                    "id": "ebad999b-bba5-55de-aa6c-2b1dbfcf5b6a"
                                   }
                                 ],
                                 "false": [
@@ -554,7 +539,7 @@
                                         }
                                       }
                                     },
-                                    "id": "1a38c52a-b5f8-5f93-bec5-7bb367571a34",
+                                    "id": "c143d6bf-3467-527b-9158-d0a85643f9fd",
                                     "children": {
                                       "true": [
                                         {
@@ -564,7 +549,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "84f277ad-f330-541a-9da0-ebb08093ed22"
+                                          "id": "2e70d141-46ad-56b8-b07c-ea11094d14bc"
                                         },
                                         {
                                           "command": "EVENT_SET_VALUE",
@@ -585,7 +570,7 @@
                                               }
                                             }
                                           },
-                                          "id": "04289f4f-edc1-5ac1-91c5-9a75592c7965"
+                                          "id": "1c9b8629-7c99-5102-83b3-86d3cd2f5e50"
                                         }
                                       ],
                                       "false": [
@@ -604,7 +589,7 @@
                                               }
                                             }
                                           },
-                                          "id": "c143d6bf-3467-527b-9158-d0a85643f9fd",
+                                          "id": "6dbdc99e-e8d7-5902-b149-f55eb5e9b915",
                                           "children": {
                                             "true": [
                                               {
@@ -614,7 +599,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "db9efd23-f83d-5ecd-8a6a-8fb28df26c33"
+                                                "id": "16f68238-c816-5912-b56b-92b0bad61cd8"
                                               },
                                               {
                                                 "command": "EVENT_SET_VALUE",
@@ -635,7 +620,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "782b8dc2-f452-56cd-a6cf-9181bc6c72e2"
+                                                "id": "b411e5da-36d9-5a8a-a6ea-2be86b74ca8c"
                                               }
                                             ],
                                             "false": []
@@ -667,7 +652,7 @@
                             }
                           }
                         },
-                        "id": "ea28e0e7-e601-5ba9-beb2-1f82ac4a736f",
+                        "id": "d37d27db-fafa-54a2-8deb-1d0bf4ddd62a",
                         "children": {
                           "true": [
                             {
@@ -685,7 +670,7 @@
                                   }
                                 }
                               },
-                              "id": "691bee60-2651-58a9-9571-2153feaeeaa5",
+                              "id": "e8e04cbc-25c5-54a0-936b-d105313b1224",
                               "children": {
                                 "true": [
                                   {
@@ -695,7 +680,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "462dc19a-980b-5855-9208-df87eb1d1568"
+                                    "id": "bbdfb09a-1529-5930-8137-c8523d77ca08"
                                   },
                                   {
                                     "command": "EVENT_SET_VALUE",
@@ -716,7 +701,7 @@
                                         }
                                       }
                                     },
-                                    "id": "dcc87557-f647-5d5b-abf0-2fe58e8a0641"
+                                    "id": "8d0c229f-7df8-5476-8ab7-9fa414155e10"
                                   }
                                 ],
                                 "false": [
@@ -735,7 +720,7 @@
                                         }
                                       }
                                     },
-                                    "id": "e8e04cbc-25c5-54a0-936b-d105313b1224",
+                                    "id": "add65a96-91e0-5eb7-8bcf-9d6f3a7411e7",
                                     "children": {
                                       "true": [
                                         {
@@ -745,7 +730,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "e47643c0-9078-58e0-879d-08279d5e578b"
+                                          "id": "cc15d9a1-d407-5119-a205-22c3ae2c7a96"
                                         },
                                         {
                                           "command": "EVENT_SET_VALUE",
@@ -766,7 +751,7 @@
                                               }
                                             }
                                           },
-                                          "id": "4c972d07-68da-5e0e-8716-9af0d7da444d"
+                                          "id": "54d4e703-8be2-5978-b614-f1abb442bb3f"
                                         }
                                       ],
                                       "false": [
@@ -785,7 +770,7 @@
                                               }
                                             }
                                           },
-                                          "id": "add65a96-91e0-5eb7-8bcf-9d6f3a7411e7",
+                                          "id": "40ce034b-4747-5fbd-baac-8f2b895b4039",
                                           "children": {
                                             "true": [
                                               {
@@ -795,7 +780,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "02426f6c-9506-5313-a118-8d68ae748101"
+                                                "id": "9544c843-7704-5515-b38b-f2211ab67684"
                                               },
                                               {
                                                 "command": "EVENT_SET_VALUE",
@@ -816,7 +801,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "8388c58a-4c9b-5387-8706-a3339205c94b"
+                                                "id": "9387221b-1a38-5e4c-937e-55cdff81b0f7"
                                               }
                                             ],
                                             "false": [
@@ -835,7 +820,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "40ce034b-4747-5fbd-baac-8f2b895b4039",
+                                                "id": "08cef91e-00f7-5431-b2ef-ea127fb7a81a",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -845,7 +830,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "527a655c-8852-5e6e-ac7c-64165f54a873"
+                                                      "id": "d353a6a1-da70-5f49-8ae5-5ed505ed59bd"
                                                     },
                                                     {
                                                       "command": "EVENT_SET_VALUE",
@@ -866,7 +851,7 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "053f7abb-f67a-58a8-ad79-1d0070373817"
+                                                      "id": "4891d39e-8c99-5e14-8318-3a5d7800f9fc"
                                                     }
                                                   ],
                                                   "false": []
@@ -898,7 +883,7 @@
                                   }
                                 }
                               },
-                              "id": "d37d27db-fafa-54a2-8deb-1d0bf4ddd62a",
+                              "id": "079256fa-b8e9-5b88-8f60-c5cc38e27713",
                               "children": {
                                 "true": [
                                   {
@@ -916,7 +901,7 @@
                                         }
                                       }
                                     },
-                                    "id": "079256fa-b8e9-5b88-8f60-c5cc38e27713",
+                                    "id": "a8eebb9a-c7fb-587e-9dc0-f648c2872e3c",
                                     "children": {
                                       "true": [
                                         {
@@ -926,7 +911,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "d7899c1d-11a6-5715-819c-39e501433771"
+                                          "id": "5f746bf2-a715-5112-9489-fbf49b4867fd"
                                         },
                                         {
                                           "command": "EVENT_SET_VALUE",
@@ -947,7 +932,7 @@
                                               }
                                             }
                                           },
-                                          "id": "1246e24a-6cbe-5cb4-be2c-06fb13190ee2"
+                                          "id": "8ce3a132-53e6-5b9a-aad8-1976fb30a7eb"
                                         }
                                       ],
                                       "false": [
@@ -966,7 +951,7 @@
                                               }
                                             }
                                           },
-                                          "id": "a8eebb9a-c7fb-587e-9dc0-f648c2872e3c",
+                                          "id": "d6027eee-1098-50ac-82b1-f287b7ea025d",
                                           "children": {
                                             "true": [
                                               {
@@ -976,7 +961,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "82821606-c771-5ebd-929e-140e0afd0b12"
+                                                "id": "c959e5ea-7adb-520a-b8fa-6a60e1ae7f65"
                                               },
                                               {
                                                 "command": "EVENT_SET_VALUE",
@@ -997,7 +982,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "a8ab253f-75dc-5303-b0f0-025ec241d97f"
+                                                "id": "9dbbaa66-b4c3-5406-b571-274655254aee"
                                               }
                                             ],
                                             "false": [
@@ -1016,7 +1001,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "d6027eee-1098-50ac-82b1-f287b7ea025d",
+                                                "id": "9f7ce299-d598-5947-a990-45995af38802",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -1026,7 +1011,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "c28525de-0389-5d43-9f99-d28626ad8764"
+                                                      "id": "02b32662-1f63-56cd-ae5c-e19f9870adfe"
                                                     },
                                                     {
                                                       "command": "EVENT_SET_VALUE",
@@ -1047,7 +1032,7 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "d07593c6-bfb9-56ab-be38-b6e9353d3dd5"
+                                                      "id": "0e22e8f4-3613-54ec-8df8-e8838d11285b"
                                                     }
                                                   ],
                                                   "false": [
@@ -1066,7 +1051,7 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "9f7ce299-d598-5947-a990-45995af38802",
+                                                      "id": "9135b823-b8a2-5669-b9b5-8741dc9ce361",
                                                       "children": {
                                                         "true": [
                                                           {
@@ -1076,7 +1061,7 @@
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "e235b58a-bccc-586b-8e1b-19fc5e63479b"
+                                                            "id": "ab0d156d-c3bc-5250-91f6-9daa51856010"
                                                           },
                                                           {
                                                             "command": "EVENT_SET_VALUE",
@@ -1097,7 +1082,7 @@
                                                                 }
                                                               }
                                                             },
-                                                            "id": "5ee92a7c-d966-5820-b2df-294fae8ceb6f"
+                                                            "id": "3faddab3-c6e0-546d-9542-0e2ca9df70a7"
                                                           }
                                                         ],
                                                         "false": []
@@ -1145,7 +1130,7 @@
                       }
                     }
                   },
-                  "id": "59010495-51aa-5d05-abe9-25c31fc44643"
+                  "id": "dbf68058-8766-57f0-b98f-d8af25b5b29e"
                 },
                 {
                   "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -1161,7 +1146,7 @@
                       "value": "6"
                     }
                   },
-                  "id": "465d2573-082e-53b7-9e8e-4e8c56b4bee5"
+                  "id": "86cec8df-f969-5c7b-a3a3-634c799b6f19"
                 },
                 {
                   "command": "EVENT_IF",
@@ -1178,7 +1163,7 @@
                       }
                     }
                   },
-                  "id": "c99e5925-b2ed-573b-9741-7beb76dbb26a",
+                  "id": "5c1d5145-730f-52d5-9072-65f8bc2f138f",
                   "children": {
                     "true": [
                       {
@@ -1193,7 +1178,7 @@
                             }
                           }
                         },
-                        "id": "f76d5a45-b7b5-5adb-8dd5-86befbc7337d"
+                        "id": "6b58e8ce-221e-5a6f-8175-7bd0dea71fcc"
                       },
                       {
                         "command": "EVENT_IF",
@@ -1210,17 +1195,17 @@
                             }
                           }
                         },
-                        "id": "46781d15-7e90-55b3-b143-a848695d3536",
+                        "id": "861196fc-8c54-56a5-bb3f-1508410db05a",
                         "children": {
                           "true": [
                             {
                               "command": "EVENT_TEXT",
                               "args": {
-                                "text": "It loses $13$\nComposure.",
+                                "text": "It loses $13$\nEnergy.",
                                 "avatarId": "",
                                 "clearPrevious": true
                               },
-                              "id": "4e5afc15-0143-5182-9f96-5a15bd9ff350"
+                              "id": "91226b44-a387-56d1-a59a-fed7f5243b41"
                             }
                           ],
                           "false": [
@@ -1239,28 +1224,28 @@
                                   }
                                 }
                               },
-                              "id": "861196fc-8c54-56a5-bb3f-1508410db05a",
+                              "id": "e8d57038-45b0-52ca-bcb5-f8ea8ef53c55",
                               "children": {
                                 "true": [
                                   {
                                     "command": "EVENT_TEXT",
                                     "args": {
-                                      "text": "$13$ Composure.\nIt felt that.",
+                                      "text": "$13$ Energy.\nIt felt that.",
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "544a6e71-1c03-5d6d-949f-990e64c771b2"
+                                    "id": "4e5afc15-0143-5182-9f96-5a15bd9ff350"
                                   }
                                 ],
                                 "false": [
                                   {
                                     "command": "EVENT_TEXT",
                                     "args": {
-                                      "text": "That's $13$ off\nits Composure.",
+                                      "text": "That's $13$ off\nits Energy.",
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "a7274eb9-089b-5e03-a470-0d8d7fe6f22b"
+                                    "id": "544a6e71-1c03-5d6d-949f-990e64c771b2"
                                   }
                                 ]
                               }
@@ -1282,7 +1267,7 @@
                             }
                           }
                         },
-                        "id": "af199e52-a7ee-5c16-ba0d-dfb23efd869a"
+                        "id": "56b5f1e6-b311-5bb2-9058-48d98f976676"
                       },
                       {
                         "command": "EVENT_IF",
@@ -1299,7 +1284,7 @@
                             }
                           }
                         },
-                        "id": "5c1d5145-730f-52d5-9072-65f8bc2f138f",
+                        "id": "a7af33f0-d39b-58f0-af4c-c341ad4b5d80",
                         "children": {
                           "true": [
                             {
@@ -1309,7 +1294,7 @@
                                 "avatarId": "",
                                 "clearPrevious": true
                               },
-                              "id": "f405e6b5-1ad3-5c34-a419-fb4f56ed4099"
+                              "id": "83d69350-98ce-5d32-bfa6-9b288358ec94"
                             }
                           ],
                           "false": [
@@ -1328,7 +1313,7 @@
                                   }
                                 }
                               },
-                              "id": "a7af33f0-d39b-58f0-af4c-c341ad4b5d80",
+                              "id": "ec534913-d624-5eee-9595-ea3f5fffa457",
                               "children": {
                                 "true": [
                                   {
@@ -1338,7 +1323,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "58275c9f-65f2-55bf-9db2-a2cfa97eae34"
+                                    "id": "f405e6b5-1ad3-5c34-a419-fb4f56ed4099"
                                   }
                                 ],
                                 "false": [
@@ -1349,7 +1334,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "92124df4-5950-5ccb-b40f-3ce16e67a185"
+                                    "id": "58275c9f-65f2-55bf-9db2-a2cfa97eae34"
                                   }
                                 ]
                               }
@@ -1377,7 +1362,7 @@
                       }
                     }
                   },
-                  "id": "55b7afab-6f27-550b-8539-9200cf39e661",
+                  "id": "9ddef02d-7236-5bb1-9c97-f0e042f4eb43",
                   "children": {
                     "true": [
                       {
@@ -1395,7 +1380,7 @@
                             }
                           }
                         },
-                        "id": "5bbfc23b-c463-5463-b473-d60b778bf129",
+                        "id": "03db2e97-385f-50d5-b37d-a5e68fb13f2e",
                         "children": {
                           "true": [
                             {
@@ -1410,7 +1395,7 @@
                                   }
                                 }
                               },
-                              "id": "42a6aba1-e89c-5938-a6bc-573c7462b97f"
+                              "id": "8cdf04e2-efd6-5056-9f05-3c971548d8d0"
                             },
                             {
                               "command": "EVENT_IF",
@@ -1427,7 +1412,7 @@
                                   }
                                 }
                               },
-                              "id": "a1c8fa18-61e5-580c-9ee1-fb9ea775deee",
+                              "id": "5431384a-2a7b-5624-a3bd-70620327121c",
                               "children": {
                                 "true": [
                                   {
@@ -1437,7 +1422,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "4e0d4b52-a4d1-5d44-af7d-f364a4af3d0c"
+                                    "id": "6b298070-56d1-56a0-94fd-e0c3921582d0"
                                   }
                                 ],
                                 "false": [
@@ -1448,7 +1433,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "e067d398-1367-5618-905a-d9d8a318fd26"
+                                    "id": "4e0d4b52-a4d1-5d44-af7d-f364a4af3d0c"
                                   }
                                 ]
                               }
@@ -1470,7 +1455,7 @@
                                   }
                                 }
                               },
-                              "id": "03db2e97-385f-50d5-b37d-a5e68fb13f2e",
+                              "id": "02e617e5-1d5f-59f5-a316-db0e526533ef",
                               "children": {
                                 "true": [
                                   {
@@ -1485,7 +1470,7 @@
                                         }
                                       }
                                     },
-                                    "id": "843d32f8-7778-5e10-bdbe-4aa6f61985f9"
+                                    "id": "f34177b6-4901-5666-84b2-0021e3aac62e"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -1502,7 +1487,7 @@
                                         }
                                       }
                                     },
-                                    "id": "1d8a5955-6236-50cc-86f7-ff5f21e6145e",
+                                    "id": "addc9e9c-c292-50a4-890f-1a14cb658365",
                                     "children": {
                                       "true": [
                                         {
@@ -1512,7 +1497,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "d1e6935f-977d-564b-83c7-1ec7db6099eb"
+                                          "id": "4ed7feaf-e0f5-592c-8cd9-90581809a477"
                                         }
                                       ],
                                       "false": [
@@ -1523,7 +1508,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "07f3ff83-4d14-5b1b-bc9c-3f6a17ea017a"
+                                          "id": "d1e6935f-977d-564b-83c7-1ec7db6099eb"
                                         }
                                       ]
                                     }
@@ -1545,7 +1530,7 @@
                                         }
                                       }
                                     },
-                                    "id": "02e617e5-1d5f-59f5-a316-db0e526533ef",
+                                    "id": "a571074a-4946-58d4-a8b7-50deac73528b",
                                     "children": {
                                       "true": [
                                         {
@@ -1560,7 +1545,7 @@
                                               }
                                             }
                                           },
-                                          "id": "6d5ecf63-46c8-5a05-8c89-f154e8151c12"
+                                          "id": "bcb3e934-381f-53c9-a3fb-ca04b8305179"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -1577,7 +1562,7 @@
                                               }
                                             }
                                           },
-                                          "id": "a571074a-4946-58d4-a8b7-50deac73528b",
+                                          "id": "e0531f00-0e3f-5b1d-8701-1303da1460d7",
                                           "children": {
                                             "true": [
                                               {
@@ -1587,7 +1572,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "12b5bad5-1562-5347-bba8-e234400b08a3"
+                                                "id": "0b673362-5c48-5516-9c23-5fc52fb2633a"
                                               }
                                             ],
                                             "false": [
@@ -1598,7 +1583,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "9e60c94e-456d-5ebb-a350-fe1dd0a523b2"
+                                                "id": "12b5bad5-1562-5347-bba8-e234400b08a3"
                                               }
                                             ]
                                           }
@@ -1630,7 +1615,7 @@
                             }
                           }
                         },
-                        "id": "9ddef02d-7236-5bb1-9c97-f0e042f4eb43",
+                        "id": "167ea455-bb0d-510a-b371-2ef9777fbe73",
                         "children": {
                           "true": [
                             {
@@ -1645,7 +1630,7 @@
                                   }
                                 }
                               },
-                              "id": "f34924ae-a6f2-5178-966b-5e2d9484a9d0"
+                              "id": "55c14b04-1ac8-595f-8374-163366334009"
                             },
                             {
                               "command": "EVENT_IF",
@@ -1662,7 +1647,7 @@
                                   }
                                 }
                               },
-                              "id": "c3905c68-5f30-57e2-9852-2b01e0157a36",
+                              "id": "3c3f2522-0e29-5d0b-a0af-911300e846e7",
                               "children": {
                                 "true": [
                                   {
@@ -1672,7 +1657,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "b835820b-7855-5205-9b0c-2a6632ec5be1"
+                                    "id": "6776df43-d58d-518e-b01b-d0266e368362"
                                   },
                                   {
                                     "command": "EVENT_SET_VALUE",
@@ -1683,7 +1668,7 @@
                                         "value": 2
                                       }
                                     },
-                                    "id": "9325b555-94c0-5766-b78a-78805320788e"
+                                    "id": "f06c2555-ec02-58e2-9356-bbc8da47c5e1"
                                   }
                                 ],
                                 "false": [
@@ -1699,7 +1684,7 @@
                                         }
                                       }
                                     },
-                                    "id": "25f10322-3207-512e-b524-2f8550b7bb33"
+                                    "id": "e3b9606d-c4fb-5400-b93b-4ff877f990d2"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -1716,7 +1701,7 @@
                                         }
                                       }
                                     },
-                                    "id": "3c3f2522-0e29-5d0b-a0af-911300e846e7",
+                                    "id": "633cd631-52a2-518d-a616-f77555b9f3b2",
                                     "children": {
                                       "true": [
                                         {
@@ -1726,7 +1711,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "62b05ba5-0ffe-5d87-b524-856a8695e140"
+                                          "id": "a4fe9bf0-1d65-565c-9c12-b9603ca7b2e2"
                                         }
                                       ],
                                       "false": [
@@ -1745,7 +1730,7 @@
                                               }
                                             }
                                           },
-                                          "id": "633cd631-52a2-518d-a616-f77555b9f3b2",
+                                          "id": "8e57117a-9cd8-5a00-8c95-d840c964d7c3",
                                           "children": {
                                             "true": [
                                               {
@@ -1755,7 +1740,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "a934cdc0-9645-568d-968a-51636a586e3f"
+                                                "id": "62b05ba5-0ffe-5d87-b524-856a8695e140"
                                               }
                                             ],
                                             "false": [
@@ -1766,7 +1751,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "07b6675f-f51e-5c33-a7fc-23bf0d0870ec"
+                                                "id": "a934cdc0-9645-568d-968a-51636a586e3f"
                                               }
                                             ]
                                           }
@@ -1794,7 +1779,7 @@
                                   }
                                 }
                               },
-                              "id": "167ea455-bb0d-510a-b371-2ef9777fbe73",
+                              "id": "4b248359-7074-5b8d-921e-c68512e6c562",
                               "children": {
                                 "true": [
                                   {
@@ -1809,7 +1794,7 @@
                                         }
                                       }
                                     },
-                                    "id": "4ec6ed64-717d-5113-a305-1461ccc45307"
+                                    "id": "7c4b91c8-609b-549c-bcb0-816bec0a7143"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -1826,7 +1811,7 @@
                                         }
                                       }
                                     },
-                                    "id": "adb45a44-0456-5b40-b3ab-68a71b636105",
+                                    "id": "f7e32f94-4424-5e51-88c5-ebe67c455cd8",
                                     "children": {
                                       "true": [
                                         {
@@ -1836,7 +1821,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "e4700bf3-be95-540f-8250-8f1402ca743f"
+                                          "id": "b8304bf5-7cd2-5cbf-8ee0-0c68dff71b8b"
                                         },
                                         {
                                           "command": "EVENT_SET_VALUE",
@@ -1847,7 +1832,7 @@
                                               "value": 2
                                             }
                                           },
-                                          "id": "1eb79cae-0787-513e-bfeb-fcf39750295a"
+                                          "id": "d14f7cfb-8e75-5c99-80b2-27b47edc4592"
                                         }
                                       ],
                                       "false": [
@@ -1863,7 +1848,7 @@
                                               }
                                             }
                                           },
-                                          "id": "aea90fda-0535-5871-ac37-1920a5afa218"
+                                          "id": "2b83f0c1-487a-5ab7-a696-ab7d0c4b68e7"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -1880,7 +1865,7 @@
                                               }
                                             }
                                           },
-                                          "id": "f7e32f94-4424-5e51-88c5-ebe67c455cd8",
+                                          "id": "510c6eb2-bc9a-542d-9a9d-6469f50a9fcd",
                                           "children": {
                                             "true": [
                                               {
@@ -1890,7 +1875,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "02ca874d-04f2-5413-8f1a-c9f33f45df18"
+                                                "id": "4d91469a-36b4-544f-b3a7-542b50561738"
                                               }
                                             ],
                                             "false": [
@@ -1909,7 +1894,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "510c6eb2-bc9a-542d-9a9d-6469f50a9fcd",
+                                                "id": "21f75dd6-2a90-5c8a-8335-8bba14b4ba69",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -1919,7 +1904,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "10164fea-e7df-546d-9e1f-541f3c499551"
+                                                      "id": "02ca874d-04f2-5413-8f1a-c9f33f45df18"
                                                     }
                                                   ],
                                                   "false": [
@@ -1930,7 +1915,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "c9e17468-8a36-50f6-87d6-ad42eefa2289"
+                                                      "id": "10164fea-e7df-546d-9e1f-541f3c499551"
                                                     }
                                                   ]
                                                 }
@@ -1958,7 +1943,7 @@
                                         }
                                       }
                                     },
-                                    "id": "4b248359-7074-5b8d-921e-c68512e6c562",
+                                    "id": "e71e30ed-b8c8-522c-a9ae-e9618ab7dfc8",
                                     "children": {
                                       "true": [
                                         {
@@ -1973,7 +1958,7 @@
                                               }
                                             }
                                           },
-                                          "id": "e4b684c9-3240-5157-899e-a2aaa7fa9f01"
+                                          "id": "d74e6130-1451-5454-9376-d6299056cfca"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -1990,7 +1975,7 @@
                                               }
                                             }
                                           },
-                                          "id": "e71e30ed-b8c8-522c-a9ae-e9618ab7dfc8",
+                                          "id": "85299d84-161a-5959-a0bf-45c7f6688edf",
                                           "children": {
                                             "true": [
                                               {
@@ -2000,7 +1985,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "fb47b219-d8fb-51a4-b11f-9ed00599e1e8"
+                                                "id": "ccae510e-54e8-5d55-a3ce-1fb617f16310"
                                               }
                                             ],
                                             "false": [
@@ -2019,7 +2004,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "85299d84-161a-5959-a0bf-45c7f6688edf",
+                                                "id": "b232d8bd-13d6-5270-a509-42a2e133d636",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -2029,7 +2014,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "fb754abf-4e5b-5e68-b7e6-6a3be5639ad6"
+                                                      "id": "fb47b219-d8fb-51a4-b11f-9ed00599e1e8"
                                                     }
                                                   ],
                                                   "false": [
@@ -2040,7 +2025,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "fa323496-533c-5e90-aaa4-37a28e59f4f0"
+                                                      "id": "fb754abf-4e5b-5e68-b7e6-6a3be5639ad6"
                                                     }
                                                   ]
                                                 }
@@ -2079,7 +2064,7 @@
                 }
               }
             },
-            "id": "4f4a072c-9f41-5de1-8e44-1ed2604fd916",
+            "id": "715ac4cc-13b5-55ac-8776-53b23218a5d1",
             "children": {
               "true": [
                 {
@@ -2091,7 +2076,7 @@
                       "value": 1
                     }
                   },
-                  "id": "bcfbcf38-922d-51b2-87a7-a62face0ef87"
+                  "id": "08ce7511-d6af-5dfa-97fe-1c0ef6a6b419"
                 }
               ],
               "false": []
@@ -2126,7 +2111,7 @@
                 }
               }
             },
-            "id": "4b6cacf9-19f2-5f94-8e8d-8427642f8113",
+            "id": "b83b5f9b-925a-5072-a7a9-9210f9d71da1",
             "children": {
               "true": [
                 {
@@ -2144,7 +2129,7 @@
                       }
                     }
                   },
-                  "id": "d765be2a-b707-5b6d-815d-e275d0295c81",
+                  "id": "1e8ac9d2-e9aa-54df-8c3a-f16b37bc8261",
                   "children": {
                     "true": [
                       {
@@ -2159,7 +2144,7 @@
                             }
                           }
                         },
-                        "id": "da46d6ec-5c7f-58e2-bd65-d740ceed2b80"
+                        "id": "5a81ec6d-1b38-548a-a1be-820bddf4ec7c"
                       },
                       {
                         "command": "EVENT_IF",
@@ -2176,7 +2161,7 @@
                             }
                           }
                         },
-                        "id": "a72f1225-94f8-5548-8501-77b8180a87d2",
+                        "id": "5b2e1b33-a0dc-53f4-9dd8-858eba5c9d16",
                         "children": {
                           "true": [
                             {
@@ -2191,7 +2176,7 @@
                                   }
                                 }
                               },
-                              "id": "2b696dbd-c2ad-5cc9-b745-af58e391030e"
+                              "id": "5f435250-e809-5043-ac64-9b27d5ba9d71"
                             },
                             {
                               "command": "EVENT_IF",
@@ -2208,7 +2193,7 @@
                                   }
                                 }
                               },
-                              "id": "73e7dc72-ab9a-554e-a124-2380ccfc09dc",
+                              "id": "4bf714ba-b48c-5db9-9ec9-6386b06b47ea",
                               "children": {
                                 "true": [
                                   {
@@ -2218,7 +2203,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "305f4980-6897-52c6-a314-a0a5e445383e"
+                                    "id": "35709e8c-f470-5eee-988b-873327b7366b"
                                   }
                                 ],
                                 "false": [
@@ -2229,7 +2214,7 @@
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
-                                    "id": "1f6c80c3-c7f6-53fc-928e-5d0ecc178069"
+                                    "id": "305f4980-6897-52c6-a314-a0a5e445383e"
                                   }
                                 ]
                               }
@@ -2253,7 +2238,7 @@
                                   }
                                 }
                               },
-                              "id": "d7299042-1e1a-5b29-8a55-5684806e0824"
+                              "id": "9c569c46-be9a-5e7f-a855-d51f9357573f"
                             },
                             {
                               "command": "EVENT_SET_VALUE",
@@ -2278,7 +2263,7 @@
                                   }
                                 }
                               },
-                              "id": "6b20d6f7-37ba-5d62-abf2-685dd34d34e6"
+                              "id": "d7299042-1e1a-5b29-8a55-5684806e0824"
                             },
                             {
                               "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -2293,6 +2278,13 @@
                                   "type": "variable",
                                   "value": "1"
                                 }
+                              },
+                              "id": "2641659f-2803-592d-aec6-72c84dd8f9ab"
+                            },
+                            {
+                              "command": "EVENT_CALL_CUSTOM_EVENT",
+                              "args": {
+                                "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
                               },
                               "id": "a77b744d-1127-5523-9518-7495b9d5e057"
                             },
@@ -2349,7 +2341,7 @@
                                         {
                                           "command": "EVENT_TEXT",
                                           "args": {
-                                            "text": "You lose $13$\nComposure.",
+                                            "text": "You lose $13$\nEnergy.",
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
@@ -2378,7 +2370,7 @@
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "$13$ Composure.\nYou breathe through it.",
+                                                  "text": "$13$ Energy.\nYou breathe through it.",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
@@ -2422,7 +2414,7 @@
                                   }
                                 }
                               },
-                              "id": "c867c67a-b63e-5edd-a515-e49a3f20a4c8",
+                              "id": "c933e5c4-5b48-546d-9ad3-ea5b7220b428",
                               "children": {
                                 "true": [
                                   {
@@ -2543,6 +2535,13 @@
                                     "id": "5e264b23-f8aa-5ed8-bf8e-d2416864567b"
                                   },
                                   {
+                                    "command": "EVENT_CALL_CUSTOM_EVENT",
+                                    "args": {
+                                      "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                    },
+                                    "id": "dce5bebf-4d9e-54c7-baac-480190c177db"
+                                  },
+                                  {
                                     "command": "EVENT_IF",
                                     "args": {
                                       "condition": {
@@ -2557,7 +2556,7 @@
                                         }
                                       }
                                     },
-                                    "id": "1d5d620a-3c4a-55ba-91dc-e05b550449c8",
+                                    "id": "7aceaf00-613e-5791-88fe-a679c8d81364",
                                     "children": {
                                       "true": [
                                         {
@@ -2572,7 +2571,7 @@
                                               }
                                             }
                                           },
-                                          "id": "27cc43c2-9c21-572c-b63c-3c28baae8092"
+                                          "id": "bf9566cb-fa7f-5b12-968c-7ec5a472237b"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -2589,17 +2588,17 @@
                                               }
                                             }
                                           },
-                                          "id": "bb7c29d9-e43a-5a10-a99d-f12cca7f21bf",
+                                          "id": "1d5d620a-3c4a-55ba-91dc-e05b550449c8",
                                           "children": {
                                             "true": [
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "You lose $13$\nComposure.",
+                                                  "text": "You lose $13$\nEnergy.",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "8ff05c48-998f-5fa5-a625-c76422f3ef4d"
+                                                "id": "3605d424-684d-5a1c-bb9d-3d87cfe1d2d2"
                                               }
                                             ],
                                             "false": [
@@ -2618,17 +2617,17 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "71c7a410-67e2-5b2a-a7e7-22c3a2ad9e64",
+                                                "id": "bb7c29d9-e43a-5a10-a99d-f12cca7f21bf",
                                                 "children": {
                                                   "true": [
                                                     {
                                                       "command": "EVENT_TEXT",
                                                       "args": {
-                                                        "text": "$13$ Composure.\nYou breathe through it.",
+                                                        "text": "$13$ Energy.\nYou breathe through it.",
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "3605d424-684d-5a1c-bb9d-3d87cfe1d2d2"
+                                                      "id": "245dd824-5738-5d5c-bca5-35d3432a623d"
                                                     }
                                                   ],
                                                   "false": [
@@ -2639,7 +2638,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "245dd824-5738-5d5c-bca5-35d3432a623d"
+                                                      "id": "816d1dd3-707f-5e17-9994-ec69884d8a39"
                                                     }
                                                   ]
                                                 }
@@ -2665,7 +2664,7 @@
                                         }
                                       }
                                     },
-                                    "id": "f9c2de95-e43f-5903-83c8-e9674f40da99"
+                                    "id": "cce0c609-df5b-523b-bffb-09d5b8b485ba"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -2682,7 +2681,7 @@
                                         }
                                       }
                                     },
-                                    "id": "aa4ad521-38ac-5f44-a77c-21171315550c",
+                                    "id": "548753c7-f513-5589-98a9-8dc845989014",
                                     "children": {
                                       "true": [
                                         {
@@ -2692,7 +2691,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "706c813e-c338-5e67-bdb9-f11164c78e91"
+                                          "id": "a0388eaa-83ef-53f9-a571-a5b70e3725b8"
                                         }
                                       ],
                                       "false": [
@@ -2703,7 +2702,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "a0388eaa-83ef-53f9-a571-a5b70e3725b8"
+                                          "id": "766e990d-1be2-51b5-a289-6eb96d10e35f"
                                         }
                                       ]
                                     }
@@ -2727,7 +2726,7 @@
                                         }
                                       }
                                     },
-                                    "id": "f6b5e5db-2573-5606-b2d4-261c29c54d2b"
+                                    "id": "77aecbb8-f45e-5796-8b0b-2473458be6e8"
                                   },
                                   {
                                     "command": "EVENT_SET_VALUE",
@@ -2752,7 +2751,7 @@
                                         }
                                       }
                                     },
-                                    "id": "77aecbb8-f45e-5796-8b0b-2473458be6e8"
+                                    "id": "c7b58cf8-184f-59b1-999d-5f29c464f25c"
                                   },
                                   {
                                     "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -2768,7 +2767,14 @@
                                         "value": "1"
                                       }
                                     },
-                                    "id": "d602bf7b-f877-58c1-b5c0-78ff1ac76ef6"
+                                    "id": "3a475ede-911b-5884-9a5d-f2c25105e459"
+                                  },
+                                  {
+                                    "command": "EVENT_CALL_CUSTOM_EVENT",
+                                    "args": {
+                                      "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                    },
+                                    "id": "7730f9d9-49f2-5afe-bb3e-cecb849d24bc"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -2785,7 +2791,7 @@
                                         }
                                       }
                                     },
-                                    "id": "fadc86e6-004a-5909-85ec-27d4e562dad7",
+                                    "id": "c867c67a-b63e-5edd-a515-e49a3f20a4c8",
                                     "children": {
                                       "true": [
                                         {
@@ -2800,7 +2806,7 @@
                                               }
                                             }
                                           },
-                                          "id": "1eab3aa1-d93f-5e2c-8559-1047535e0fff"
+                                          "id": "96d022e4-72b8-5835-86ed-2cbe8ffc1d50"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -2817,17 +2823,17 @@
                                               }
                                             }
                                           },
-                                          "id": "65787c4c-4d38-5985-8b9b-bcc07dd037d1",
+                                          "id": "760ee43a-47a1-59ad-a746-53ccc133894f",
                                           "children": {
                                             "true": [
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "You lose $13$\nComposure.",
+                                                  "text": "You lose $13$\nEnergy.",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "eaf79ce9-4681-568c-90fa-003ca0db6d6a"
+                                                "id": "34057b20-c68d-5d56-bb17-739f347d235b"
                                               }
                                             ],
                                             "false": [
@@ -2846,17 +2852,17 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "a678b7ae-eebb-5193-bcae-1b7aeadcaa12",
+                                                "id": "fadc86e6-004a-5909-85ec-27d4e562dad7",
                                                 "children": {
                                                   "true": [
                                                     {
                                                       "command": "EVENT_TEXT",
                                                       "args": {
-                                                        "text": "$13$ Composure.\nYou breathe through it.",
+                                                        "text": "$13$ Energy.\nYou breathe through it.",
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "cf6a1d3c-a41a-5d0e-b8eb-ef0a54c8b8d0"
+                                                      "id": "1660a912-1971-5431-8cd8-467dcefc5042"
                                                     }
                                                   ],
                                                   "false": [
@@ -2867,7 +2873,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "34057b20-c68d-5d56-bb17-739f347d235b"
+                                                      "id": "b660ab83-d997-54e5-a3e0-04659857db22"
                                                     }
                                                   ]
                                                 }
@@ -2902,7 +2908,7 @@
                             }
                           }
                         },
-                        "id": "baa3e5cd-285b-5f75-9658-5543df3e86bd",
+                        "id": "6064c764-86e3-5c29-ae94-2db15c8c017e",
                         "children": {
                           "true": [
                             {
@@ -2917,7 +2923,7 @@
                                   }
                                 }
                               },
-                              "id": "9b05e7d1-a65a-5e68-a687-7f1d4ff8e862"
+                              "id": "569951b9-b300-5e27-b20b-06e6728146d5"
                             },
                             {
                               "command": "EVENT_IF",
@@ -2934,7 +2940,7 @@
                                   }
                                 }
                               },
-                              "id": "23387256-4c0d-578c-b442-bb78abb35afc",
+                              "id": "66e01fca-0e57-5f05-879b-c83503e9c15b",
                               "children": {
                                 "true": [
                                   {
@@ -2949,7 +2955,7 @@
                                         }
                                       }
                                     },
-                                    "id": "1bab6704-5d90-5b91-a290-1e0557defe0d"
+                                    "id": "1bcdbd9a-5edc-5ad7-8e79-daa01da9e6f1"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -2966,7 +2972,7 @@
                                         }
                                       }
                                     },
-                                    "id": "19d1fef2-5054-5b9b-8e59-3717bc4c39ab",
+                                    "id": "854e449c-a6ca-5946-99ae-db9b48bc21a8",
                                     "children": {
                                       "true": [
                                         {
@@ -2976,7 +2982,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "5745c4c5-35b0-53d3-b35b-e676a9b4da56"
+                                          "id": "2d08d64c-5a61-5bc4-8d45-e46f914ac9d5"
                                         }
                                       ],
                                       "false": [
@@ -2987,7 +2993,7 @@
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
-                                          "id": "bec6f90b-dd96-5ef9-bf67-cc95db3e8ef9"
+                                          "id": "01610a33-1484-5a05-b0f9-f31e53aa2324"
                                         }
                                       ]
                                     }
@@ -3011,7 +3017,7 @@
                                         }
                                       }
                                     },
-                                    "id": "1bcdbd9a-5edc-5ad7-8e79-daa01da9e6f1"
+                                    "id": "331e1063-77b8-5303-8897-b794b597439d"
                                   },
                                   {
                                     "command": "EVENT_SET_VALUE",
@@ -3036,7 +3042,7 @@
                                         }
                                       }
                                     },
-                                    "id": "b954545a-0616-594a-9030-02b537bc11e6"
+                                    "id": "74fe7cee-e54c-5b76-82e7-c96fef9cb9cb"
                                   },
                                   {
                                     "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -3052,7 +3058,14 @@
                                         "value": "1"
                                       }
                                     },
-                                    "id": "843561f4-d1de-5c18-bd1c-88346f6e7605"
+                                    "id": "4bd0ee5b-cd96-57a1-89cf-5a333545a27d"
+                                  },
+                                  {
+                                    "command": "EVENT_CALL_CUSTOM_EVENT",
+                                    "args": {
+                                      "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                    },
+                                    "id": "9e333d65-264c-5509-894a-eecffd00d3ca"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -3069,7 +3082,7 @@
                                         }
                                       }
                                     },
-                                    "id": "e621b215-93f4-5d88-bf21-ef8a0c3b7439",
+                                    "id": "5cd2b5c7-e16c-5eb3-bdaf-1c96bb593b2b",
                                     "children": {
                                       "true": [
                                         {
@@ -3084,7 +3097,7 @@
                                               }
                                             }
                                           },
-                                          "id": "4c49d52d-0b31-5fce-9a7b-d24955df27b0"
+                                          "id": "6ef58372-2b73-589a-8d2f-3eb6110dfdbd"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -3101,17 +3114,17 @@
                                               }
                                             }
                                           },
-                                          "id": "b877b320-7dac-5458-962b-3c5e3a1092d6",
+                                          "id": "e2e6854d-43df-5770-8160-609b8120f396",
                                           "children": {
                                             "true": [
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "You lose $13$\nComposure.",
+                                                  "text": "You lose $13$\nEnergy.",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "ad57b4d5-7bde-52a2-8d5d-58e1b062264f"
+                                                "id": "c6cf11d0-b038-52d3-b6a9-2745c920a37f"
                                               }
                                             ],
                                             "false": [
@@ -3130,17 +3143,17 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "ff2a1364-660c-5bf5-ad55-ba1b85cf2b3e",
+                                                "id": "5c3900c3-f3cd-5344-9c75-eaafbc6856ae",
                                                 "children": {
                                                   "true": [
                                                     {
                                                       "command": "EVENT_TEXT",
                                                       "args": {
-                                                        "text": "$13$ Composure.\nYou breathe through it.",
+                                                        "text": "$13$ Energy.\nYou breathe through it.",
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "de3ba701-9306-553c-b028-c5ef8aabc78f"
+                                                      "id": "70eb1206-bb2f-506c-be10-65ecc77f9e78"
                                                     }
                                                   ],
                                                   "false": [
@@ -3151,7 +3164,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "b62323ac-b5d3-5359-b8f2-55cd62cd44aa"
+                                                      "id": "e1dad2a6-41bb-5a5a-824b-69a3bd6f4197"
                                                     }
                                                   ]
                                                 }
@@ -3180,7 +3193,7 @@
                                         }
                                       }
                                     },
-                                    "id": "7aaa7398-3d36-536b-9f92-66b815decb78",
+                                    "id": "d59d3b72-cfd1-50bc-b106-67f1ca394f91",
                                     "children": {
                                       "true": [
                                         {
@@ -3195,7 +3208,7 @@
                                               }
                                             }
                                           },
-                                          "id": "ba0cf6ec-66eb-5d3d-bab2-c2d08bb6403c"
+                                          "id": "fbc11cae-0fd5-5c3f-972b-bb1aa27c8277"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -3212,7 +3225,7 @@
                                               }
                                             }
                                           },
-                                          "id": "adceec93-1486-5f79-8921-1a4df468fd2c",
+                                          "id": "21a8737a-127e-585b-822e-45754a92f90e",
                                           "children": {
                                             "true": [
                                               {
@@ -3222,7 +3235,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "9555cc1e-1646-5c7f-b9b3-74f1dcc4c020"
+                                                "id": "10aca5a9-2611-5d10-a0fe-93d37816b36c"
                                               }
                                             ],
                                             "false": [
@@ -3233,7 +3246,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "32f9f081-eee6-5026-bb26-06416c6a9ec4"
+                                                "id": "ffd631e0-88fd-529a-b7a3-84de8de28f09"
                                               }
                                             ]
                                           }
@@ -3257,7 +3270,7 @@
                                               }
                                             }
                                           },
-                                          "id": "2072a028-b526-51cc-bf0e-b33439bbff8c"
+                                          "id": "1f2afb85-e07b-56d8-b3db-dc2a12fbcb4f"
                                         },
                                         {
                                           "command": "EVENT_SET_VALUE",
@@ -3282,7 +3295,7 @@
                                               }
                                             }
                                           },
-                                          "id": "fbc11cae-0fd5-5c3f-972b-bb1aa27c8277"
+                                          "id": "079a8b36-fcc6-5183-9be0-185feb4f6a09"
                                         },
                                         {
                                           "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -3298,7 +3311,14 @@
                                               "value": "1"
                                             }
                                           },
-                                          "id": "ff400bd9-e58f-5d82-a424-a0f21eb59275"
+                                          "id": "da900ef6-5adf-53b6-80ba-5096729f744a"
+                                        },
+                                        {
+                                          "command": "EVENT_CALL_CUSTOM_EVENT",
+                                          "args": {
+                                            "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                          },
+                                          "id": "9094b1f8-927b-53cf-930e-cf609ec0b100"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -3315,7 +3335,7 @@
                                               }
                                             }
                                           },
-                                          "id": "2a1569b7-f3ac-5b7f-a915-41c2436362fc",
+                                          "id": "87ed4c1e-6099-5981-8c1c-4007d07cfc40",
                                           "children": {
                                             "true": [
                                               {
@@ -3330,7 +3350,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "398866b2-f062-500e-bc45-af8441b0be22"
+                                                "id": "56743044-1a97-5a8e-90bf-f39be36540e7"
                                               },
                                               {
                                                 "command": "EVENT_IF",
@@ -3347,17 +3367,17 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "4cb38df5-839b-585a-9517-bee11a189018",
+                                                "id": "2f7c67f8-ef4f-55e9-b4b7-5a7da7114147",
                                                 "children": {
                                                   "true": [
                                                     {
                                                       "command": "EVENT_TEXT",
                                                       "args": {
-                                                        "text": "You lose $13$\nComposure.",
+                                                        "text": "You lose $13$\nEnergy.",
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "83efa444-9d46-56da-abaf-dc0f80475d84"
+                                                      "id": "a6b469cd-382a-524f-bfab-7d96bfacbdf4"
                                                     }
                                                   ],
                                                   "false": [
@@ -3376,17 +3396,17 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "b7696633-1352-5988-9ce2-92ef22704fe3",
+                                                      "id": "0704366a-b32e-582b-b7fd-bbede7c3811f",
                                                       "children": {
                                                         "true": [
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "$13$ Composure.\nYou breathe through it.",
+                                                              "text": "$13$ Energy.\nYou breathe through it.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "116cb865-e995-5786-89b4-b330e47805e8"
+                                                            "id": "cf8e64fa-ad0a-596d-917b-7725af80afeb"
                                                           }
                                                         ],
                                                         "false": [
@@ -3397,7 +3417,7 @@
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "0e01cd12-17f2-5c3b-9451-2dc07dbd31c1"
+                                                            "id": "788032b7-9bc4-5043-9c2c-19a83eb9803b"
                                                           }
                                                         ]
                                                       }
@@ -3423,7 +3443,7 @@
                                               }
                                             }
                                           },
-                                          "id": "53ec00f3-ab24-5fc2-835c-5ca85e962696"
+                                          "id": "62611b68-fd1a-5071-84fa-4d9539d38bf1"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -3440,7 +3460,7 @@
                                               }
                                             }
                                           },
-                                          "id": "87ed4c1e-6099-5981-8c1c-4007d07cfc40",
+                                          "id": "51f1cfc3-2bea-5fc5-baf2-7b709bfcefb7",
                                           "children": {
                                             "true": [
                                               {
@@ -3450,7 +3470,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "384ed0e5-5460-56f8-9634-ec710397348b"
+                                                "id": "24fda309-9100-5aa4-a564-b0b41b5fdd7c"
                                               }
                                             ],
                                             "false": [
@@ -3461,7 +3481,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "162bb3f6-ce96-53c5-b413-d9824a2ab69b"
+                                                "id": "52ab05f2-bedd-5005-90f5-181cd05a13e2"
                                               }
                                             ]
                                           }
@@ -3485,7 +3505,7 @@
                                               }
                                             }
                                           },
-                                          "id": "ad2eac30-e446-515d-a3e3-1a131f7fbba9"
+                                          "id": "a11826f6-e143-5520-812d-19bd6a0250db"
                                         },
                                         {
                                           "command": "EVENT_SET_VALUE",
@@ -3510,7 +3530,7 @@
                                               }
                                             }
                                           },
-                                          "id": "f60d020d-0c34-5420-b5be-cbbd55afe8a8"
+                                          "id": "85fe4809-32b3-5859-b934-31c428a7a668"
                                         },
                                         {
                                           "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -3526,7 +3546,14 @@
                                               "value": "1"
                                             }
                                           },
-                                          "id": "9daa28c2-ca4a-5fcd-879e-dcf986562cd5"
+                                          "id": "8df265c5-ec81-503c-bf0d-f7559c6d9bc5"
+                                        },
+                                        {
+                                          "command": "EVENT_CALL_CUSTOM_EVENT",
+                                          "args": {
+                                            "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                          },
+                                          "id": "ff0d431c-337c-5179-af23-488d58b409ee"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -3543,7 +3570,7 @@
                                               }
                                             }
                                           },
-                                          "id": "64eacafb-89ab-5b57-a0f9-9c6d4547a381",
+                                          "id": "69e1093b-c248-5d48-ae24-4f642ea19a98",
                                           "children": {
                                             "true": [
                                               {
@@ -3558,7 +3585,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "21f03032-fd6a-5b8f-ac7b-2814e7bdc551"
+                                                "id": "e8338759-bdf1-5fca-ba13-6dafcedf28ad"
                                               },
                                               {
                                                 "command": "EVENT_IF",
@@ -3575,17 +3602,17 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "e20c4101-17eb-528c-a556-618dd375ce21",
+                                                "id": "f530d8ca-f684-5562-bf86-f8290de84e06",
                                                 "children": {
                                                   "true": [
                                                     {
                                                       "command": "EVENT_TEXT",
                                                       "args": {
-                                                        "text": "You lose $13$\nComposure.",
+                                                        "text": "You lose $13$\nEnergy.",
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "cfc101f6-cc3b-5765-9220-102d81710a65"
+                                                      "id": "8477c6b5-2c3d-51f3-b76b-f07255517910"
                                                     }
                                                   ],
                                                   "false": [
@@ -3604,17 +3631,17 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "34588951-687d-50e8-8920-9433cd51ecf6",
+                                                      "id": "23387256-4c0d-578c-b442-bb78abb35afc",
                                                       "children": {
                                                         "true": [
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "$13$ Composure.\nYou breathe through it.",
+                                                              "text": "$13$ Energy.\nYou breathe through it.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "011db2e1-7f07-5216-8555-e37af36a8f8d"
+                                                            "id": "d56f8536-1b7e-54f0-90ae-0c30747a9bd2"
                                                           }
                                                         ],
                                                         "false": [
@@ -3625,7 +3652,7 @@
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "36d8c028-d462-5366-9d4a-de816a6ebe0a"
+                                                            "id": "2dd19a63-ee58-5669-a254-762dd91fc9aa"
                                                           }
                                                         ]
                                                       }
@@ -3660,7 +3687,7 @@
                                   }
                                 }
                               },
-                              "id": "7cc91833-8a5a-592b-88e5-1be8b8b7b80c",
+                              "id": "539fbbd4-50b3-5876-948f-b076153fec25",
                               "children": {
                                 "true": [
                                   {
@@ -3675,7 +3702,7 @@
                                         }
                                       }
                                     },
-                                    "id": "4e54df60-7a9c-5385-879a-d5be367e3146"
+                                    "id": "fcaa6552-c4f3-550c-9cbb-92298645524d"
                                   },
                                   {
                                     "command": "EVENT_IF",
@@ -3692,7 +3719,7 @@
                                         }
                                       }
                                     },
-                                    "id": "c3a50618-4427-5425-88e4-e925431a4a30",
+                                    "id": "dd8caa9b-de2a-514f-bb70-9f4c0664f9db",
                                     "children": {
                                       "true": [
                                         {
@@ -3707,7 +3734,7 @@
                                               }
                                             }
                                           },
-                                          "id": "569951b9-b300-5e27-b20b-06e6728146d5"
+                                          "id": "a6383999-90b9-5498-9cc1-c01eb1595be2"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -3724,7 +3751,7 @@
                                               }
                                             }
                                           },
-                                          "id": "d59d3b72-cfd1-50bc-b106-67f1ca394f91",
+                                          "id": "3d16733b-870e-567d-aa3f-827d11c5888e",
                                           "children": {
                                             "true": [
                                               {
@@ -3734,7 +3761,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "429b7d2e-13c7-57f2-9937-e23568e0287e"
+                                                "id": "2d48e46d-fd84-5848-ab65-5d087182f7af"
                                               }
                                             ],
                                             "false": [
@@ -3745,7 +3772,7 @@
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
-                                                "id": "008d7892-5611-5aad-9714-d31eacf7c9ee"
+                                                "id": "552e535a-c96d-592c-a2b1-c7656649cd21"
                                               }
                                             ]
                                           }
@@ -3769,7 +3796,7 @@
                                               }
                                             }
                                           },
-                                          "id": "eca8f39b-5c9f-596e-9e06-965de896afc7"
+                                          "id": "aee95ce9-5d61-5f5e-aa2b-df252295ffed"
                                         },
                                         {
                                           "command": "EVENT_SET_VALUE",
@@ -3794,7 +3821,7 @@
                                               }
                                             }
                                           },
-                                          "id": "ca4f932a-1cbd-5c29-a62e-c20382c14be3"
+                                          "id": "ab6a0c57-d788-5eae-b1d5-810ecf1450c9"
                                         },
                                         {
                                           "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -3810,7 +3837,14 @@
                                               "value": "1"
                                             }
                                           },
-                                          "id": "06fad7a1-da3f-5c36-b02a-0cc12fc4e96f"
+                                          "id": "125ce3ea-c783-57ef-b574-fde29a4dd368"
+                                        },
+                                        {
+                                          "command": "EVENT_CALL_CUSTOM_EVENT",
+                                          "args": {
+                                            "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                          },
+                                          "id": "e16e7b33-2123-5c27-8cce-20dab2e2b846"
                                         },
                                         {
                                           "command": "EVENT_IF",
@@ -3827,7 +3861,7 @@
                                               }
                                             }
                                           },
-                                          "id": "02f4d64b-7a6b-5114-89a0-3454aad5c2cd",
+                                          "id": "905a569d-c5aa-5f12-ac05-2f8c6603d7ca",
                                           "children": {
                                             "true": [
                                               {
@@ -3842,7 +3876,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "ab6a0c57-d788-5eae-b1d5-810ecf1450c9"
+                                                "id": "a2517f65-2fb1-5b01-8ca4-4be8cbacdaa2"
                                               },
                                               {
                                                 "command": "EVENT_IF",
@@ -3859,17 +3893,17 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "3caf41f8-c777-5a08-90d4-5f2bcf202a8a",
+                                                "id": "c9eb99f9-cf40-5f2c-82bc-727211137aa1",
                                                 "children": {
                                                   "true": [
                                                     {
                                                       "command": "EVENT_TEXT",
                                                       "args": {
-                                                        "text": "You lose $13$\nComposure.",
+                                                        "text": "You lose $13$\nEnergy.",
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "7525ada6-7493-5f32-af53-7a5dd62c1fb8"
+                                                      "id": "8d36054b-57c4-57f8-8fbd-7511a5cc480e"
                                                     }
                                                   ],
                                                   "false": [
@@ -3888,17 +3922,17 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "35744c6b-e288-5889-a5e5-82b294f80a21",
+                                                      "id": "ab79bd93-7127-51d5-ab8f-36dfb15e0bf0",
                                                       "children": {
                                                         "true": [
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "$13$ Composure.\nYou breathe through it.",
+                                                              "text": "$13$ Energy.\nYou breathe through it.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "242529db-9551-5412-9f64-976bf792bd8b"
+                                                            "id": "23d1aed1-9161-5a86-9c8f-a220359c0c55"
                                                           }
                                                         ],
                                                         "false": [
@@ -3909,7 +3943,7 @@
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "45c2e3b6-f05a-5ecb-957a-a31aa28eea0a"
+                                                            "id": "57ac7c70-f951-5996-a991-8ed53ba0e455"
                                                           }
                                                         ]
                                                       }
@@ -3938,7 +3972,7 @@
                                               }
                                             }
                                           },
-                                          "id": "5b4607a7-62b1-5a33-b7a1-12e14c8293c9",
+                                          "id": "54239767-31de-5521-b4a2-c33c885960ee",
                                           "children": {
                                             "true": [
                                               {
@@ -3953,7 +3987,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "a2517f65-2fb1-5b01-8ca4-4be8cbacdaa2"
+                                                "id": "f09bb7da-6466-595b-89cb-8a2726983f6c"
                                               },
                                               {
                                                 "command": "EVENT_IF",
@@ -3970,7 +4004,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "ab79bd93-7127-51d5-ab8f-36dfb15e0bf0",
+                                                "id": "6199f48e-d902-5db9-8c6c-33fa39e41204",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -3980,7 +4014,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "23d1aed1-9161-5a86-9c8f-a220359c0c55"
+                                                      "id": "0ba63cf1-8778-528e-8fe7-49d439c83e97"
                                                     }
                                                   ],
                                                   "false": [
@@ -3991,7 +4025,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "57ac7c70-f951-5996-a991-8ed53ba0e455"
+                                                      "id": "e33375a8-11ac-54c4-8a4f-e8c2de94ee92"
                                                     }
                                                   ]
                                                 }
@@ -4015,7 +4049,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "a0c270d8-2de7-525f-b4ca-58c9f604eccd"
+                                                "id": "97737289-9406-5618-a918-4d7862e2b394"
                                               },
                                               {
                                                 "command": "EVENT_SET_VALUE",
@@ -4040,7 +4074,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "6f84d089-eb62-5421-b223-5e0e7ce19b3f"
+                                                "id": "23ad4134-5c41-517a-81de-6d533b7ce2f1"
                                               },
                                               {
                                                 "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -4056,7 +4090,14 @@
                                                     "value": "1"
                                                   }
                                                 },
-                                                "id": "ab14efd4-0b87-525b-86cc-ff84dc52950c"
+                                                "id": "65f2cc88-7106-5f8b-acbc-2fd1f0b3be41"
+                                              },
+                                              {
+                                                "command": "EVENT_CALL_CUSTOM_EVENT",
+                                                "args": {
+                                                  "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                                },
+                                                "id": "d62ac4f3-b91d-50d8-8024-2eafb66fe63b"
                                               },
                                               {
                                                 "command": "EVENT_IF",
@@ -4073,7 +4114,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "9fb09c23-3233-5d2c-927c-8bc598a7a581",
+                                                "id": "d9400005-d3be-5684-be07-e876647979ac",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -4088,7 +4129,7 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "97737289-9406-5618-a918-4d7862e2b394"
+                                                      "id": "4f5b3b89-9ceb-502c-b1eb-ffbe8f43b423"
                                                     },
                                                     {
                                                       "command": "EVENT_IF",
@@ -4105,17 +4146,17 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "544eb684-f37c-58df-9d6b-f2294855dd26",
+                                                      "id": "2602e6c9-016e-5fc6-b014-f7fcab986c28",
                                                       "children": {
                                                         "true": [
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "You lose $13$\nComposure.",
+                                                              "text": "You lose $13$\nEnergy.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "e33375a8-11ac-54c4-8a4f-e8c2de94ee92"
+                                                            "id": "ce7bf0f1-1f32-5584-b134-eb62556a2ea6"
                                                           }
                                                         ],
                                                         "false": [
@@ -4134,17 +4175,17 @@
                                                                 }
                                                               }
                                                             },
-                                                            "id": "ec23f570-3458-57cb-99ff-6136c7653ef8",
+                                                            "id": "0dae701e-0cf0-5aa3-b37c-3e02e0354281",
                                                             "children": {
                                                               "true": [
                                                                 {
                                                                   "command": "EVENT_TEXT",
                                                                   "args": {
-                                                                    "text": "$13$ Composure.\nYou breathe through it.",
+                                                                    "text": "$13$ Energy.\nYou breathe through it.",
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
-                                                                  "id": "1a66654e-85a0-512f-8d71-3d8b419c0262"
+                                                                  "id": "41cb3414-ae5d-5d3a-b39c-4248da2236a3"
                                                                 }
                                                               ],
                                                               "false": [
@@ -4155,7 +4196,7 @@
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
-                                                                  "id": "47c930da-f10a-57ee-a52c-49d0dc7cab0a"
+                                                                  "id": "c5d715de-2d72-56de-b413-87fc92745dd7"
                                                                 }
                                                               ]
                                                             }
@@ -4181,7 +4222,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "2374c233-936b-52d9-8399-93573ea5f523"
+                                                "id": "840816a2-2cab-5e7d-83d4-1d121adabc83"
                                               },
                                               {
                                                 "command": "EVENT_IF",
@@ -4198,7 +4239,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "4f511afd-3778-5528-a4bf-be0ecfccdae1",
+                                                "id": "27cded9c-a542-596a-a2e2-68acc7bd60fc",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -4208,7 +4249,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "ce7bf0f1-1f32-5584-b134-eb62556a2ea6"
+                                                      "id": "83653e3a-b319-5522-bdaf-7d2bb4fa044c"
                                                     }
                                                   ],
                                                   "false": [
@@ -4219,7 +4260,7 @@
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
-                                                      "id": "41cb3414-ae5d-5d3a-b39c-4248da2236a3"
+                                                      "id": "560e073d-0b16-5f1c-9c79-4211224801a3"
                                                     }
                                                   ]
                                                 }
@@ -4243,7 +4284,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "5328b71a-caa7-510e-bdc2-fb532e60d208"
+                                                "id": "1ffb1a45-324a-56b6-88d8-74eac7a65119"
                                               },
                                               {
                                                 "command": "EVENT_SET_VALUE",
@@ -4268,7 +4309,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "ab54cd8c-815c-55ec-9b31-183a5d29237e"
+                                                "id": "e9d09c66-7d4a-5501-a9e5-e7adfdae5b31"
                                               },
                                               {
                                                 "command": "EVENT_CALL_CUSTOM_EVENT",
@@ -4284,7 +4325,14 @@
                                                     "value": "1"
                                                   }
                                                 },
-                                                "id": "60694c98-ccc9-56ba-9283-425394915760"
+                                                "id": "55431800-61a2-5554-9e7a-05dc955a6699"
+                                              },
+                                              {
+                                                "command": "EVENT_CALL_CUSTOM_EVENT",
+                                                "args": {
+                                                  "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                                                },
+                                                "id": "fc4ecc21-7e31-5919-9b59-5ded7273e676"
                                               },
                                               {
                                                 "command": "EVENT_IF",
@@ -4301,7 +4349,7 @@
                                                     }
                                                   }
                                                 },
-                                                "id": "b45b3acd-dd7c-5846-9555-a11d572573b6",
+                                                "id": "d99edc0d-7c2e-5d33-b6e8-a4b66c41185e",
                                                 "children": {
                                                   "true": [
                                                     {
@@ -4316,7 +4364,7 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "2639c09d-66a8-50a7-98d0-caf060893a31"
+                                                      "id": "451e1b0b-7d6f-503c-a6b6-e0aa07ac6df9"
                                                     },
                                                     {
                                                       "command": "EVENT_IF",
@@ -4333,17 +4381,17 @@
                                                           }
                                                         }
                                                       },
-                                                      "id": "2fab44f1-a4a6-5d5a-8cc9-eeb6e7916e34",
+                                                      "id": "4b6cacf9-19f2-5f94-8e8d-8427642f8113",
                                                       "children": {
                                                         "true": [
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "You lose $13$\nComposure.",
+                                                              "text": "You lose $13$\nEnergy.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
-                                                            "id": "83653e3a-b319-5522-bdaf-7d2bb4fa044c"
+                                                            "id": "297bed42-f629-52bf-8569-14ba58760023"
                                                           }
                                                         ],
                                                         "false": [
@@ -4362,17 +4410,17 @@
                                                                 }
                                                               }
                                                             },
-                                                            "id": "dd3129e5-313f-5c03-8b28-e8cd0fa94bf6",
+                                                            "id": "d765be2a-b707-5b6d-815d-e275d0295c81",
                                                             "children": {
                                                               "true": [
                                                                 {
                                                                   "command": "EVENT_TEXT",
                                                                   "args": {
-                                                                    "text": "$13$ Composure.\nYou breathe through it.",
+                                                                    "text": "$13$ Energy.\nYou breathe through it.",
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
-                                                                  "id": "560e073d-0b16-5f1c-9c79-4211224801a3"
+                                                                  "id": "c7c6e939-f660-5b99-b57f-cecaf402e619"
                                                                 }
                                                               ],
                                                               "false": [
@@ -4383,7 +4431,7 @@
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
-                                                                  "id": "964b7063-751a-54a2-a0dc-337e756bac88"
+                                                                  "id": "8b3a8731-9075-5434-a469-e9787ba83c27"
                                                                 }
                                                               ]
                                                             }
@@ -4430,7 +4478,7 @@
                 }
               }
             },
-            "id": "16fe9e42-fdce-5ee0-8720-a649d52db89e",
+            "id": "55a5f115-2650-5923-9aa8-194df71e1200",
             "children": {
               "true": [
                 {
@@ -4442,7 +4490,7 @@
                       "value": 3
                     }
                   },
-                  "id": "0b8252da-11c8-54a6-a22b-bde788f81138"
+                  "id": "82619f67-010e-5f40-893f-b38c167a5368"
                 }
               ],
               "false": []
@@ -4466,7 +4514,7 @@
           }
         }
       },
-      "id": "b3d7117c-6a92-54e1-9375-d3d9374f387c",
+      "id": "d2491000-3131-5bb7-8b2b-f684bbfea9d5",
       "children": {
         "true": [
           {
@@ -4484,7 +4532,7 @@
                 }
               }
             },
-            "id": "f6d2dd31-78d2-58ab-8acf-2221093c4fb2",
+            "id": "6a99db80-7b91-55a1-a554-5f50a9ecc0b9",
             "children": {
               "true": [
                 {
@@ -4494,7 +4542,64 @@
                     "avatarId": "",
                     "clearPrevious": true
                   },
-                  "id": "2f008925-e120-52ed-ae44-d0a07b9f8e21"
+                  "id": "97d34ddc-8009-526b-9ea1-24f46e1f31c0"
+                },
+                {
+                  "command": "EVENT_SET_VALUE",
+                  "args": {
+                    "variable": "0",
+                    "value": {
+                      "type": "min",
+                      "valueA": {
+                        "type": "variable",
+                        "value": "1"
+                      },
+                      "valueB": {
+                        "type": "add",
+                        "valueA": {
+                          "type": "variable",
+                          "value": "0"
+                        },
+                        "valueB": {
+                          "type": "number",
+                          "value": 12
+                        }
+                      }
+                    }
+                  },
+                  "id": "3d51a58d-637c-5429-8bc7-2c502a416b40"
+                },
+                {
+                  "command": "EVENT_CALL_CUSTOM_EVENT",
+                  "args": {
+                    "customEventId": "b2fdc1a5-0772-5f76-b042-003885cbb7f8",
+                    "$actor[0]$": "1",
+                    "$variable[V0]$": {
+                      "type": "variable",
+                      "value": "0"
+                    },
+                    "$variable[V1]$": {
+                      "type": "variable",
+                      "value": "1"
+                    }
+                  },
+                  "id": "075b7b56-842b-5c16-843a-46087893166d"
+                },
+                {
+                  "command": "EVENT_CALL_CUSTOM_EVENT",
+                  "args": {
+                    "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                  },
+                  "id": "3c53c0d9-4635-5e5b-b97a-e9c7298527e0"
+                },
+                {
+                  "command": "EVENT_TEXT",
+                  "args": {
+                    "text": "You drink it. It is\nactually good.\n\n+12 Energy.",
+                    "avatarId": "",
+                    "clearPrevious": true
+                  },
+                  "id": "5f87f78e-7ed2-5ee1-8d38-0fa35910eb62"
                 },
                 {
                   "command": "EVENT_SET_VALUE",
@@ -4505,7 +4610,7 @@
                       "value": 1
                     }
                   },
-                  "id": "cb04e15b-e822-5d00-82bb-d7ece6488fe7"
+                  "id": "d5d46c21-7710-57ef-a3e6-2715eef66831"
                 }
               ],
               "false": [
@@ -4524,7 +4629,7 @@
                       }
                     }
                   },
-                  "id": "e84ef684-fe8d-504a-af16-a8fc86a0b693",
+                  "id": "a57a3809-6ed6-5873-8e0b-5454d7ce95df",
                   "children": {
                     "true": [
                       {
@@ -4534,7 +4639,82 @@
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "8321d87d-e968-5e6a-a9d2-5de6d2fb1be8"
+                        "id": "64fe9770-871a-5baf-9054-6db818127cb8"
+                      },
+                      {
+                        "command": "EVENT_SET_VALUE",
+                        "args": {
+                          "variable": "0",
+                          "value": {
+                            "type": "min",
+                            "valueA": {
+                              "type": "variable",
+                              "value": "1"
+                            },
+                            "valueB": {
+                              "type": "add",
+                              "valueA": {
+                                "type": "variable",
+                                "value": "0"
+                              },
+                              "valueB": {
+                                "type": "number",
+                                "value": 8
+                              }
+                            }
+                          }
+                        },
+                        "id": "403cc93d-3825-5a02-917a-cf6e3bb8a4ff"
+                      },
+                      {
+                        "command": "EVENT_SET_VALUE",
+                        "args": {
+                          "variable": "2",
+                          "value": {
+                            "type": "add",
+                            "valueA": {
+                              "type": "variable",
+                              "value": "2"
+                            },
+                            "valueB": {
+                              "type": "number",
+                              "value": 1
+                            }
+                          }
+                        },
+                        "id": "35f25290-c14a-5153-8305-7c56b68d29f5"
+                      },
+                      {
+                        "command": "EVENT_CALL_CUSTOM_EVENT",
+                        "args": {
+                          "customEventId": "b2fdc1a5-0772-5f76-b042-003885cbb7f8",
+                          "$actor[0]$": "1",
+                          "$variable[V0]$": {
+                            "type": "variable",
+                            "value": "0"
+                          },
+                          "$variable[V1]$": {
+                            "type": "variable",
+                            "value": "1"
+                          }
+                        },
+                        "id": "1656ff7b-0c01-5a3a-b6cc-b46b3e378d49"
+                      },
+                      {
+                        "command": "EVENT_CALL_CUSTOM_EVENT",
+                        "args": {
+                          "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                        },
+                        "id": "84c3565e-6f19-5d3a-829c-db14516e0859"
+                      },
+                      {
+                        "command": "EVENT_TEXT",
+                        "args": {
+                          "text": "You know its ways now.\n\n+8 Energy, +1 Brains.",
+                          "avatarId": "",
+                          "clearPrevious": true
+                        },
+                        "id": "42bf1b16-9018-5576-a84d-e2d94476222a"
                       },
                       {
                         "command": "EVENT_SET_VALUE",
@@ -4545,7 +4725,7 @@
                             "value": 1
                           }
                         },
-                        "id": "7e9c2458-572c-57f8-bc8c-40cc4d53c889"
+                        "id": "26ff0184-5df5-5d65-a709-41fbcf4d8fc3"
                       }
                     ],
                     "false": [
@@ -4564,7 +4744,7 @@
                             }
                           }
                         },
-                        "id": "55a5f115-2650-5923-9aa8-194df71e1200",
+                        "id": "e0b77321-b097-58e9-9655-681aa05d7f1d",
                         "children": {
                           "true": [
                             {
@@ -4574,7 +4754,102 @@
                                 "avatarId": "",
                                 "clearPrevious": true
                               },
-                              "id": "dafce0bc-c7f7-5295-bddb-8d792685ce2a"
+                              "id": "736426c4-74f9-59c7-a5e2-ee6cb30f69aa"
+                            },
+                            {
+                              "command": "EVENT_SET_VALUE",
+                              "args": {
+                                "variable": "1",
+                                "value": {
+                                  "type": "add",
+                                  "valueA": {
+                                    "type": "variable",
+                                    "value": "1"
+                                  },
+                                  "valueB": {
+                                    "type": "number",
+                                    "value": 10
+                                  }
+                                }
+                              },
+                              "id": "c5a8e802-b8bc-5b78-8a5e-daf81327175a"
+                            },
+                            {
+                              "command": "EVENT_SET_VALUE",
+                              "args": {
+                                "variable": "0",
+                                "value": {
+                                  "type": "add",
+                                  "valueA": {
+                                    "type": "variable",
+                                    "value": "0"
+                                  },
+                                  "valueB": {
+                                    "type": "number",
+                                    "value": 10
+                                  }
+                                }
+                              },
+                              "id": "3551b90e-bd90-5f85-8010-46ebe0e8ff20"
+                            },
+                            {
+                              "command": "EVENT_SET_VALUE",
+                              "args": {
+                                "variable": "2",
+                                "value": {
+                                  "type": "add",
+                                  "valueA": {
+                                    "type": "variable",
+                                    "value": "2"
+                                  },
+                                  "valueB": {
+                                    "type": "number",
+                                    "value": 2
+                                  }
+                                }
+                              },
+                              "id": "ecc63e5a-0df0-5986-8a07-6609bbe780e8"
+                            },
+                            {
+                              "command": "EVENT_CALL_CUSTOM_EVENT",
+                              "args": {
+                                "customEventId": "b2fdc1a5-0772-5f76-b042-003885cbb7f8",
+                                "$actor[0]$": "1",
+                                "$variable[V0]$": {
+                                  "type": "variable",
+                                  "value": "0"
+                                },
+                                "$variable[V1]$": {
+                                  "type": "variable",
+                                  "value": "1"
+                                }
+                              },
+                              "id": "708dd48b-f591-5efb-b952-fb6113dc48d0"
+                            },
+                            {
+                              "command": "EVENT_CALL_CUSTOM_EVENT",
+                              "args": {
+                                "customEventId": "655f9744-15d3-4844-8ec1-7104bb71c49f"
+                              },
+                              "id": "6aec05b2-968c-5315-98d8-b356d7de6227"
+                            },
+                            {
+                              "command": "EVENT_TEXT",
+                              "args": {
+                                "text": "You survived the\nunsurvivable. Something\nin you hardened.",
+                                "avatarId": "",
+                                "clearPrevious": true
+                              },
+                              "id": "487025fd-80ea-5046-94d3-ce8156652215"
+                            },
+                            {
+                              "command": "EVENT_TEXT",
+                              "args": {
+                                "text": "+10 Max Energy,\n+2 Brains.",
+                                "avatarId": "",
+                                "clearPrevious": true
+                              },
+                              "id": "de70db06-fd3c-54d5-bec3-6b83eac7abb4"
                             },
                             {
                               "command": "EVENT_SET_VALUE",
@@ -4585,7 +4860,7 @@
                                   "value": 1
                                 }
                               },
-                              "id": "82619f67-010e-5f40-893f-b38c167a5368"
+                              "id": "31fdec7d-ea7b-5aef-8852-330ef229f07d"
                             }
                           ],
                           "false": []
@@ -4614,7 +4889,7 @@
                 }
               }
             },
-            "id": "f5ec837e-5851-5b1e-a698-687fe2f33f3a",
+            "id": "58126efc-42ec-5bda-b015-52f778c2ab48",
             "children": {
               "true": [
                 {
@@ -4629,7 +4904,7 @@
                       }
                     }
                   },
-                  "id": "403cc93d-3825-5a02-917a-cf6e3bb8a4ff"
+                  "id": "9b4961ef-cd5e-5202-b093-f51302231400"
                 },
                 {
                   "command": "EVENT_IF",
@@ -4646,17 +4921,17 @@
                       }
                     }
                   },
-                  "id": "c4b0204b-44df-5c95-bcd2-0ec4884ebc19",
+                  "id": "8eb11b86-ea27-57b9-b6ad-0686dddfcfea",
                   "children": {
                     "true": [
                       {
                         "command": "EVENT_TEXT",
                         "args": {
-                          "text": "You have run out of\nComposure.",
+                          "text": "You have run out of\nEnergy.",
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "139fd546-3ad8-539b-bce2-603d2b9424f4"
+                        "id": "cf936e0c-056a-5276-9fa0-d37fa38cc225"
                       },
                       {
                         "command": "EVENT_TEXT",
@@ -4665,7 +4940,7 @@
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "13677392-7db8-5a3e-981c-dd6c1d6de6ac"
+                        "id": "96ee74b9-e2e9-50c5-86ec-75e8a632c90e"
                       },
                       {
                         "command": "EVENT_TEXT",
@@ -4674,18 +4949,18 @@
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "b84b6d03-11be-562f-b89a-4843c42d146a"
+                        "id": "385d4b9a-f59d-512c-b585-e9fdb4472759"
                       }
                     ],
                     "false": [
                       {
                         "command": "EVENT_TEXT",
                         "args": {
-                          "text": "Your Composure is\ngone.",
+                          "text": "Your Energy is\ngone.",
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "5f87f78e-7ed2-5ee1-8d38-0fa35910eb62"
+                        "id": "df9bc975-3fa4-52bf-b882-930d8204e5d8"
                       },
                       {
                         "command": "EVENT_TEXT",
@@ -4694,7 +4969,7 @@
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "d4baf9ed-14dc-5f5b-a976-6fa79c6be15f"
+                        "id": "13255782-f5ba-5394-9310-b4d0f0dd4068"
                       },
                       {
                         "command": "EVENT_TEXT",
@@ -4703,7 +4978,7 @@
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "64fe9770-871a-5baf-9054-6db818127cb8"
+                        "id": "44b68687-ad01-51a7-86c1-1f89944cd760"
                       }
                     ]
                   }
@@ -4720,7 +4995,7 @@
       "args": {
         "fadeSpeed": "2"
       },
-      "id": "71aaad8c-69cb-551a-a5b8-66cd603e947c"
+      "id": "63ff591d-4aef-57aa-9004-89287a9cb603"
     }
   ]
 }
