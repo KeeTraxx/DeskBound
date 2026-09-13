@@ -1,0 +1,207 @@
+{
+  "_resourceType": "sprite",
+  "id": "633a1aa1-f08b-49c0-9728-cc8e3b83250c",
+  "name": "enemy_coffee_machine",
+  "symbol": "sprite_enemy_coffee_machine",
+  "states": [
+    {
+      "id": "a1deed67-5c12-47fd-8803-13a4816d55f8",
+      "name": "",
+      "animationType": "fixed",
+      "flipLeft": true,
+      "animations": [
+        {
+          "id": "9802b319-37ba-4dc9-ae5b-c350be66957a",
+          "frames": [
+            {
+              "id": "472fd919-5c17-4902-b6e3-70969183816e",
+              "tiles": [
+                {
+                  "id": "a332cb6c-acf5-564e-9b98-b486a2373a75",
+                  "x": -8,
+                  "y": 16,
+                  "sliceX": 0,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "4a0e1c25-8000-55e7-8b76-1ea3542b7059",
+                  "x": -8,
+                  "y": 0,
+                  "sliceX": 0,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "e2679ce0-5a2f-5248-874c-26b0fba740d5",
+                  "x": 0,
+                  "y": 16,
+                  "sliceX": 8,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "daeaf60b-80b1-5cf8-966b-f5b6dffd5480",
+                  "x": 0,
+                  "y": 0,
+                  "sliceX": 8,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "03c46b4c-e7d6-5c70-a1a9-bb6de17562bc",
+                  "x": 8,
+                  "y": 16,
+                  "sliceX": 16,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "f723d802-da8a-5ca7-b338-5e1bfa56a39b",
+                  "x": 8,
+                  "y": 0,
+                  "sliceX": 16,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "7989abdb-63cb-5345-abd6-af472e1c670d",
+                  "x": 16,
+                  "y": 16,
+                  "sliceX": 24,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "e994da80-3d9e-5c50-a157-67abf9ab1fb8",
+                  "x": 16,
+                  "y": 0,
+                  "sliceX": 24,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "a21b18ab-db90-46b8-acae-5d68212bd9ae",
+          "frames": [
+            {
+              "id": "11a814f8-eccf-413e-a2bd-4c263a2bd929",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "9736aa54-e0df-4a03-a227-a021719cbfac",
+          "frames": [
+            {
+              "id": "1a19fc0a-5ea9-4bb1-b922-12b9c3fecd90",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "8a67322b-de4e-467c-b877-94899b42b610",
+          "frames": [
+            {
+              "id": "ae45106e-9247-4776-9d1c-07f7e50c4615",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "2e1d399b-7bc8-4115-81c7-ecec8d3c2319",
+          "frames": [
+            {
+              "id": "86a69cdb-7370-431d-a74f-80ec8ecd36b9",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "239ef5f3-4ecb-485d-a4e6-e750ae6fda52",
+          "frames": [
+            {
+              "id": "8b1b166e-296b-4af6-9ecf-d51a50112aff",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "96bfe8e9-df65-4156-9732-735f3744fe79",
+          "frames": [
+            {
+              "id": "1874b0fc-0e81-4cd9-9e14-4904bed67d6a",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "6ef5ecc9-12cc-4fe6-bdb7-9c62555e12fc",
+          "frames": [
+            {
+              "id": "7e76f70c-0103-4af2-82b9-b1338ad87289",
+              "tiles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "numTiles": 8,
+  "canvasOriginX": 0,
+  "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
+  "boundsX": 0,
+  "boundsY": -8,
+  "boundsWidth": 16,
+  "boundsHeight": 16,
+  "animSpeed": 15,
+  "filename": "enemy_coffee_machine.png",
+  "width": 32,
+  "height": 32,
+  "checksum": "0b98b70d72212b65e5d98b46d5ba4777fac6d9a6"
+}

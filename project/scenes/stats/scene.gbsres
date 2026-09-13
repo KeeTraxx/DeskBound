@@ -21,7 +21,7 @@
       "command": "EVENT_TEXT_DRAW",
       "args": {
         "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$00$/$01$",
-        "x": 11,
+        "x": 7,
         "y": 5,
         "location": "background"
       },
@@ -31,7 +31,7 @@
       "command": "EVENT_TEXT_DRAW",
       "args": {
         "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$02$",
-        "x": 11,
+        "x": 7,
         "y": 7,
         "location": "background"
       },
@@ -41,7 +41,7 @@
       "command": "EVENT_TEXT_DRAW",
       "args": {
         "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$03$",
-        "x": 11,
+        "x": 7,
         "y": 9,
         "location": "background"
       },
@@ -96,7 +96,7 @@
             "command": "EVENT_TEXT_DRAW",
             "args": {
               "text": "MON",
-              "x": 10,
+              "x": 14,
               "y": 11,
               "location": "background"
             },
@@ -108,7 +108,7 @@
             "command": "EVENT_TEXT_DRAW",
             "args": {
               "text": "TUE",
-              "x": 10,
+              "x": 14,
               "y": 11,
               "location": "background"
             },
@@ -120,7 +120,7 @@
             "command": "EVENT_TEXT_DRAW",
             "args": {
               "text": "WED",
-              "x": 10,
+              "x": 14,
               "y": 11,
               "location": "background"
             },
@@ -132,7 +132,7 @@
             "command": "EVENT_TEXT_DRAW",
             "args": {
               "text": "THU",
-              "x": 10,
+              "x": 14,
               "y": 11,
               "location": "background"
             },
@@ -144,7 +144,7 @@
             "command": "EVENT_TEXT_DRAW",
             "args": {
               "text": "FRI",
-              "x": 10,
+              "x": 14,
               "y": 11,
               "location": "background"
             },

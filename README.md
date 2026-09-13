@@ -341,7 +341,9 @@ all need a real playtest.
 
 ## Known gaps
 
-- No audio (the GB Studio template's `template.mod` is still the only track)
+- Nothing plays music yet. Two original tracks exist — `lounge_elevator.mod`
+  and `coffee_break.mod` (regenerate with `python3 tools/gen_music.py`) — but no
+  scene has a Play Music event, so the game is still silent in-engine
 - Enemies point at placeholder sprites (`actor`, `static`) — drop real enemy
   sprite `.png`s into `assets/sprites/` and point `enemies.yaml` at them
 - `energy_bar.png` is a programmer-drawn 17-frame strip; bar placement

@@ -18,6 +18,15 @@
   "y": 30,
   "script": [
     {
+      "command": "EVENT_ACTOR_SET_SPRITE",
+      "args": {
+        "actorId": "72679feb-224d-5f32-afa2-1b3ecc324623",
+        "spriteSheetId": "633a1aa1-f08b-49c0-9728-cc8e3b83250c",
+        "__label": "Reserve VRAM for the largest enemy sprite (see README)"
+      },
+      "id": "9f2c1a70-5d84-4e6b-9c33-2b1e7a640001"
+    },
+    {
       "command": "EVENT_CALL_CUSTOM_EVENT",
       "args": {
         "customEventId": "de7aee73-0f31-5877-b684-8542d7636893",
@@ -26,6 +35,16 @@
         "$actor[2]$": "158d747c-f60d-50ba-a861-aa2fe1c9ad7b"
       },
       "id": "67ddd22b-3d5a-50ad-874e-cad01f883bac"
+    },
+    {
+      "command": "EVENT_TEXT_DRAW",
+      "args": {
+        "text": "Joey Jobbins",
+        "x": 10,
+        "y": 14,
+        "location": "background"
+      },
+      "id": "9b7542b9-cea8-4425-acfa-016776808623"
     }
   ],
   "playerHit1Script": [],

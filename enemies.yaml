@@ -6,7 +6,7 @@
 # before switching to the battle scene (see the Coffee Machine actor).
 #
 # `sprite` is a .png file under assets/sprites/ — the path as it sits on disk
-# ("actor.png", or "enemies/coffee.png" in a subfolder), not GB Studio's
+# ("INVIS.png", or "enemies/coffee.png" in a subfolder), not GB Studio's
 # internal sprite name.
 #
 # Every text field is a list of VARIANTS, and each variant is a list of STEPS:
@@ -122,7 +122,7 @@ enemies:
   # small stakes — you are trying to get to work, not win anything.
   - id: 0
     name: Dog
-    sprite: actor.png
+    sprite: enemy_dog.png
     energy: 18
     intro:
       - - "A DOG launches itself\ninto the road.\nIt is thrilled."
@@ -167,7 +167,7 @@ enemies:
 
   - id: 1
     name: Grandma
-    sprite: actor_animated.png
+    sprite: enemy_grandma.png
     energy: 22
     intro:
       - - "A GRANDMOTHER begins\ncrossing. The lights\nare in her favour."
@@ -212,7 +212,7 @@ enemies:
 
   - id: 2
     name: Boss Call
-    sprite: static.png
+    sprite: enemy_boss_call.png
     energy: 25
     intro:
       - - "YOUR PHONE RINGS.\nIt is your boss.\nYou are not in yet."
@@ -257,7 +257,7 @@ enemies:
 
   - id: 3
     name: Tractor
-    sprite: moped01.png
+    sprite: enemy_tractor.png
     energy: 30
     intro:
       - - "A TRACTOR pulls out.\nIt is doing eleven.\nThe road is single lane."
@@ -302,7 +302,7 @@ enemies:
 
   - id: 4
     name: Construction
-    sprite: motorcycle01.png
+    sprite: enemy_construction.png
     energy: 35
     can_flee: false
     flee_blocked:
@@ -352,7 +352,7 @@ enemies:
   # --- The office (ids 10-12) -------------------------------------------
   - id: 10
     name: Coffee Machine
-    sprite: actor.png
+    sprite: enemy_coffee_machine.png
     energy: 60
     win_flag: story_flag_coffee
     intro:
@@ -399,7 +399,7 @@ enemies:
 
   - id: 11
     name: The Printer
-    sprite: static.png
+    sprite: enemy_the_printer.png
     energy: 65
     win_flag: story_flag_printer
     intro:
@@ -447,7 +447,7 @@ enemies:
 
   - id: 12
     name: The Meeting
-    sprite: actor_animated.png
+    sprite: enemy_the_meeting.png
     energy: 105
     win_flag: story_flag_boss
     can_flee: false
