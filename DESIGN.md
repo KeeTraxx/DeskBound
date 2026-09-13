@@ -264,6 +264,7 @@ short game beats an unfinished sprawling one.
 | `print_station` | TOPDOWN | Printer encounter |
 | `meeting_room` | TOPDOWN | Boss encounter |
 | `battle` | POINTNCLICK | **Shared battle scene** (see below) |
+| `stats` | POINTNCLICK | Your numbers, on START from anywhere (see §5.7) |
 | `ending` | TOPDOWN | Friday evening. What you got done |
 
 `home` is both ends of a day: the wake-up that advances `dayOfWeek` and restores
@@ -287,6 +288,7 @@ Battle:   battle_menu_choice, battle_act_choice, battle_power,
           battle_damage, battle_temp, battle_result, battle_turn_count
 Week:     dayOfWeek, transport, commute_time
 Progress: story_flag_coffee, story_flag_printer, story_flag_boss
+UI:       stats_return
 ```
 
 Notably absent: caffeine/MP and all item counters.
@@ -349,6 +351,31 @@ being present de-risks the whole project.
 while the installed app is 4.3.2 — but the 4.3.2 app's *own* bundled templates
 are also `4.2.0 / release 10`. The project format did not change between those
 app versions, so **no upgrade is required** and no migration risk exists.
+
+### 5.7 The stats screen
+
+START opens the `stats` scene from anywhere except the title, and returns you to
+the exact tile you were standing on. Four engine facts shape how it is wired:
+
+- **Input bindings die on every scene change** (`events_init` on
+  `EXCEPTION_CHANGE_SCENE`), so `AttachStatsButton` has to be called from each
+  scene's On Init. It cannot be bound once.
+- **Input scripts only fire while the VM is unlocked**, and scene On Init,
+  actor and trigger scripts all compile with `VM_LOCK`. START is therefore dead
+  during any dialogue — and dead for the whole fight, since the battle runs
+  inside the battle scene's On Init. The `battle` scene deliberately does *not*
+  call `AttachStatsButton`; it doesn't need to.
+- **Pop Scene State re-runs the target scene's On Init.** That is why `home`
+  wraps its day setup in a `stats_return` guard: without it, coming back would
+  re-run `NewDay` and hand the player a free full heal. `street` needs no guard
+  — its On Init is idempotent and `camera_x`/`camera_y` survive a scene load, so
+  the commute resumes. Every other scene that binds START clears `stats_return`
+  on entry, so the flag can never leak into a later visit to `home`.
+- **Only the numbers are drawn at runtime.** The VWF glyph pool is 52 tiles and
+  is shared across consecutive Draw Text calls, so every static label lives in
+  `assets/backgrounds/stats.png` (regenerate with `tools/gen_stats_bg.py`). The
+  Draw Text events switch to GBS Mono via an inline `!F:<id>!` code, which is
+  what keeps values at one character per tile and aligned with those labels.
 
 ---
 

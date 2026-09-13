@@ -14,13 +14,13 @@
   "collisions": "",
   "autoFadeSpeed": 1,
   "symbol": "scene_stats",
-  "x": 800,
-  "y": 432,
+  "x": 728,
+  "y": 30,
   "script": [
     {
       "command": "EVENT_TEXT_DRAW",
       "args": {
-        "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$0$/$1$",
+        "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$00$/$01$",
         "x": 11,
         "y": 5,
         "location": "background"
@@ -30,7 +30,7 @@
     {
       "command": "EVENT_TEXT_DRAW",
       "args": {
-        "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$2$",
+        "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$02$",
         "x": 11,
         "y": 7,
         "location": "background"
@@ -40,7 +40,7 @@
     {
       "command": "EVENT_TEXT_DRAW",
       "args": {
-        "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$3$",
+        "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!$03$",
         "x": 11,
         "y": 9,
         "location": "background"
@@ -95,7 +95,7 @@
           {
             "command": "EVENT_TEXT_DRAW",
             "args": {
-              "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!MONDAY",
+              "text": "MON",
               "x": 10,
               "y": 11,
               "location": "background"
@@ -107,7 +107,7 @@
           {
             "command": "EVENT_TEXT_DRAW",
             "args": {
-              "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!TUESDAY",
+              "text": "TUE",
               "x": 10,
               "y": 11,
               "location": "background"
@@ -119,7 +119,7 @@
           {
             "command": "EVENT_TEXT_DRAW",
             "args": {
-              "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!WEDNESDAY",
+              "text": "WED",
               "x": 10,
               "y": 11,
               "location": "background"
@@ -131,7 +131,7 @@
           {
             "command": "EVENT_TEXT_DRAW",
             "args": {
-              "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!THURSDAY",
+              "text": "THU",
               "x": 10,
               "y": 11,
               "location": "background"
@@ -143,7 +143,7 @@
           {
             "command": "EVENT_TEXT_DRAW",
             "args": {
-              "text": "!F:4bd653f0-e08d-424e-9e5b-c1f3aaa21e47!FRIDAY",
+              "text": "FRI",
               "x": 10,
               "y": 11,
               "location": "background"
