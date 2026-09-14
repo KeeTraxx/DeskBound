@@ -1,0 +1,131 @@
+name: Build ROM
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-rom-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # GB Studio release used to compile the ROM. DeskBound.gbsproj is authored for
+  # project format 4.2.0 / release 10, so staying on the 4.2 line means the CLI
+  # builds the project as-is instead of migrating it first.
+  GB_STUDIO_VERSION: "4.2.2"
+
+jobs:
+  rom:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # attach the ROM to a release on tag builds
+
+    steps:
+      - name: Check out DeskBound
+        uses: actions/checkout@v4
+        with:
+          path: game
+
+      # The published Linux builds of GB Studio are Electron apps with no
+      # gb-studio-cli in them, so the CLI has to be built from source.
+      - name: Check out GB Studio
+        uses: actions/checkout@v4
+        with:
+          repository: chrismaltby/gb-studio
+          ref: v${{ env.GB_STUDIO_VERSION }}
+          submodules: recursive
+          path: gb-studio
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Cache Yarn and Electron downloads
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.yarn/berry/cache
+            ~/.cache/electron
+          key: gbs-deps-${{ env.GB_STUDIO_VERSION }}-${{ hashFiles('gb-studio/yarn.lock') }}
+          restore-keys: gbs-deps-${{ env.GB_STUDIO_VERSION }}-
+
+      - name: Install GB Studio dependencies
+        working-directory: gb-studio
+        run: yarn install --immutable
+
+      - name: Cache GBDK toolchain
+        id: gbdk
+        uses: actions/cache@v4
+        with:
+          path: gb-studio/buildTools/linux-x64
+          key: gbdk-linux-x64-${{ env.GB_STUDIO_VERSION }}
+
+      # GB Studio's own `yarn fetch-deps` pulls the rolling `gbdk-next` build,
+      # which no longer links against the 4.2 engine — it fails with
+      # `?ASlink-Warning-Undefined Global '.IF'`. The matching GB Studio release
+      # ships a pinned GBDK inside its app bundle; use exactly that one.
+      - name: Extract GBDK from the GB Studio release
+        if: steps.gbdk.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          curl -fsSL -o gb-studio.deb \
+            "https://github.com/chrismaltby/gb-studio/releases/download/v${GB_STUDIO_VERSION}/gb-studio-linux-debian.deb"
+          dpkg-deb -x gb-studio.deb deb
+          npx --yes @electron/asar extract deb/usr/lib/gb-studio/resources/app.asar app
+          mkdir -p gb-studio/buildTools
+          cp -a app/buildTools/linux-x64 gb-studio/buildTools/
+
+      # `yarn make:cli` can't find webpack: Yarn 4 only exposes binaries of
+      # direct dependencies, and GB Studio depends on webpack transitively.
+      - name: Build gb-studio-cli
+        working-directory: gb-studio
+        run: NO_TYPE_CHECKING=1 ./node_modules/.bin/webpack --config webpack.cli.config.js
+
+      - name: Work out the ROM name
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            version="$GITHUB_REF_NAME"
+          else
+            version="$(git -C game rev-parse --short HEAD)"
+          fi
+          mkdir -p rom
+          echo "ROM_PATH=$GITHUB_WORKSPACE/rom/DeskBound-$version.gb" >> "$GITHUB_ENV"
+
+      - name: Build the ROM
+        working-directory: gb-studio
+        run: |
+          set -euo pipefail
+          node out/cli/gb-studio-cli.js make:rom \
+            "$GITHUB_WORKSPACE/game/DeskBound.gbsproj" "$ROM_PATH" 2>&1 | tee build.log
+          # The compiler skips events it has no handler for, still exits 0, and
+          # emits a ROM whose scripts are simply missing. Treat that as a failure.
+          if grep -q "No compiler for command" build.log; then
+            echo "::error::GB Studio skipped events while compiling — the ROM would be incomplete."
+            exit 1
+          fi
+          ls -l "$ROM_PATH"
+
+      - name: Upload the ROM as a build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeskBound-rom
+          path: rom/*.gb
+          if-no-files-found: error
+
+      - name: Publish the ROM to GitHub Releases
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+            || gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
+                 --title "$GITHUB_REF_NAME" --generate-notes
+          gh release upload "$GITHUB_REF_NAME" "$ROM_PATH" --repo "$GITHUB_REPOSITORY" --clobber

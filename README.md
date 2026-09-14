@@ -309,10 +309,37 @@ The project targets GB Studio `4.2.0 / release 10`. The installed flatpak is
 4.3.2, whose own templates are still on that same format version, so no project
 upgrade is needed.
 
+Prebuilt `.gb` ROMs are attached to each
+[release](https://github.com/KeeTraxx/DeskBound/releases).
+
+## CI builds
+
+[`.github/workflows/build-rom.yml`](.github/workflows/build-rom.yml) compiles a
+ROM on every push and pull request, uploads it as a build artifact, and — on a
+`v*` tag — attaches `DeskBound-<tag>.gb` to the matching GitHub release.
+
+No Linux distribution of GB Studio ships `gb-studio-cli` (the flatpak, the
+AppImage and the `.deb` are all just the Electron app), so the workflow builds
+the CLI from the `chrismaltby/gb-studio` source at the pinned
+`GB_STUDIO_VERSION`. Two things about that are non-obvious and worth keeping:
+
+- **GBDK comes out of the official release, not `yarn fetch-deps`.** That script
+  downloads the rolling `gbdk-next` build, which no longer links against the 4.2
+  engine — it dies at the link step with
+  `?ASlink-Warning-Undefined Global '.IF'`. The workflow unpacks the `.deb`'s
+  `app.asar` and takes the pinned `buildTools/linux-x64` the release ships.
+- **The build greps its own log for `No compiler for command`.** If the CLI
+  can't resolve an event handler it skips the event, still exits 0, and emits a
+  ROM with the scripts silently missing (roughly half the size). The grep turns
+  that into a failed build.
+
+The CLI has to run from the full GB Studio source tree — it loads event
+definitions from `src/lib/events` at runtime rather than from its webpack
+bundle, which is exactly how that silent-skip failure happens.
+
 ## Verification
 
-GB Studio only builds from its GUI — there is no `gb-studio-cli` in the
-flatpak — so this repo can't compile a ROM unattended. Two things stand in:
+Besides the CI build above, two checks cover the parts a compiler can't:
 
 **`gen_enemies.py --dry-run` validates the data**: unknown sprite names,
 missing or backwards damage ranges, duplicate enemy ids, actions an enemy
@@ -335,9 +362,9 @@ shipped script (2000 games per cell):
 Every strategy wins and none stalls, matching the "comedic and easy" design
 goal, while optimal play stays about twice as fast as stubborn play.
 
-**Not yet verified:** the generated script has never been compiled by GB Studio,
-and gameplay itself. Text layout on a 160×144 screen, menu widths, and pacing
-all need a real playtest.
+**Not yet verified:** gameplay itself. The generated script compiles and links
+(CI builds a 256 KB ROM), but text layout on a 160×144 screen, menu widths, and
+pacing all need a real playtest.
 
 ## Known gaps
 
