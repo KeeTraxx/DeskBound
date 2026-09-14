@@ -320,12 +320,15 @@ ROM on every push and pull request, uploads it as a build artifact, and — on a
 
 No Linux distribution of GB Studio ships `gb-studio-cli` (the flatpak, the
 AppImage and the `.deb` are all just the Electron app), so the workflow builds
-the CLI from the `chrismaltby/gb-studio` source at the pinned
-`GB_STUDIO_VERSION`. Two things about that are non-obvious and worth keeping:
+the CLI from the `chrismaltby/gb-studio` source at `GB_STUDIO_VERSION`, pinned
+to **4.3.2** to match the flatpak used locally. `make:rom` reads the project
+without writing it back, so the 4.2.0-format `.gbsproj` is migrated in memory
+only and the checkout is left alone. Two things about the build are non-obvious
+and worth keeping:
 
 - **GBDK comes out of the official release, not `yarn fetch-deps`.** That script
-  downloads the rolling `gbdk-next` build, which no longer links against the 4.2
-  engine — it dies at the link step with
+  downloads the rolling `gbdk-next` build, which no longer links against the
+  bundled engine — it dies at the link step with
   `?ASlink-Warning-Undefined Global '.IF'`. The workflow unpacks the `.deb`'s
   `app.asar` and takes the pinned `buildTools/linux-x64` the release ships.
 - **The build greps its own log for `No compiler for command`.** If the CLI

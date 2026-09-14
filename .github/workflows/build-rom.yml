@@ -12,10 +12,12 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # GB Studio release used to compile the ROM. DeskBound.gbsproj is authored for
-  # project format 4.2.0 / release 10, so staying on the 4.2 line means the CLI
-  # builds the project as-is instead of migrating it first.
-  GB_STUDIO_VERSION: "4.2.2"
+  # GB Studio release used to compile the ROM — keep this matching the GB Studio
+  # you build with locally, so CI and the GUI produce the same ROM.
+  # DeskBound.gbsproj is still on project format 4.2.0 / release 10; newer
+  # GB Studio migrates that in memory when it loads and never writes it back,
+  # so the checkout stays untouched.
+  GB_STUDIO_VERSION: "4.3.2"
 
 jobs:
   rom:
@@ -81,11 +83,16 @@ jobs:
           mkdir -p gb-studio/buildTools
           cp -a app/buildTools/linux-x64 gb-studio/buildTools/
 
-      # `yarn make:cli` can't find webpack: Yarn 4 only exposes binaries of
-      # direct dependencies, and GB Studio depends on webpack transitively.
+      # `yarn make:cli` on its own can't find webpack: Yarn 4 only exposes the
+      # binaries of direct dependencies and GB Studio depends on webpack
+      # transitively. Putting node_modules/.bin on PATH fixes that while still
+      # going through the upstream script, whose config path moves between
+      # releases (4.3 moved it under src/apps/gb-studio-cli/).
       - name: Build gb-studio-cli
         working-directory: gb-studio
-        run: NO_TYPE_CHECKING=1 ./node_modules/.bin/webpack --config webpack.cli.config.js
+        run: |
+          set -euo pipefail
+          PATH="$PWD/node_modules/.bin:$PATH" NO_TYPE_CHECKING=1 yarn make:cli
 
       - name: Work out the ROM name
         run: |
