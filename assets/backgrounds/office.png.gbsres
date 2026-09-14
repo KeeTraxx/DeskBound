@@ -3,10 +3,10 @@
   "id": "dbb84455-b1ee-4e76-9838-96ad36437580",
   "name": "office",
   "symbol": "bg_office",
-  "tileColors": "00a19+",
+  "tileColors": "009b4+",
   "filename": "office.png",
-  "width": 47,
-  "height": 55,
-  "imageWidth": 376,
-  "imageHeight": 440
+  "width": 46,
+  "height": 54,
+  "imageWidth": 368,
+  "imageHeight": 432
 }

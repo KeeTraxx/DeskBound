@@ -4,7 +4,7 @@
     {
       "id": "0",
       "name": "player_energy",
-      "symbol": "var_player_energy"
+      "symbol": "var_player_energy_0"
     },
     {
       "id": "1",
@@ -185,6 +185,11 @@
       "id": "b3fd1890-45a7-49ac-a1c1-bf34bc74ca40__L2",
       "name": "next_random_encounter",
       "symbol": "var_next_random_encounter_0"
+    },
+    {
+      "id": "82324d2e-0b21-4800-9352-e148ba5a75f2__L0",
+      "name": "dir",
+      "symbol": "var_dir"
     }
   ],
   "constants": [

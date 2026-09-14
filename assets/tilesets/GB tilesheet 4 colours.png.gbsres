@@ -1,0 +1,11 @@
+{
+  "_resourceType": "tileset",
+  "id": "8a608450-fdd3-46ed-9f50-1d1d261fa00a",
+  "name": "GB tilesheet 4 colours",
+  "symbol": "tileset_gb_tilesheet_4_colo",
+  "width": 22,
+  "height": 32,
+  "imageWidth": 176,
+  "imageHeight": 256,
+  "filename": "GB tilesheet 4 colours.png"
+}
