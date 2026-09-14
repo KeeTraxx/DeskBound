@@ -498,3 +498,802 @@ enemies:
           - - "Any other business?\nSomeone has other\nbusiness."
           - - "Can everyone see my\nscreen? Nobody can\nsee the screen."
         damage: 6-9
+
+  # --- Office tasks (ids 20-24) -----------------------------------------
+  # The work itself, taken on at your own desk. Short fights, no story flags:
+  # these are the ones you can lose and still come back to tomorrow.
+  - id: 20
+    name: Presentation
+    sprite: enemy_presentation.png
+    energy: 28
+    intro:
+      - - "A PRESENTATION is due\ntomorrow. It exists\nonly as a title."
+    look:
+      - - "Slide 1 of 1. The title\nis \"Overview\". There is\nnothing to overview."
+      - - "You have a template.\nThe template has a\nplaceholder logo."
+    defeat:
+      - - "The deck is finished.\nIt is fourteen slides.\nTwo of them are good."
+    reward:
+      brains: 1
+      text:
+        - - "You found the story in\nit somewhere.\n\n+1 Brains."
+    take_damage:
+      THINK:
+        damage: 13-19
+        text:
+          - - "You decide what it's\nactually about. The rest\nis only slides."
+      TALK:
+        damage: 5-9
+        text:
+          - - "You explain it out loud\nto a colleague. It gets\nshorter."
+      EMAIL:
+        damage: 2-5
+        text:
+          - - "You ask for the brand\ntemplate. It arrives\nas a PDF."
+      SHRUG:
+        damage: 6-10
+        text:
+          - - "You reuse last quarter's\ndeck. Nobody read it\nthe first time."
+    moves:
+      - text:
+          - - "The font does something\ndifferent on slide 6."
+          - - "You drag one image. The\nwhole layout moves."
+        damage: 4-7
+      - text:
+          - - "The chart has no axis\nlabels. It never had\naxis labels."
+          - - "Animations. You did not\nask for animations."
+        damage: 3-6
+      - text:
+          - - "It autosaves. Over the\ngood version."
+        damage: 2-5
+
+  - id: 21
+    name: The Inbox
+    sprite: enemy_the_inbox.png
+    energy: 32
+    intro:
+      - - "THE INBOX opens.\nUnread: 141.\nIt was 138 a moment ago."
+    look:
+      - - "Forty are CCs. Twelve\nare from you. Nine are\nabout parking."
+      - - "One is marked URGENT.\nIt is from a mailing\nlist."
+    defeat:
+      - - "Inbox zero. It lasts\nabout four minutes.\nYou were there for it."
+    reward:
+      energy: 5
+      text:
+        - - "Briefly, nothing is\nowed.\n\n+5 Energy."
+    take_damage:
+      THINK:
+        damage: 4-8
+        text:
+          - - "You sort by sender.\nYou now have sorted\nproblems."
+      TALK:
+        damage: 7-11
+        text:
+          - - "You walk over and ask.\nIt takes nine seconds.\nIt saved nine emails."
+      EMAIL:
+        damage: 14-20
+        text:
+          - - "You answer fire with\nfire. Here, and only\nhere, that works."
+      SHRUG:
+        damage: 3-7
+        text:
+          - - "You mark all as read.\nThey are not read.\nThey are marked."
+    moves:
+      - text:
+          - - "Reply all. Someone has\nreplied all."
+          - - "A thread you were CC'd\non has opinions now."
+        damage: 3-6
+      - text:
+          - - "\"Per my last email.\""
+          - - "\"Just following up on\nthis.\" It is the fourth\nfollow-up."
+        damage: 4-7
+      - text:
+          - - "Out of office, says the\none person you needed."
+          - - "Three more arrive while\nyou read one."
+        damage: 2-5
+
+  - id: 22
+    name: Backlog Grooming
+    sprite: enemy_backlog_grooming.png
+    energy: 36
+    intro:
+      - - "BACKLOG GROOMING begins.\nThe backlog has 400\nitems. None are groomed."
+    look:
+      - - "The oldest ticket is\nfrom 2021. It says\n\"TBD\"."
+      - - "Four tickets describe\nthe same bug. None of\nthem agree."
+    defeat:
+      - - "Eleven closed. Seven\nmerged. One is now\nsomebody else's."
+    reward:
+      brains: 1
+      text:
+        - - "You can see the shape\nof the work now.\n\n+1 Brains."
+    take_damage:
+      THINK:
+        damage: 12-17
+        text:
+          - - "You close everything\nolder than a year.\nNothing breaks."
+      TALK:
+        damage: 8-12
+        text:
+          - - "You ask who wants this.\nNobody does. It's gone."
+      EMAIL:
+        damage: 3-6
+        text:
+          - - "You email the reporter.\nThe reporter left in\nMarch."
+      SHRUG:
+        damage: 5-9
+        text:
+          - - "You drag them all to\nNext Quarter. Next\nQuarter is very patient."
+    moves:
+      - text:
+          - - "Someone reopens a\nticket you just closed."
+          - - "A ticket has no\ndescription. It has\nthree watchers."
+        damage: 3-6
+      - text:
+          - - "\"Shall we size it?\"\nIt cannot be sized."
+          - - "Everyone votes 5. One\nperson votes 13. We\ndiscuss this for a while."
+        damage: 4-7
+      - text:
+          - - "Priority: Medium.\nEverything is priority\nmedium."
+        damage: 2-5
+
+  - id: 23
+    name: The Contract
+    sprite: enemy_the_contract.png
+    energy: 40
+    intro:
+      - - "THE CONTRACT needs\nwriting. Legal is\navailable in principle."
+    look:
+      - - "Clause 4 refers to\nAppendix B. There is no\nAppendix B."
+      - - "The template is a Word\nfile with tracked\nchanges from 2019."
+    defeat:
+      - - "It is signed. Both\nsides are equally\nunhappy. That's the job."
+    reward:
+      energy: 3
+      brains: 1
+      text:
+        - - "You know which clauses\nmatter now.\n\n+3 Energy, +1 Brains."
+    take_damage:
+      THINK:
+        damage: 9-14
+        text:
+          - - "You read it properly.\nAll of it. Rarer than\nyou would think."
+      TALK:
+        damage: 4-8
+        text:
+          - - "You call Legal. Legal\nis in a workshop until\nThursday."
+      EMAIL:
+        damage: 13-18
+        text:
+          - - "You put every change in\nwriting. Paper beats\npaper."
+      SHRUG:
+        damage: 3-6
+        text:
+          - - "You accept their terms.\nFuture you can handle\nclause 9."
+    moves:
+      - text:
+          - - "Track changes has\ntracked a change to a\ncomma."
+          - - "Two versions are called\nFINAL. They differ."
+        damage: 4-8
+      - text:
+          - - "A new redline arrives.\nIt redlines the redline."
+          - - "Procurement adds a\nfield. The field is\nmandatory."
+        damage: 3-6
+      - text:
+          - - "The PDF is a scan of a\nprint of a PDF."
+        damage: 2-5
+
+  - id: 24
+    name: Pair Programming
+    sprite: enemy_pair_programming.png
+    energy: 34
+    intro:
+      - - "PAIR PROGRAMMING.\nOne keyboard. Two\nopinions. No plan."
+    look:
+      - - "Their editor has forty\nplugins. Yours has the\ndefault theme."
+      - - "The branch is called\ntemp2-final-fix-v3."
+    defeat:
+      - - "It works. Neither of\nyou is sure which of\nyou made it work."
+    reward:
+      brains: 2
+      text:
+        - - "You picked up three\nshortcuts and a habit.\n\n+2 Brains."
+    take_damage:
+      THINK:
+        damage: 7-11
+        text:
+          - - "You read the error\nmessage. Out loud.\nIt was the answer."
+      TALK:
+        damage: 13-19
+        text:
+          - - "You say what you're\nabout to type before\nyou type it. It clicks."
+      EMAIL:
+        damage: 1-4
+        text:
+          - - "You email them. They\nare sitting next to\nyou."
+      SHRUG:
+        damage: 5-9
+        text:
+          - - "You hand over the\nkeyboard and let it\nhappen."
+    moves:
+      - text:
+          - - "\"Can I drive?\" They are\nalready driving."
+          - - "They reformat the file.\nThe diff is now 400\nlines."
+        damage: 3-6
+      - text:
+          - - "A tab-vs-space incident.\nIt lasts nine minutes."
+          - - "\"That's not how I'd do\nit.\" It compiles either\nway."
+        damage: 4-7
+      - text:
+          - - "The shared session\ndrops. Twice."
+          - - "They take a call. The\ncursor sits blinking."
+        damage: 2-5
+
+  # --- The project manager (ids 30-33) ----------------------------------
+  # Fights where the enemy is holding something you want: a rating, a budget,
+  # a fortnight in July. Longer, and the rewards are permanent.
+  - id: 30
+    name: Appraisal
+    sprite: enemy_appraisal.png
+    energy: 45
+    can_flee: false
+    flee_blocked:
+      - - "You can't leave. It is\nabout you."
+      - - "The door is closed. It\nwas closed carefully."
+    intro:
+      - - "THE APPRAISAL begins.\nA form is open. Your\nname is on it."
+    look:
+      - - "Six competencies, rated\n1 to 5. Nobody has ever\nbeen given a 5."
+      - - "Last year's goals are\nhere. You recognise\nnone of them."
+    defeat:
+      - - "\"Meets expectations.\"\nYou have survived\nanother year."
+    reward:
+      max_energy: 5
+      text:
+        - - "You made your case and\nit landed.\n\n+5 Max Energy."
+    take_damage:
+      THINK:
+        damage: 8-12
+        text:
+          - - "You remember the thing\nin March that went\nwell. It counts."
+      TALK:
+        damage: 12-17
+        text:
+          - - "You say what you did,\nplainly, without\napologising for it."
+      EMAIL:
+        damage: 6-10
+        text:
+          - - "You produce the thread\nproving you flagged it\nin January."
+      SHRUG:
+        damage: 2-5
+        text:
+          - - "You say it was a team\neffort. It was. That\nhelps nobody here."
+    moves:
+      - text:
+          - - "\"Where do you see\nyourself in five\nyears?\""
+          - - "\"Let's talk about your\ndevelopment areas.\""
+        damage: 4-8
+      - text:
+          - - "\"Budget is tight this\nyear.\" It is tight\nevery year."
+          - - "A number appears. It is\nsmaller than the one\nyou said."
+        damage: 5-9
+      - text:
+          - - "\"How do you think it\nwent?\" You have to go\nfirst."
+        damage: 3-6
+
+  - id: 31
+    name: Funding Round
+    sprite: enemy_funding_round.png
+    energy: 50
+    intro:
+      - - "You ask for FUNDING\nfor a new project.\nThe room goes quiet."
+    look:
+      - - "The budget sheet has a\ntab called DO NOT EDIT.\nSomeone edited it."
+      - - "There is money. It is\nallocated to something\nnobody remembers."
+    defeat:
+      - - "It's approved. Not all\nof it. Enough of it."
+    reward:
+      brains: 2
+      text:
+        - - "You learned where the\nmoney actually lives.\n\n+2 Brains."
+    take_damage:
+      THINK:
+        damage: 12-18
+        text:
+          - - "You build the business\ncase on one slide.\nOne slide is enough."
+      TALK:
+        damage: 6-10
+        text:
+          - - "You name a competitor\nwho already did it.\nThe room shifts."
+      EMAIL:
+        damage: 8-12
+        text:
+          - - "You forward the angry\ncustomer email. It is\nurgent now."
+      SHRUG:
+        damage: 2-5
+        text:
+          - - "You say it would be\nnice to have. It is\nnow a nice-to-have."
+    moves:
+      - text:
+          - - "\"What's the ROI?\"\nYou do not have an ROI."
+          - - "\"Can we do it with\nexisting headcount?\""
+        damage: 4-8
+      - text:
+          - - "\"Let's revisit this\nnext quarter.\""
+          - - "It goes to the parking\nlot. The parking lot is\nwhere things die."
+        damage: 5-8
+      - text:
+          - - "Someone asks what it\ncosts to do nothing.\nNobody answers."
+        damage: 3-6
+
+  - id: 32
+    name: Business Meeting
+    sprite: enemy_business_meeting.png
+    energy: 42
+    intro:
+      - - "A BUSINESS MEETING.\nExternal guests. Good\nchairs. No agenda."
+    look:
+      - - "Everyone has a laptop.\nNobody is taking notes."
+      - - "There is a plate of\npastries. Nobody will\ngo first."
+    defeat:
+      - - "Hands are shaken. A\nfollow-up is promised.\nIt may even happen."
+    reward:
+      energy: 4
+      text:
+        - - "The pastries were, in\nthe end, yours.\n\n+4 Energy."
+    take_damage:
+      THINK:
+        damage: 5-9
+        text:
+          - - "You work out who in\nthe room decides. It\nis not who is talking."
+      TALK:
+        damage: 12-17
+        text:
+          - - "You ask what they\nactually need. Nobody\nhad asked them yet."
+      EMAIL:
+        damage: 7-11
+        text:
+          - - "You send the recap\nbefore they do. Yours\nis the version now."
+      SHRUG:
+        damage: 3-7
+        text:
+          - - "You let the silence\nrun. Someone else\nfills it."
+    moves:
+      - text:
+          - - "\"Just to give a bit of\nbackground -\" It is\nfifteen minutes."
+          - - "Someone introduces\nthemselves for the\nsecond time."
+        damage: 3-7
+      - text:
+          - - "A deck appears. Sixty\nslides. \"We'll go\nquickly.\""
+          - - "\"Let's take that\noffline.\" Nothing ever\ngoes offline."
+        damage: 4-7
+      - text:
+          - - "The room is booked\nuntil 10. It is 10."
+        damage: 2-5
+
+  - id: 33
+    name: Vacation Request
+    sprite: enemy_vacation_request.png
+    energy: 38
+    intro:
+      - - "You request VACATION.\nThe form is simple.\nThe conversation is not."
+    look:
+      - - "The team calendar shows\ntwo others away. One\nuntil October."
+      - - "Your balance says 26\ndays. It has said 26\ndays for two years."
+    defeat:
+      - - "Approved. Two weeks.\nThey are real and they\nare yours."
+    reward:
+      max_energy: 8
+      text:
+        - - "Something to aim at.\n\n+8 Max Energy."
+    take_damage:
+      THINK:
+        damage: 11-16
+        text:
+          - - "You pick the week when\nnothing ships. There\nis always one week."
+      TALK:
+        damage: 5-9
+        text:
+          - - "You say it out loud\nearly. Early is the\nwhole trick."
+      EMAIL:
+        damage: 9-13
+        text:
+          - - "You submit it in the\nsystem. The system does\nnot negotiate."
+      SHRUG:
+        damage: 2-5
+        text:
+          - - "You say you're flexible.\nYou are now flexible\nuntil November."
+    moves:
+      - text:
+          - - "\"Those are busy weeks\nfor us.\" Every week is."
+          - - "\"Can you be reachable?\""
+        damage: 4-7
+      - text:
+          - - "Someone booked the same\nweek. They booked it\nthis morning."
+          - - "\"Who's covering for\nyou?\" Nobody. Ever."
+        damage: 3-6
+      - text:
+          - - "The approval sits\nunread for nine days."
+        damage: 2-5
+
+  # --- The meeting room (ids 40-43) -------------------------------------
+  # Same four walls, four different ways to lose an hour.
+  - id: 40
+    name: Standup
+    sprite: enemy_standup.png
+    energy: 26
+    can_flee: false
+    flee_blocked:
+      - - "It's fifteen minutes.\nIt has been fifteen\nminutes for an hour."
+      - - "You are next. Everyone\nis waiting for you to\nbe next."
+    intro:
+      - - "THE STANDUP. Everyone\nis standing. Nobody\nremembers why."
+    look:
+      - - "Nine people. Fifteen\nminutes. The maths has\nnever worked."
+      - - "One person is on a\ncall from a car."
+    defeat:
+      - - "It ends at 09:23.\nNothing was decided.\nEverything was said."
+    reward:
+      energy: 3
+      text:
+        - - "At least you know what\neveryone is doing.\n\n+3 Energy."
+    take_damage:
+      THINK:
+        damage: 6-10
+        text:
+          - - "You decide what matters\nbefore your turn. It is\none thing."
+      TALK:
+        damage: 10-15
+        text:
+          - - "Three sentences. No\nblockers. You stop\ntalking first."
+      EMAIL:
+        damage: 3-6
+        text:
+          - - "You post your update in\nthe channel. Two people\nread it."
+      SHRUG:
+        damage: 4-8
+        text:
+          - - "\"Same as yesterday.\"\nIt is allowed. It is\nalso true."
+    moves:
+      - text:
+          - - "Someone gives a full\nsprint history."
+          - - "\"Quick one -\" It is\nnot a quick one."
+        damage: 3-5
+      - text:
+          - - "Two people start\nsolving it. Here. Now.\nIn front of everyone."
+          - - "\"Let's take that\noffline.\" They do not\ntake it offline."
+        damage: 4-6
+      - text:
+          - - "The laptop dies. The\nboard is on the laptop."
+          - - "Someone joins at 09:14."
+        damage: 1-4
+
+  - id: 41
+    name: Tech Talk
+    sprite: enemy_tech_talk.png
+    energy: 44
+    intro:
+      - - "You give a TECH TALK.\nTwenty people. One of\nthem wrote the thing."
+    look:
+      - - "The room seats twelve.\nThe invite went to\nforty."
+      - - "The front row is empty.\nIt is always empty."
+    defeat:
+      - - "Applause, the polite\nkind. Two people stay\nto ask more."
+    reward:
+      brains: 2
+      text:
+        - - "Explaining it taught\nyou it properly.\n\n+2 Brains."
+    take_damage:
+      THINK:
+        damage: 8-12
+        text:
+          - - "You cut the middle\nthird. Nobody misses\nit."
+      TALK:
+        damage: 13-18
+        text:
+          - - "You drop the slides and\njust explain it. The\nroom wakes up."
+      EMAIL:
+        damage: 2-5
+        text:
+          - - "You share the deck\nafterwards. It is not\nthe same thing."
+      SHRUG:
+        damage: 5-9
+        text:
+          - - "\"I don't know.\" The\nroom relaxes. So do\nyou."
+    moves:
+      - text:
+          - - "The HDMI does not.\nIt simply does not."
+          - - "Your laptop mirrors at\nthe wrong resolution."
+        damage: 4-8
+      - text:
+          - - "A question that is\nactually a statement."
+          - - "\"Have you considered\nRust?\" It is not about\nRust."
+        damage: 3-7
+      - text:
+          - - "Someone eats lunch\nloudly in row two."
+          - - "Half the room is\nreading email."
+        damage: 2-5
+
+  - id: 42
+    name: Finance Review
+    sprite: enemy_finance_review.png
+    energy: 55
+    intro:
+      - - "THE FINANCE REVIEW.\nA spreadsheet is on\nthe wall. It is large."
+    look:
+      - - "Column M is red. Nobody\nwill say the word\n\"overspend\"."
+      - - "The forecast was made\nin January. It is not\nJanuary."
+    defeat:
+      - - "The numbers hold. You\nkeep your budget. Most\nof it."
+    reward:
+      energy: 4
+      brains: 1
+      text:
+        - - "You can read the sheet\nnow.\n\n+4 Energy, +1 Brains."
+    take_damage:
+      THINK:
+        damage: 14-20
+        text:
+          - - "You find the line\ncounted twice. It was\nthere all along."
+      TALK:
+        damage: 5-9
+        text:
+          - - "You explain the\nvariance in one\nsentence. It lands."
+      EMAIL:
+        damage: 7-11
+        text:
+          - - "You attach the approval\nfrom March. Signed.\nDated."
+      SHRUG:
+        damage: 2-6
+        text:
+          - - "You let them reallocate\nit. It comes back in\nQ3. It usually does."
+    moves:
+      - text:
+          - - "\"Can you walk us\nthrough row 41?\""
+          - - "The total does not match\nthe total on the other\nslide."
+        damage: 5-9
+      - text:
+          - - "A cost centre you have\nnever heard of is\nyours."
+          - - "\"That's over budget.\"\nIt is over by 2%."
+        damage: 4-8
+      - text:
+          - - "Someone opens the file\nin a different currency."
+          - - "The projector cuts off\ncolumn P. Column P was\nthe point."
+        damage: 2-6
+
+  - id: 43
+    name: The Candidate
+    sprite: enemy_the_candidate.png
+    energy: 40
+    can_flee: false
+    flee_blocked:
+      - - "They are already in\nthe room. You cannot\nunstart this."
+      - - "HR is taking notes.\nOn both of you."
+    intro:
+      - - "A CANDIDATE INTERVIEW.\nThey are nervous. So,\nquietly, are you."
+    look:
+      - - "Their CV is two pages.\nOne of them is skills\nwith progress bars."
+      - - "You were given the CV\nfour minutes ago."
+    defeat:
+      - - "You write it up. Yes,\nwith reasons. It is a\ngood hire."
+    reward:
+      brains: 2
+      text:
+        - - "You know what you're\nhiring for now.\n\n+2 Brains."
+    take_damage:
+      THINK:
+        damage: 9-13
+        text:
+          - - "You decide what the\nrole needs before you\nask anything."
+      TALK:
+        damage: 12-18
+        text:
+          - - "You ask about a real\nproblem they solved.\nThey come alive."
+      EMAIL:
+        damage: 2-5
+        text:
+          - - "You send the feedback\nform. The form has\ntwelve fields."
+      SHRUG:
+        damage: 4-8
+        text:
+          - - "You let them ask the\nquestions for a while.\nYou learn more."
+    moves:
+      - text:
+          - - "\"What's your biggest\nweakness?\" You hear\nyourself ask it."
+          - - "They ask about culture.\nYou hear yourself say\n\"like a family\"."
+        damage: 4-7
+      - text:
+          - - "A whiteboard question\nyou could not do\nyourself."
+          - - "The room is booked over.\nSomeone opens the door."
+        damage: 3-6
+      - text:
+          - - "Silence. They wait. You\nwait. HR writes\nsomething down."
+        damage: 2-5
+
+  # --- Tech fixes (ids 50-53) -------------------------------------------
+  # Nothing is broken. Everything is broken. You are the one standing there.
+  - id: 50
+    name: The Beamer
+    sprite: enemy_the_beamer.png
+    energy: 30
+    intro:
+      - - "THE BEAMER will not\nfind the laptop. Nine\npeople are watching."
+    look:
+      - - "Three cables. Two\nadapters. One of them\nis somebody's."
+      - - "INPUT: HDMI 2. There\nis no HDMI 2."
+    defeat:
+      - - "The picture appears.\nThe room exhales. You\nhave done a magic."
+    reward:
+      energy: 4
+      text:
+        - - "Nine people are quietly\ngrateful.\n\n+4 Energy."
+    take_damage:
+      THINK:
+        damage: 12-17
+        text:
+          - - "You try the other\ninput. It was, of\ncourse, the other input."
+      TALK:
+        damage: 4-8
+        text:
+          - - "You ask for a USB-C\nadapter. Two arrive.\nNeither fits."
+      EMAIL:
+        damage: 2-5
+        text:
+          - - "You email IT. IT is on\nthis floor. So is the\nbeamer."
+      SHRUG:
+        damage: 7-11
+        text:
+          - - "You unplug it, count to\nfive, plug it back in.\nThe oldest magic."
+    moves:
+      - text:
+          - - "NO SIGNAL, it says,\nwith great confidence."
+          - - "The picture arrives.\nIt is blue."
+        damage: 3-6
+      - text:
+          - - "It mirrors your desktop.\nYour desktop has\nseventy icons."
+          - - "The resolution is wrong.\nEverything is slightly\noval."
+        damage: 4-7
+      - text:
+          - - "The remote has no\nbatteries."
+          - - "The bulb warning comes\non. It has been on for\ntwo years."
+        damage: 1-4
+
+  - id: 51
+    name: The VPN
+    sprite: enemy_the_vpn.png
+    energy: 34
+    intro:
+      - - "THE VPN will not\nconnect. Everything\nyou need is behind it."
+    look:
+      - - "Error 809. The internet\nhas twelve answers.\nNone are about 809."
+      - - "The client updated\nitself overnight.\nNobody asked it to."
+    defeat:
+      - - "Connected. The little\nicon turns green. You\ntouch nothing else."
+    reward:
+      brains: 1
+      text:
+        - - "You know which toggle\nit was.\n\n+1 Brains."
+    take_damage:
+      THINK:
+        damage: 13-18
+        text:
+          - - "You check the clock.\nThe clock was wrong.\nIt is always the clock."
+      TALK:
+        damage: 2-5
+        text:
+          - - "You ask the room.\nEveryone else is\nconnected. Thank you."
+      EMAIL:
+        damage: 8-12
+        text:
+          - - "You open a ticket with\nthe exact error code.\nRare enough to work."
+      SHRUG:
+        damage: 5-9
+        text:
+          - - "You turn it off and on\nagain. It is not\nnothing."
+    moves:
+      - text:
+          - - "AUTHENTICATION FAILED.\nThe password is right."
+          - - "It connects. It drops.\nIt connects."
+        damage: 4-7
+      - text:
+          - - "The token app wants a\nPIN you set in 2022."
+          - - "Certificate expired.\nIt expired at 09:00\nexactly."
+        damage: 3-6
+      - text:
+          - - "It is connected, but\nnothing resolves."
+          - - "IT asks whether you\nare on the VPN."
+        damage: 2-5
+
+  - id: 52
+    name: The WiFi
+    sprite: enemy_the_wifi.png
+    energy: 28
+    intro:
+      - - "THE WIFI drops. Then\nreturns. Then drops.\nYou are on a call."
+    look:
+      - - "Four bars. Four\nconfident, dishonest\nbars."
+      - - "GUEST, CORP, CORP-5G,\nCORP-OLD. Two of them\nwork. Not these two."
+    defeat:
+      - - "It holds. For now, it\nholds. You stop moving\nyour laptop."
+    reward:
+      energy: 3
+      text:
+        - - "You know which corner\nof the room works.\n\n+3 Energy."
+    take_damage:
+      THINK:
+        damage: 8-12
+        text:
+          - - "You work out it's the\nmicrowave. It is always\nthe microwave."
+      TALK:
+        damage: 4-8
+        text:
+          - - "You ask who else is\ndropping. Everyone is.\nIt was never you."
+      EMAIL:
+        damage: 3-6
+        text:
+          - - "You email IT. The email\ndoes not send. Of\ncourse it doesn't."
+      SHRUG:
+        damage: 12-17
+        text:
+          - - "You move one metre to\nthe left. Everything\nis fixed."
+    moves:
+      - text:
+          - - "\"You're breaking up.\"\nYou were mid-sentence."
+          - - "It reconnects to the\nguest network. Quietly."
+        damage: 3-6
+      - text:
+          - - "A captive portal opens.\nYou signed in an hour\nago."
+          - - "The call drops to audio.\nThen to nothing at all."
+        damage: 4-7
+      - text:
+          - - "Someone starts a\ndownload."
+          - - "Connected, no internet.\nIt is proud of the\ndistinction."
+        damage: 1-4
+
+  - id: 53
+    name: Update Required
+    sprite: enemy_update_required.png
+    energy: 32
+    intro:
+      - - "UPDATE REQUIRED. It\nwill take 40 minutes.\nIt begins in five."
+    look:
+      - - "Postpone: 1 hour. That\nbutton has been pressed\neleven times."
+      - - "Version 4.2.1. Nobody\nknows what changed in\n4.2.0 either."
+    defeat:
+      - - "It restarts. It comes\nback. Everything is\nwhere you left it."
+    reward:
+      energy: 2
+      brains: 1
+      text:
+        - - "You saved everything\nfirst. You learn.\n\n+2 Energy, +1 Brains."
+    take_damage:
+      THINK:
+        damage: 11-16
+        text:
+          - - "You save it all and let\nit run now, rather than\nat 16:55."
+      TALK:
+        damage: 3-6
+        text:
+          - - "You ask if anyone has\ndone it. Everyone has\npostponed it."
+      EMAIL:
+        damage: 4-8
+        text:
+          - - "You email IT to ask\nwhat's in it. Nobody\nknows what's in it."
+      SHRUG:
+        damage: 9-13
+        text:
+          - - "You go and get a\ncoffee. This is the\nintended solution."
+    moves:
+      - text:
+          - - "Restart now, or\nrestart now?"
+          - - "It restarts. It was not\ndone restarting."
+        damage: 3-6
+      - text:
+          - - "37% complete. It has\nsaid 37% for a while."
+          - - "DO NOT TURN OFF YOUR\nCOMPUTER, it shouts."
+        damage: 4-7
+      - text:
+          - - "Your settings are back\nto default."
+          - - "It offers you a tour of\nthe new features."
+        damage: 2-5

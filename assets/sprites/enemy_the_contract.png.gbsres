@@ -1,0 +1,207 @@
+{
+  "_resourceType": "sprite",
+  "id": "1ada21d9-deda-51e1-91ff-3872b4edc4a6",
+  "name": "enemy_the_contract",
+  "symbol": "sprite_enemy_the_contract",
+  "states": [
+    {
+      "id": "add54faf-d27c-5053-9611-53d12ec8fa66",
+      "name": "",
+      "animationType": "fixed",
+      "flipLeft": false,
+      "animations": [
+        {
+          "id": "f9787d63-410a-5a38-b5b2-9d9f8bd32e91",
+          "frames": [
+            {
+              "id": "5093f22d-c5df-5899-af32-ac4e72f94f12",
+              "tiles": [
+                {
+                  "id": "89afa92b-81db-58ff-b531-a4159b60f257",
+                  "x": -8,
+                  "y": 16,
+                  "sliceX": 0,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "6392f95f-d73c-5662-9110-f75c9376ba18",
+                  "x": -8,
+                  "y": 0,
+                  "sliceX": 0,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "da80d95c-f1c5-5d1f-ae68-154966e24bc7",
+                  "x": 0,
+                  "y": 16,
+                  "sliceX": 8,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "abdfb16d-e5dd-55dd-9037-d86c79055726",
+                  "x": 0,
+                  "y": 0,
+                  "sliceX": 8,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "213d8faf-3128-5cee-b8df-13e1e3ce9a2b",
+                  "x": 8,
+                  "y": 16,
+                  "sliceX": 16,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "d91e1312-203a-565c-a7be-3ab4a40b51e4",
+                  "x": 8,
+                  "y": 0,
+                  "sliceX": 16,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "69d924f1-c6b1-54a5-a33f-673eb711c57f",
+                  "x": 16,
+                  "y": 16,
+                  "sliceX": 24,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "b770f9c5-c44c-561d-b613-90ee0f3afde4",
+                  "x": 16,
+                  "y": 0,
+                  "sliceX": 24,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "8dc37f74-13ee-5093-a10b-4a21aeb93c8f",
+          "frames": [
+            {
+              "id": "db8caa26-c5d8-57c6-aae0-627f62e4adc3",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "3b92d74d-d0ca-5249-ac8c-a489c43ec5b7",
+          "frames": [
+            {
+              "id": "0f8a0847-7d61-54b4-beec-68e0d4a3a7dd",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "92384271-ea4d-56f5-9019-49c4ae148fa2",
+          "frames": [
+            {
+              "id": "5c483e22-028a-5114-b0e0-c187d22d6965",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "2f92ae06-765a-5197-8fba-d9a68b9ad22f",
+          "frames": [
+            {
+              "id": "a9418e15-dd1b-5cc4-9000-4dc57f12d437",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "a409b42b-d792-52c3-b818-ab6677d49d22",
+          "frames": [
+            {
+              "id": "f62ab786-18f5-50a9-9822-8d71c95c51b9",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "01f255dd-bf8a-588e-b54e-34c751215424",
+          "frames": [
+            {
+              "id": "53bd5dc4-9afb-5d79-8bb5-4f9cb9031e39",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "d156646c-1d24-5153-8f61-2944984a39ab",
+          "frames": [
+            {
+              "id": "46790dd4-c906-58ac-bf0a-ec093c63cdb1",
+              "tiles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "canvasOriginX": 0,
+  "canvasOriginY": 0,
+  "boundsX": 0,
+  "boundsY": -8,
+  "boundsWidth": 16,
+  "boundsHeight": 16,
+  "animSpeed": 255,
+  "checksum": "",
+  "numTiles": 8,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
+  "filename": "enemy_the_contract.png",
+  "width": 32,
+  "height": 32
+}
