@@ -83,6 +83,8 @@ main {
 
 .controls {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -96,6 +98,7 @@ main {
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   border: 2px solid transparent;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .picker:hover {

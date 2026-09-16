@@ -1,6 +1,9 @@
 <script lang="ts">
   import { GameKoi } from 'game-koi'
 
+  // BASE_URL, not "/": on GitHub Pages the site lives under /DeskBound/.
+  const romUrl = `${import.meta.env.BASE_URL}DeskBound.gb`
+
   let canvas: HTMLCanvasElement
   let koi: GameKoi | null = null
   let romName = $state<string | null>(null)
@@ -28,8 +31,7 @@
   async function loadDeskBound() {
     error = null
     try {
-      // BASE_URL, not "/": on GitHub Pages the site lives under /DeskBound/.
-      const res = await fetch(`${import.meta.env.BASE_URL}DeskBound.gb`)
+      const res = await fetch(romUrl)
       if (!res.ok) {
         throw new Error("DeskBound.gb not found — run `just rom` to build it first")
       }
@@ -79,6 +81,7 @@
       Load ROM
       <input type="file" accept=".gb" onchange={onFileInput} />
     </label>
+    <a class="picker" href={romUrl} download="DeskBound.gb">Download .gb</a>
   </div>
 
   {#if romName}
