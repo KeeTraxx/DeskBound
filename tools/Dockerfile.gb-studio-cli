@@ -1,0 +1,33 @@
+# Builds gb-studio-cli from source, the same way .github/workflows/build-rom.yml
+# does in CI. Bakes the compiler into the image so `docker build` only needs to
+# rerun when GB_STUDIO_VERSION changes; ROM compiles happen via `docker run`
+# against a mounted project directory (see tools/build-rom.sh).
+FROM node:24-bookworm
+
+ARG GB_STUDIO_VERSION=4.3.2
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      git ca-certificates curl unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /gb-studio
+RUN git clone --branch "v${GB_STUDIO_VERSION}" --depth 1 --recurse-submodules \
+      https://github.com/chrismaltby/gb-studio .
+
+RUN corepack enable \
+    && COREPACK_ENABLE_DOWNLOAD_PROMPT=0 yarn install --immutable
+
+# GBDK comes from the official .deb release, not `yarn fetch-deps` — that script
+# downloads the rolling `gbdk-next` build, which no longer links against the
+# bundled engine and dies at the link step with `?ASlink-Warning-Undefined
+# Global '.IF'`. The release ships the matching GBDK inside its app bundle.
+RUN curl -fsSL -o /tmp/gb-studio.deb \
+      "https://github.com/chrismaltby/gb-studio/releases/download/v${GB_STUDIO_VERSION}/gb-studio-linux-debian.deb" \
+    && dpkg-deb -x /tmp/gb-studio.deb /tmp/deb \
+    && npx --yes @electron/asar extract /tmp/deb/usr/lib/gb-studio/resources/app.asar /tmp/app \
+    && cp -a /tmp/app/buildTools/linux-x64 buildTools/ \
+    && rm -rf /tmp/gb-studio.deb /tmp/deb /tmp/app
+
+RUN PATH="/gb-studio/node_modules/.bin:$PATH" NO_TYPE_CHECKING=1 yarn make:cli
+
+ENTRYPOINT ["node", "/gb-studio/out/cli/gb-studio-cli.js"]
