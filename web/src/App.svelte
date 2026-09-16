@@ -87,4 +87,29 @@
   {#if error}
     <p class="error">{error}</p>
   {/if}
+
+  <section class="help">
+    <h2>Controls</h2>
+    <dl>
+      <dt>D-pad</dt>
+      <dd><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></dd>
+
+      <dt>A / B</dt>
+      <dd><kbd>Z</kbd> <kbd>X</kbd></dd>
+
+      <dt>Start / Select</dt>
+      <dd><kbd>Enter</kbd> <kbd>Right Shift</kbd></dd>
+
+      <dt>Stats overlay</dt>
+      <dd><kbd>~</kbd></dd>
+    </dl>
+    <p class="note">
+      Keys are bound by position, not by label — on a non-QWERTY layout, A and B are
+      wherever <kbd>Z</kbd> and <kbd>X</kbd> sit on a US keyboard.
+    </p>
+    <p class="note">
+      A standard gamepad works too: d-pad or left stick to move, the bottom and
+      right face buttons for B and A, Start and Back for Start and Select.
+    </p>
+  </section>
 </main>

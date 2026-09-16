@@ -117,3 +117,63 @@ main {
   font-size: 14px;
   color: #e5484d;
 }
+
+.help {
+  width: 100%;
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+}
+
+.help h2 {
+  margin: 0 0 12px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-h);
+}
+
+.help dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  margin: 0;
+  align-items: baseline;
+}
+
+.help dt {
+  color: var(--text-h);
+}
+
+.help dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+kbd {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1;
+  padding: 5px 7px;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  white-space: nowrap;
+}
+
+.help .note {
+  margin: 16px 0 0;
+  font-size: 14px;
+  line-height: 155%;
+}
+
+.help .note kbd {
+  font-size: 12px;
+  padding: 3px 5px;
+}
