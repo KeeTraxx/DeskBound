@@ -2,7 +2,7 @@
   "_resourceType": "sprite",
   "id": "638e519d-448a-5e5f-8467-f845bb43927a",
   "name": "enemy_pair_programming",
-  "symbol": "sprite_enemy_pair_programming",
+  "symbol": "sprite_enemy_pair_programmi",
   "states": [
     {
       "id": "2e615234-4e23-5d40-9b49-87be55a695c0",
@@ -190,17 +190,17 @@
       ]
     }
   ],
+  "numTiles": 8,
   "canvasOriginX": 0,
   "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
   "boundsX": 0,
   "boundsY": -8,
   "boundsWidth": 16,
   "boundsHeight": 16,
   "animSpeed": 255,
   "checksum": "",
-  "numTiles": 8,
-  "canvasWidth": 32,
-  "canvasHeight": 32,
   "filename": "enemy_pair_programming.png",
   "width": 32,
   "height": 32

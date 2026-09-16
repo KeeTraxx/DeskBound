@@ -2,7 +2,7 @@
   "_resourceType": "sprite",
   "id": "bc366e36-ae70-564c-871d-caccb5a85f05",
   "name": "enemy_backlog_grooming",
-  "symbol": "sprite_enemy_backlog_grooming",
+  "symbol": "sprite_enemy_backlog_groomi",
   "states": [
     {
       "id": "57799036-02b1-5798-aa70-d9bc1b12f42b",
@@ -190,17 +190,17 @@
       ]
     }
   ],
+  "numTiles": 8,
   "canvasOriginX": 0,
   "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
   "boundsX": 0,
   "boundsY": -8,
   "boundsWidth": 16,
   "boundsHeight": 16,
   "animSpeed": 255,
   "checksum": "",
-  "numTiles": 8,
-  "canvasWidth": 32,
-  "canvasHeight": 32,
   "filename": "enemy_backlog_grooming.png",
   "width": 32,
   "height": 32

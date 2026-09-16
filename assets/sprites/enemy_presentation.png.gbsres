@@ -190,17 +190,17 @@
       ]
     }
   ],
+  "numTiles": 8,
   "canvasOriginX": 0,
   "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
   "boundsX": 0,
   "boundsY": -8,
   "boundsWidth": 16,
   "boundsHeight": 16,
   "animSpeed": 255,
   "checksum": "",
-  "numTiles": 8,
-  "canvasWidth": 32,
-  "canvasHeight": 32,
   "filename": "enemy_presentation.png",
   "width": 32,
   "height": 32

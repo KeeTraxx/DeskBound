@@ -2,7 +2,7 @@
   "_resourceType": "sprite",
   "id": "6cb69e6e-ef23-5c84-a74c-2f43538fc3e7",
   "name": "enemy_update_required",
-  "symbol": "sprite_enemy_update_required",
+  "symbol": "sprite_enemy_update_require",
   "states": [
     {
       "id": "0074cc63-1097-53dd-b0cb-013b3fa7bfb7",
@@ -190,17 +190,17 @@
       ]
     }
   ],
+  "numTiles": 8,
   "canvasOriginX": 0,
   "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
   "boundsX": 0,
   "boundsY": -8,
   "boundsWidth": 16,
   "boundsHeight": 16,
   "animSpeed": 255,
   "checksum": "",
-  "numTiles": 8,
-  "canvasWidth": 32,
-  "canvasHeight": 32,
   "filename": "enemy_update_required.png",
   "width": 32,
   "height": 32

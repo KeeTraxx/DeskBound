@@ -2,7 +2,7 @@
   "_resourceType": "sprite",
   "id": "0f827366-4cdc-5d42-acd1-ef73fa8e89c6",
   "name": "enemy_business_meeting",
-  "symbol": "sprite_enemy_business_meeting",
+  "symbol": "sprite_enemy_business_meeti",
   "states": [
     {
       "id": "43376348-b14b-58dd-b975-8b4c1f12fc77",
@@ -190,17 +190,17 @@
       ]
     }
   ],
+  "numTiles": 8,
   "canvasOriginX": 0,
   "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
   "boundsX": 0,
   "boundsY": -8,
   "boundsWidth": 16,
   "boundsHeight": 16,
   "animSpeed": 255,
   "checksum": "",
-  "numTiles": 8,
-  "canvasWidth": 32,
-  "canvasHeight": 32,
   "filename": "enemy_business_meeting.png",
   "width": 32,
   "height": 32

@@ -2,7 +2,7 @@
   "_resourceType": "sprite",
   "id": "e03bf82e-d909-5264-a028-2b1509fa77f9",
   "name": "enemy_vacation_request",
-  "symbol": "sprite_enemy_vacation_request",
+  "symbol": "sprite_enemy_vacation_reque",
   "states": [
     {
       "id": "e0c3f81e-0608-5c36-8d73-28f4430b3de6",
@@ -190,17 +190,17 @@
       ]
     }
   ],
+  "numTiles": 8,
   "canvasOriginX": 0,
   "canvasOriginY": 0,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
   "boundsX": 0,
   "boundsY": -8,
   "boundsWidth": 16,
   "boundsHeight": 16,
   "animSpeed": 255,
   "checksum": "",
-  "numTiles": 8,
-  "canvasWidth": 32,
-  "canvasHeight": 32,
   "filename": "enemy_vacation_request.png",
   "width": 32,
   "height": 32

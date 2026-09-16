@@ -112,7 +112,7 @@
                 "type": "number",
                 "value": 4
               },
-              "__collapse": true
+              "__collapse": false
             },
             "children": {
               "true0": [
