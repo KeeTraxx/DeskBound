@@ -1,0 +1,88 @@
+name: Publish web player
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Only one deployment at a time, and never cancel one halfway: a cancelled
+# deploy-pages leaves the site on the previous build, but queueing is cheaper
+# than racing two uploads.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # web/public/DeskBound.gb is gitignored — it is a build output, not source —
+  # so the site can't be built without compiling the ROM first.
+  rom:
+    uses: ./.github/workflows/build-rom.yml
+    permissions:
+      # build-rom.yml declares `contents: write` for its tag-only release
+      # upload, and a called workflow can only narrow the caller's permissions,
+      # never widen them. That step never runs from here (this workflow only
+      # triggers on a branch), but the grant has to be here for the call to be
+      # accepted at all.
+      contents: write
+
+  deploy:
+    needs: rom
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # The ROM artifact is named DeskBound-<short sha>.gb; App.svelte fetches a
+      # fixed DeskBound.gb, so flatten it to that name.
+      - name: Fetch the ROM built by the rom job
+        uses: actions/download-artifact@v4
+        with:
+          name: DeskBound-rom
+          path: rom
+
+      - name: Put the ROM where Vite will serve it
+        run: |
+          set -euo pipefail
+          mkdir -p web/public
+          cp rom/*.gb web/public/DeskBound.gb
+          ls -l web/public/DeskBound.gb
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install web dependencies
+        working-directory: web
+        run: npm ci
+
+      # Resolves the site's base path — /DeskBound for a project page, / once a
+      # custom domain is configured — so the build doesn't have to hardcode it.
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build the web player
+        working-directory: web
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: npm run build
+
+      - name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

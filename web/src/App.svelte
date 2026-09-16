@@ -28,7 +28,8 @@
   async function loadDeskBound() {
     error = null
     try {
-      const res = await fetch('/DeskBound.gb')
+      // BASE_URL, not "/": on GitHub Pages the site lives under /DeskBound/.
+      const res = await fetch(`${import.meta.env.BASE_URL}DeskBound.gb`)
       if (!res.ok) {
         throw new Error("DeskBound.gb not found — run `just rom` to build it first")
       }

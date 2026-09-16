@@ -315,8 +315,11 @@ Prebuilt `.gb` ROMs are attached to each
 ## CI builds
 
 [`.github/workflows/build-rom.yml`](.github/workflows/build-rom.yml) compiles a
-ROM on every push and pull request, uploads it as a build artifact, and — on a
-`v*` tag — attaches `DeskBound-<tag>.gb` to the matching GitHub release.
+ROM on every pull request, uploads it as a build artifact, and — on a `v*` tag
+— attaches `DeskBound-<tag>.gb` to the matching GitHub release. It is also a
+reusable workflow, and pushes to `main` reach it that way, through the Pages
+workflow below (see [Web player](#web-player)) rather than directly — otherwise
+every push to `main` would compile the same ROM twice.
 
 No Linux distribution of GB Studio ships `gb-studio-cli` (the flatpak, the
 AppImage and the `.deb` are all just the Electron app), so the workflow builds
@@ -339,6 +342,29 @@ and worth keeping:
 The CLI has to run from the full GB Studio source tree — it loads event
 definitions from `src/lib/events` at runtime rather than from its webpack
 bundle, which is exactly how that silent-skip failure happens.
+
+## Web player
+
+`web/` is a Svelte + Vite page that runs the ROM in the browser through
+[`game-koi`](https://www.npmjs.com/package/game-koi). Locally, `just` builds the
+ROM and starts the dev server; `tools/build-rom.sh` drops the result at
+`web/public/DeskBound.gb`, which is a build output and stays gitignored.
+
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml) publishes that page
+to GitHub Pages on every push to `main`. Because the ROM isn't in the
+repository, the workflow first calls `build-rom.yml`, then copies the resulting
+artifact to `web/public/DeskBound.gb` before `npm run build`.
+
+The site is served from `https://keetraxx.github.io/DeskBound/`, not from a
+domain root, so the build has to know its prefix: `actions/configure-pages`
+resolves it and the workflow passes it to Vite as `BASE_PATH` (see
+`web/vite.config.ts`). Anything fetched at runtime has to go through
+`import.meta.env.BASE_URL` for the same reason — `fetch('/DeskBound.gb')` would
+404 on Pages while working fine in `vite dev`.
+
+**This needs Pages switched on once, by hand:** Settings → Pages → Source →
+*GitHub Actions*. Until then `deploy-pages` fails with a "Pages site not found"
+error.
 
 ## Verification
 

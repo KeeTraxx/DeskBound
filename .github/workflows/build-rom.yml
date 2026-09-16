@@ -1,11 +1,14 @@
 name: Build ROM
 
 on:
+  # No `branches: [main]` here: pages.yml calls this workflow on every push to
+  # main (the web player needs the ROM), so triggering directly as well would
+  # build the same ROM twice per push.
   push:
-    branches: [main]
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
+  workflow_call:
 
 concurrency:
   group: build-rom-${{ github.ref }}
