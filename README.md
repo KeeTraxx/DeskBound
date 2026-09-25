@@ -27,7 +27,8 @@ and unreadable as JSON, so enemies live in [`enemies.yaml`](enemies.yaml) and
 compile into a GB Studio custom script named **BattleScript**:
 
 ```sh
-python3 tools/gen_enemies.py            # --dry-run to validate without writing
+uv sync                                 # once, creates .venv/ with pyyaml + pillow
+uv run tools/gen_enemies.py             # --dry-run to validate without writing
 ```
 
 That writes two scripts and nothing else — no scene, no actors:

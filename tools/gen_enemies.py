@@ -52,7 +52,7 @@ import uuid
 try:
     import yaml
 except ImportError:  # pragma: no cover - environment problem, not logic
-    sys.exit("PyYAML is required: pip install pyyaml")
+    sys.exit("PyYAML is required: uv sync (or pip install pyyaml)")
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
@@ -123,6 +123,8 @@ DEFAULT_FLEE = {
 }
 
 MAX_VAR_VALUE = 32767  # GB Studio 4 globals are 16-bit
+
+MAX_TEXT_LINES = 3  # lines per Display Text box before dialogue() pages it
 
 # animSpeed is the engine's anim_tick. 255 is the editor's "None" — the only
 # way to stop a sprite cycling its frames, since the `animate` flag is not
@@ -226,9 +228,10 @@ def _text(line):
 def make_say(roll_var):
     """Build the dialogue emitter, rolling variants on `roll_var`.
 
-    A text field is a list of *variants*, each a list of steps. One variant is
-    picked at random at runtime; its steps then play in order, one Display Text
-    each. A single variant needs no roll at all.
+    A text field is a list of *variants*, each a list of pages (see
+    `dialogue`). One variant is picked at random at runtime; its pages then
+    play in order, one Display Text each. A single variant needs no roll at
+    all.
     """
 
     def say(variants):
@@ -394,8 +397,6 @@ class Substituter:
         self.tokens["turn"] = var_ref(variables["battle_turn_count"])
 
     def __call__(self, body):
-        if isinstance(body, list):
-            return [self(line) for line in body]
         if not isinstance(body, str):
             fail(f"expected text, got {body!r}")
         return re.sub(r"\{(\w+)\}",
@@ -403,33 +404,35 @@ class Substituter:
 
 
 def as_variants(value, where):
-    """Normalise a text field to [[step, ...], ...] — variants of steps.
+    """Normalise a text field to a flat list of variant strings.
 
-    Canonical form is a list of lists: one variant is picked at random, then
-    its steps play in order. A flat list of strings is one variant with those
-    steps, and a bare string is one variant with one step.
+    Canonical form is a bare string (one variant) or a list of strings (one
+    per variant); one variant is picked at random at runtime.
     """
     if isinstance(value, str):
-        return [[value]]
-    if not isinstance(value, list) or not value:
-        fail(f"{where}: expected a non-empty list of dialogue variants")
-    if all(isinstance(v, str) for v in value):
-        return [list(value)]
-    if not all(isinstance(v, list) for v in value):
-        fail(f"{where}: mixes strings and lists — write every variant as its "
-             "own list of steps")
-    variants = []
-    for i, variant in enumerate(value):
-        if not variant or not all(isinstance(s, str) for s in variant):
-            fail(f"{where}[{i}]: a variant must be a non-empty list of strings")
-        variants.append(list(variant))
-    return variants
+        return [value]
+    if isinstance(value, list) and value and all(
+            isinstance(v, str) for v in value):
+        return list(value)
+    fail(f"{where}: expected a string or a non-empty list of variant strings")
+
+
+def paginate(text):
+    """Split one variant's prose into Display Text pages.
+
+    Authors write a variant as flowing "\\n"-separated lines; a box only
+    comfortably fits MAX_TEXT_LINES of them, so every run of that many lines
+    becomes its own Display Text box instead of enemies.yaml hand-nesting a
+    second array to mark the page break.
+    """
+    lines = text.split("\n")
+    return ["\n".join(lines[i:i + MAX_TEXT_LINES])
+            for i in range(0, len(lines), MAX_TEXT_LINES)]
 
 
 def dialogue(value, where, subst):
-    """Validate a text field's shape, then interpolate its placeholders."""
-    return [[subst(step) for step in variant]
-            for variant in as_variants(value, where)]
+    """Validate a text field's shape, interpolate placeholders, then paginate."""
+    return [paginate(subst(variant)) for variant in as_variants(value, where)]
 
 
 def parse_range(value, where):
@@ -639,10 +642,9 @@ class Config:
         for key in ("success", "failed", "blocked"):
             self.flee[key] = dialogue(self.flee[key], f"flee.{key}", subst)
 
-        self.lose = dialogue(raw.get("lose") or [
-            "You have run out of\nEnergy.",
-            "You quietly gather\nyour things.",
-        ], "lose", subst)
+        self.lose = dialogue(raw.get("lose") or
+            "You have run out of\nEnergy.\nYou quietly gather\nyour things.",
+            "lose", subst)
 
         for e in self.enemies:
             for stat in (e.reward or {}):
@@ -1152,7 +1154,7 @@ def draw_bar_art(bars, dry_run):
     try:
         from PIL import Image
     except ImportError:
-        fail("--draw-bar-art needs Pillow: pip install pillow")
+        fail("--draw-bar-art needs Pillow: uv sync (or pip install pillow)")
 
     if not isinstance(bars, dict):
         fail("--draw-bar-art needs a 'bars:' section in enemies.yaml")

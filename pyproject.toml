@@ -1,0 +1,12 @@
+[project]
+name = "deskbound-tools"
+version = "0.1.0"
+description = "Content-generation scripts for the DeskBound GB Studio project (see tools/)"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+    "pillow>=10.0",
+]
+
+[tool.uv]
+package = false

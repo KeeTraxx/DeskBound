@@ -47,12 +47,12 @@ import uuid
 try:
     import yaml
 except ImportError:  # pragma: no cover - environment problem, not logic
-    sys.exit("PyYAML is required: pip install pyyaml")
+    sys.exit("PyYAML is required: uv sync (or pip install pyyaml)")
 
 try:
     from PIL import Image
 except ImportError:  # pragma: no cover - environment problem, not logic
-    sys.exit("Pillow is required: pip install pillow")
+    sys.exit("Pillow is required: uv sync (or pip install pillow)")
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 YAML_PATH = os.path.join(ROOT, "enemies.yaml")

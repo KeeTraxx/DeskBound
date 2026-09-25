@@ -10,3 +10,4 @@ user_settings.gbsres
 # Python tooling
 __pycache__/
 *.pyc
+.venv/
