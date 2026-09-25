@@ -507,6 +507,26 @@ def text_width(s):
     return sum(widths.get(ch, FONT_CELL) for ch in s)
 
 
+# The ACT verb submenu (build_battle_script's `act`) uses GB Studio's
+# "dialogue" EVENT_MENU layout, which renders a 4-item menu as a 2x2 grid
+# inside the text box: each column gets half of TEXT_BOX_WIDTH_PX, minus one
+# tile reserved for the selection cursor.
+ACT_MENU_COLUMN_PX = TEXT_BOX_WIDTH_PX // 2 - FONT_CELL
+
+
+def check_menu_width(labels, where):
+    """Fail loudly if an ACT verb label would clip its submenu column.
+
+    Unlike dialogue text, a menu label can't be auto-wrapped or repaginated —
+    an overflow here means it silently clips against the next column instead.
+    """
+    for label in labels:
+        w = text_width(label)
+        if w > ACT_MENU_COLUMN_PX:
+            fail(f"{where}: '{label}' is {w}px, wider than the "
+                 f"{ACT_MENU_COLUMN_PX}px ACT submenu column — shorten it")
+
+
 _wrap_stats = {"checked": 0, "wrapped": 0}
 
 
@@ -718,6 +738,8 @@ class Config:
         if len(self.actions) > 8:
             fail("enemies.yaml: GB Studio menus hold at most 8 options, "
                  f"got {len(self.actions)} actions")
+        if len(self.actions) == 4:
+            check_menu_width(self.actions, "actions")
 
         self.enemies = [Enemy(e, i, self.actions, sprites, subst)
                         for i, e in enumerate(enemies_raw)]

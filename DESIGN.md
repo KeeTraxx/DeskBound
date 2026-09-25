@@ -85,15 +85,15 @@ Strictly alternating, player-first. No speed stat — it adds a turn-order branc
 without adding much fun.
 
 ```
-┌─ PLAYER TURN ──────────────────────────────────┐
-│ Top menu: ACT / LOOK / FLEE                    │
-│   ACT  → submenu: THINK / TALK / EMAIL / SHRUG │
-│          → resolve per-enemy effect            │
-│   LOOK → flavour text only, no effect,         │
-│          does NOT consume the turn             │
-│   FLEE → attempt to escape (may fail)          │
-│ Apply damage → check enemy Energy ≤ 0          │
-└──────────────────┬─────────────────────────────┘
+┌─ PLAYER TURN ─────────────────────────────────────┐
+│ Top menu: ACT / LOOK / FLEE                       │
+│   ACT  → submenu: THINK / TALK / EMAIL / INTERACT │
+│          → resolve per-enemy effect               │
+│   LOOK → flavour text only, no effect,            │
+│          does NOT consume the turn                │
+│   FLEE → attempt to escape (may fail)             │
+│ Apply damage → check enemy Energy ≤ 0             │
+└──────────────────┬────────────────────────────────┘
                    ↓ enemy still standing
 ┌─ ENEMY TURN ───────────────────────────────────┐
 │ Pick move via weighted rnd()                   │
@@ -132,7 +132,7 @@ Each verb is an *approach*, not an attack. None is universally good.
 | **THINK** | Work out what is actually wrong. Diagnose it. |
 | **TALK** | Negotiate with it. Address the thing as a person. |
 | **EMAIL** | Escalate in writing. Paper trail. |
-| **SHRUG** | Disengage. Accept the absurdity. |
+| **INTERACT** | Get hands-on. Touch it, move it, press the button. |
 
 ### 3.5 Per-Enemy Effects — the core mechanic
 
@@ -151,9 +151,9 @@ move does something other than damage.
 | **THINK** | **12** | You work out that nobody has descaled it since 2019. It shudders, seen at last. *Strong.* |
 | TALK | 4 | "You talk to the coffee machine. It gurgles noncommittally." |
 | EMAIL | 2 | "You email Facilities. The ticket is auto-closed as duplicate." *Weak.* |
-| **SHRUG** | **10** | You drink it black and bitter, like it wants. It respects this. *Strong.* |
+| **INTERACT** | **10** | You pop the side panel and poke around inside. Something was not meant to be there. *Strong.* |
 
-**Lesson taught:** understanding it and accepting it both work. Escalation doesn't.
+**Lesson taught:** understanding it and getting hands-on both work. Escalation doesn't.
 
 #### The Printer · Energy 65 · Brains 9 · Patience 8
 *It has never worked. It will never work. It is not sorry.*
@@ -163,7 +163,7 @@ move does something other than damage.
 | THINK | 3 | You deduce, correctly, that the jam is in tray 2. There is no jam in tray 2. There has never been a jam in tray 2. *Weak.* |
 | TALK | 0 | You say "please." The printer emits one sheet of a document from 2017. *No damage.* |
 | **EMAIL** | **16** | You CC the office manager. Bureaucracy is the only language it fears. *Strong.* |
-| SHRUG | 6 | You walk away. It beeps, wounded by the indifference. |
+| INTERACT | 6 | You open every tray at once. Something falls out that is not paper. |
 
 **Lesson taught:** the verb that won last fight is now the worst one. THINK fails
 here precisely because it succeeded against the coffee machine.
@@ -176,10 +176,11 @@ here precisely because it succeeded against the coffee machine.
 | THINK | 5 | You work out what this meeting is for. It is for nothing. Knowing this does not help. *Weak.* |
 | **TALK** | **14** | You say the quiet part: "Could this have been an email?" *Strong.* |
 | EMAIL | 8 | You send the follow-up email *during* the meeting. Deeply illegal. Effective. |
-| **SHRUG** | **2** | You stop resisting. **Restores 12 Energy** and still chips. Survival, mostly. |
+| INTERACT | 6 | You share your screen without being asked. Nobody objects fast enough. |
 
 **Lesson taught:** the boss can't be reasoned out or escalated away — it must be named
-aloud, and SHRUG flips from attack to heal, so the fight has a sustain option.
+aloud. INTERACT (butting in without asking) gets some purchase, but TALK's
+directness is what actually lands.
 
 ### 3.6 Enemy Moves — all with flavour text
 
@@ -308,7 +309,7 @@ The one genuinely fiddly bit. GB Studio has no arrays, so the
 
 ```
 LookupPower(enemy_id, act_choice) → battle_power
-  if enemy_id == 1:  if act == THINK → 12, TALK → 4, EMAIL → 2, SHRUG → 10
+  if enemy_id == 1:  if act == THINK → 12, TALK → 4, EMAIL → 2, INTERACT → 10
   if enemy_id == 2:  ...
 ```
 
@@ -415,8 +416,8 @@ interesting one. Dropping MP also means no consumable to balance and no
 resource-starvation failure state.
 
 **No items.** *(Your call.)* Items in a 20-minute game are mostly inventory UI
-for a healing button. SHRUG-as-heal against the boss covers the sustain need
-without an inventory screen.
+for a healing button. The damage floor and generous starting Energy (see
+§9.1) already guarantee every fight is winnable without one.
 
 **Per-enemy verb effects instead of a type chart.** A type chart needs ≥6
 enemies before players can feel it. Three hand-written enemies × four verbs =
@@ -445,7 +446,10 @@ in a GB Studio project of this shape.
 - **Script complexity.** The §5.3 lookup is the main sprawl risk. Mitigation:
   custom events, aggressively.
 - **Menu text width.** The old 6-character menu limit was lifted, but screen
-  width still binds. `THINK/TALK/EMAIL/SHRUG` are all ≤5 chars — comfortably safe.
+  width still binds: the ACT submenu renders as a 2x2 grid inside the text
+  box, giving each verb a real 64px column. `gen_enemies.py`'s
+  `check_menu_width` measures every verb against the actual font and fails
+  the build if one doesn't fit — `INTERACT` is the tightest so far at 61px.
 - **Sprite height vs. tile geometry.** Sprites are 8x16, so the player occupies
   two vertical tiles and can never stand on the bottom row of a scene. Exit
   triggers must sit at `height - 2` or above, and arrival points must not
@@ -481,9 +485,6 @@ punished. Concretely:
   unwinnable fight — see the simulation results below.
 - **Enemy damage is scaled to 7/10**, so fights run long enough to show the
   jokes rather than ending in three turns.
-- **The boss's SHRUG heals 12 *and* chips for 2.** The chip is essential: with
-  a pure heal, SHRUG-spam is an infinite stalemate (simulated: 800/800 games
-  never terminated).
 
 The design target: a player choosing at random should still win every fight.
 A player who *reads the enemy* wins roughly twice as fast. Skill changes pace,
@@ -495,11 +496,11 @@ The damage ranges in `enemies.yaml` were tuned by interpreting the *generated*
 `BattleScript` event tree directly (2000 games per cell), so the numbers below
 are the shipped script's behaviour, not a re-implementation of it:
 
-| Enemy | random | always THINK | always TALK | always EMAIL | always SHRUG |
+| Enemy | random | always THINK | always TALK | always EMAIL | always INTERACT |
 |---|---|---|---|---|---|
 | Coffee (60 HP) | 100% · 7.0t | 100% · 4.4t | 100% · 10.5t | 100% · 13.8t | 100% · 5.7t |
-| Printer (65 HP) | 100% · 7.6t | 99.9% · 14.8t | 100% · 11.3t | 100% · 4.0t | 100% · 8.6t |
-| Meeting (105 HP) | 100% · 10.1t | 100% · 12.1t | 100% · 6.7t | 100% · 11.0t | 100% · 12.8t |
+| Printer (65 HP) | 100% · 7.6t | 99.8% · 14.8t | 100% · 11.3t | 100% · 4.0t | 100% · 8.6t |
+| Meeting (105 HP) | 100% · 9.9t | 100% · 12.1t | 100% · 6.7t | 100% · 11.0t | 100% · 12.8t |
 
 Every strategy wins; none stalls. Optimal play is ~2× faster than stubborn
 play, so reading the enemy is rewarded with pace rather than survival.

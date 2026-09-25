@@ -383,11 +383,11 @@ the same `EVENT_IF` / `EVENT_LOOP_WHILE` / `EVENT_SET_VALUE` nodes the engine
 runs — rather than re-implementing the formulas, so the table reflects the
 shipped script (2000 games per cell):
 
-| Enemy | random | always THINK | always TALK | always EMAIL | always SHRUG |
+| Enemy | random | always THINK | always TALK | always EMAIL | always INTERACT |
 |---|---|---|---|---|---|
 | Coffee Machine | 100% · 7.0t | 100% · 4.4t | 100% · 10.5t | 100% · 13.8t | 100% · 5.7t |
-| The Printer | 100% · 7.6t | 99.9% · 14.8t | 100% · 11.3t | 100% · 4.0t | 100% · 8.6t |
-| The Meeting | 100% · 10.1t | 100% · 12.1t | 100% · 6.7t | 100% · 11.0t | 100% · 12.8t |
+| The Printer | 100% · 7.6t | 99.8% · 14.8t | 100% · 11.3t | 100% · 4.0t | 100% · 8.6t |
+| The Meeting | 100% · 9.9t | 100% · 12.1t | 100% · 6.7t | 100% · 11.0t | 100% · 12.8t |
 
 Every strategy wins and none stalls, matching the "comedic and easy" design
 goal, while optimal play stays about twice as fast as stubborn play.

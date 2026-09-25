@@ -70,7 +70,7 @@ hooks:
   player_fainted: Faint
 
 # The ACT submenu, in order. Every enemy must answer for each verb.
-actions: [THINK, TALK, EMAIL, SHRUG]
+actions: [THINK, TALK, EMAIL, INTERACT]
 
 menu:
   act: ACT
@@ -155,10 +155,10 @@ enemies:
         damage: 1-3
         text:
           - "You email nobody. It is a dog. It does not have an inbox."
-      SHRUG:
+      INTERACT:
         damage: 6-10
         text:
-          - "You stop pedalling and wait. The dog respects this enormously."
+          - "You crouch down and scratch its ears. It has never once been asked before."
     moves:
       - text:
           - "It barks at your front wheel, for the wheel's own good."
@@ -200,10 +200,10 @@ enemies:
         damage: 1-3
         text:
           - "There is nobody to CC about a grandmother."
-      SHRUG:
+      INTERACT:
         damage: 10-15
         text:
-          - "You wait. This turns out to be the entire solution."
+          - "You offer your arm. She takes it and does not speed up at all."
     moves:
       - text:
           - "She stops to check her list. It is a long list."
@@ -248,10 +248,10 @@ enemies:
         damage: 12-18
         text:
           - "\"I'll put that in an email.\" The call loses all of its power."
-      SHRUG:
+      INTERACT:
         damage: 6-10
         text:
-          - "You let it ring. A ring is only a sound."
+          - "You press decline mid-ring. Your thumb has never moved this fast."
     moves:
       - text:
           - "\"Quick question -\""
@@ -293,10 +293,10 @@ enemies:
         damage: 1-4
         text:
           - "You compose a strongly worded email to a field."
-      SHRUG:
+      INTERACT:
         damage: 7-11
         text:
-          - "You accept eleven kilometres an hour. The hedges are nice."
+          - "You pull alongside and knock on the cab door. The driver looks personally offended."
     moves:
       - text:
           - "It indicates left for a very long time."
@@ -342,10 +342,10 @@ enemies:
         damage: 3-6
         text:
           - "You email the council. An auto-reply thanks you for your patience."
-      SHRUG:
+      INTERACT:
         damage: 4-8
         text:
-          - "You wait at the temporary lights. They are in no hurry."
+          - "You press the pedestrian button. Someone built it. You are the first to use it."
     moves:
       - text:
           - "The light stays red. Nothing is coming the other way."
@@ -389,10 +389,10 @@ enemies:
         damage: 3-6
         text:
           - "You email Facilities. Auto-closed as a duplicate ticket."
-      SHRUG:
+      INTERACT:
         damage: 9-14
         text:
-          - "You drink it black and bitter, like it wants. It respects this."
+          - "You pop the side panel and poke around inside. Something was not meant to be there."
     moves:
       - text:
           - "It dispenses something at exactly body temperature."
@@ -437,10 +437,10 @@ enemies:
         damage: 16-22
         text:
           - "You CC the office manager. Bureaucracy is the only language it fears."
-      SHRUG:
+      INTERACT:
         damage: 6-10
         text:
-          - "You walk away. It beeps, wounded by the indifference."
+          - "You open every tray at once. Something falls out that is not paper."
     moves:
       - text:
           - "PC LOAD LETTER. Nobody has ever known what this means."
@@ -490,10 +490,10 @@ enemies:
         damage: 8-12
         text:
           - "You send the follow-up email DURING the meeting. Deeply illegal. Effective."
-      SHRUG:
+      INTERACT:
         damage: 7-10
         text:
-          - "You stop resisting. You let it wash over you."
+          - "You share your screen without being asked. Nobody objects fast enough."
     moves:
       - text:
           - "Let's circle back to that."
@@ -539,10 +539,10 @@ enemies:
         damage: 2-5
         text:
           - "You ask for the brand template. It arrives as a PDF."
-      SHRUG:
+      INTERACT:
         damage: 6-10
         text:
-          - "You reuse last quarter's deck. Nobody read it the first time."
+          - "You grab the clicker and skip straight to the summary slide."
     moves:
       - text:
           - "The font does something different on slide 6."
@@ -584,10 +584,10 @@ enemies:
         damage: 14-20
         text:
           - "You answer fire with fire. Here, and only here, that works."
-      SHRUG:
+      INTERACT:
         damage: 3-7
         text:
-          - "You mark all as read. They are not read. They are marked."
+          - "You open the oldest unread email. It is from 2019. You reply anyway."
     moves:
       - text:
           - "Reply all. Someone has replied all."
@@ -630,10 +630,10 @@ enemies:
         damage: 3-6
         text:
           - "You email the reporter. The reporter left in March."
-      SHRUG:
+      INTERACT:
         damage: 5-9
         text:
-          - "You drag them all to Next Quarter. Next Quarter is very patient."
+          - "You drag every ticket into a new column called Someday. Oddly satisfying."
     moves:
       - text:
           - "Someone reopens a ticket you just closed."
@@ -676,10 +676,10 @@ enemies:
         damage: 13-18
         text:
           - "You put every change in writing. Paper beats paper."
-      SHRUG:
+      INTERACT:
         damage: 3-6
         text:
-          - "You accept their terms. Future you can handle clause 9."
+          - "You redline a random clause just to feel something. It sticks."
     moves:
       - text:
           - "Track changes has tracked a change to a comma."
@@ -721,10 +721,10 @@ enemies:
         damage: 1-4
         text:
           - "You email them. They are sitting next to you."
-      SHRUG:
+      INTERACT:
         damage: 5-9
         text:
-          - "You hand over the keyboard and let it happen."
+          - "You take the keyboard back mid-sentence and just start typing."
     moves:
       - text:
           - "\"Can I drive?\" They are already driving."
@@ -774,10 +774,10 @@ enemies:
         damage: 6-10
         text:
           - "You produce the thread proving you flagged it in January."
-      SHRUG:
+      INTERACT:
         damage: 2-5
         text:
-          - "You say it was a team effort. It was. That helps nobody here."
+          - "You slide the self-review back across the desk, filled in wrong on purpose."
     moves:
       - text:
           - "\"Where do you see yourself in five years?\""
@@ -819,10 +819,10 @@ enemies:
         damage: 8-12
         text:
           - "You forward the angry customer email. It is urgent now."
-      SHRUG:
+      INTERACT:
         damage: 2-5
         text:
-          - "You say it would be nice to have. It is now a nice-to-have."
+          - "You sketch the whole thing on the whiteboard while they are still asking questions."
     moves:
       - text:
           - "\"What's the ROI?\" You do not have an ROI."
@@ -864,10 +864,10 @@ enemies:
         damage: 7-11
         text:
           - "You send the recap before they do. Yours is the version now."
-      SHRUG:
+      INTERACT:
         damage: 3-7
         text:
-          - "You let the silence run. Someone else fills it."
+          - "You slide a pastry across the table. Diplomacy, mostly."
     moves:
       - text:
           - "\"Just to give a bit of background -\" It is fifteen minutes."
@@ -909,10 +909,10 @@ enemies:
         damage: 9-13
         text:
           - "You submit it in the system. The system does not negotiate."
-      SHRUG:
+      INTERACT:
         damage: 2-5
         text:
-          - "You say you're flexible. You are now flexible until November."
+          - "You submit the request and close the tab before anyone can reply."
     moves:
       - text:
           - "\"Those are busy weeks for us.\" Every week is."
@@ -960,10 +960,10 @@ enemies:
         damage: 3-6
         text:
           - "You post your update in the channel. Two people read it."
-      SHRUG:
+      INTERACT:
         damage: 4-8
         text:
-          - "\"Same as yesterday.\" It is allowed. It is also true."
+          - "You stand up. Physically. Everyone else is still sitting."
     moves:
       - text:
           - "Someone gives a full sprint history."
@@ -1006,10 +1006,10 @@ enemies:
         damage: 2-5
         text:
           - "You share the deck afterwards. It is not the same thing."
-      SHRUG:
+      INTERACT:
         damage: 5-9
         text:
-          - "\"I don't know.\" The room relaxes. So do you."
+          - "You walk up and drive the demo yourself. It actually works this time."
     moves:
       - text:
           - "The HDMI does not. It simply does not."
@@ -1053,10 +1053,10 @@ enemies:
         damage: 7-11
         text:
           - "You attach the approval from March. Signed. Dated."
-      SHRUG:
+      INTERACT:
         damage: 2-6
         text:
-          - "You let them reallocate it. It comes back in Q3. It usually does."
+          - "You highlight the cell yourself before they can. Column M turns less red."
     moves:
       - text:
           - "\"Can you walk us through row 41?\""
@@ -1103,10 +1103,10 @@ enemies:
         damage: 2-5
         text:
           - "You send the feedback form. The form has twelve fields."
-      SHRUG:
+      INTERACT:
         damage: 4-8
         text:
-          - "You let them ask the questions for a while. You learn more."
+          - "You slide a glass of water across. Everyone breathes for a second."
     moves:
       - text:
           - "\"What's your biggest weakness?\" You hear yourself ask it."
@@ -1150,7 +1150,7 @@ enemies:
         damage: 2-5
         text:
           - "You email IT. IT is on this floor. So is the beamer."
-      SHRUG:
+      INTERACT:
         damage: 7-11
         text:
           - "You unplug it, count to five, plug it back in. The oldest magic."
@@ -1196,7 +1196,7 @@ enemies:
         damage: 8-12
         text:
           - "You open a ticket with the exact error code. Rare enough to work."
-      SHRUG:
+      INTERACT:
         damage: 5-9
         text:
           - "You turn it off and on again. It is not nothing."
@@ -1242,7 +1242,7 @@ enemies:
         damage: 3-6
         text:
           - "You email IT. The email does not send. Of course it doesn't."
-      SHRUG:
+      INTERACT:
         damage: 12-17
         text:
           - "You move one metre to the left. Everything is fixed."
@@ -1289,10 +1289,10 @@ enemies:
         damage: 4-8
         text:
           - "You email IT to ask what's in it. Nobody knows what's in it."
-      SHRUG:
+      INTERACT:
         damage: 9-13
         text:
-          - "You go and get a coffee. This is the intended solution."
+          - "You click Restart Now yourself, before it can ask again."
     moves:
       - text:
           - "Restart now, or restart now?"
