@@ -56,7 +56,7 @@
                 "value": 30
               }
             },
-            "id": "921b255a-1964-509b-a7aa-311e4bf07f53"
+            "id": "ecc63e5a-0df0-5986-8a07-6609bbe780e8"
           },
           {
             "command": "EVENT_SET_VALUE",
@@ -67,7 +67,7 @@
                 "value": 30
               }
             },
-            "id": "d0bf3543-58de-52c0-98d9-c2722bcc16bc"
+            "id": "921b255a-1964-509b-a7aa-311e4bf07f53"
           },
           {
             "command": "EVENT_ACTOR_SET_SPRITE",
@@ -75,16 +75,16 @@
               "actorId": "0",
               "spriteSheetId": "9cc60038-74ea-4c2b-ac8a-6d1046de62a5"
             },
-            "id": "65563d91-3925-59b9-a68d-69fd7e5d6449"
+            "id": "b7ac09e3-6993-5026-a807-9b4a15a4a52d"
           },
           {
             "command": "EVENT_TEXT",
             "args": {
-              "text": "A TRACTOR pulls out.\nIt is doing eleven.\nThe road is single lane.",
+              "text": "A TRACTOR pulls out. It\nis doing eleven. The\nroad is single lane.",
               "avatarId": "",
               "clearPrevious": true
             },
-            "id": "de70db06-fd3c-54d5-bec3-6b83eac7abb4"
+            "id": "487025fd-80ea-5046-94d3-ce8156652215"
           }
         ],
         "false": [
@@ -131,7 +131,7 @@
                           "avatarId": "",
                           "clearPrevious": true
                         },
-                        "id": "b0997d35-c437-567c-93b8-05fbce481c3a"
+                        "id": "de70db06-fd3c-54d5-bec3-6b83eac7abb4"
                       },
                       {
                         "command": "EVENT_SET_VALUE",
@@ -152,7 +152,7 @@
                             }
                           }
                         },
-                        "id": "99896a4c-4a75-5eb2-8dd1-16a353c19ba0"
+                        "id": "31fdec7d-ea7b-5aef-8852-330ef229f07d"
                       }
                     ],
                     "false": [
@@ -177,7 +177,16 @@
                             {
                               "command": "EVENT_TEXT",
                               "args": {
-                                "text": "You say something polite.\nNobody in there has heard\nanything since 1994.",
+                                "text": "You say something\npolite. Nobody in there\nhas heard anything",
+                                "avatarId": "",
+                                "clearPrevious": true
+                              },
+                              "id": "029ede51-1f4a-5e5c-a49b-1ef1446962be"
+                            },
+                            {
+                              "command": "EVENT_TEXT",
+                              "args": {
+                                "text": "since 1994.",
                                 "avatarId": "",
                                 "clearPrevious": true
                               },
@@ -227,7 +236,7 @@
                                   {
                                     "command": "EVENT_TEXT",
                                     "args": {
-                                      "text": "You compose a strongly\nworded email to a\nfield.",
+                                      "text": "You compose a strongly\nworded email to a field.",
                                       "avatarId": "",
                                       "clearPrevious": true
                                     },
@@ -277,7 +286,7 @@
                                         {
                                           "command": "EVENT_TEXT",
                                           "args": {
-                                            "text": "You accept eleven\nkilometres an hour.\nThe hedges are nice.",
+                                            "text": "You accept eleven\nkilometres an hour. The\nhedges are nice.",
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
@@ -479,7 +488,7 @@
                                         {
                                           "command": "EVENT_TEXT",
                                           "args": {
-                                            "text": "You walk away. The\nproblem remains, but\nso do you.",
+                                            "text": "You walk away. The\nproblem remains, but so\ndo you.",
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },
@@ -508,7 +517,7 @@
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "You quietly leave. \nNoone notices...\n",
+                                                  "text": "You quietly leave. Noone\nnotices...",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
@@ -519,7 +528,7 @@
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "The rule of the\ntwo legs. You\nproudly leave.",
+                                                  "text": "The rule of the two\nlegs. You proudly leave.",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
@@ -608,7 +617,7 @@
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "You take one step.\nSomeone says your name.",
+                                                  "text": "You take one step.\nSomeone says your\nname.",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
@@ -732,7 +741,7 @@
                                               {
                                                 "command": "EVENT_TEXT",
                                                 "args": {
-                                                  "text": "It indicates left.\nIt turns right.",
+                                                  "text": "It indicates left. It\nturns right.",
                                                   "avatarId": "",
                                                   "clearPrevious": true
                                                 },
@@ -863,7 +872,7 @@
                                                     {
                                                       "command": "EVENT_TEXT",
                                                       "args": {
-                                                        "text": "You lose $13$\nEnergy.",
+                                                        "text": "You lose $13$ Energy.",
                                                         "avatarId": "",
                                                         "clearPrevious": true
                                                       },
@@ -892,7 +901,7 @@
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "$13$ Energy.\nYou breathe through it.",
+                                                              "text": "$13$ Energy. You\nbreathe through it.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
@@ -903,7 +912,7 @@
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "That's $13$ you\nwon't get back.",
+                                                              "text": "That's $13$ you won't\nget back.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
@@ -1116,7 +1125,7 @@
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "You lose $13$\nEnergy.",
+                                                              "text": "You lose $13$ Energy.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
@@ -1145,7 +1154,7 @@
                                                                 {
                                                                   "command": "EVENT_TEXT",
                                                                   "args": {
-                                                                    "text": "$13$ Energy.\nYou breathe through it.",
+                                                                    "text": "$13$ Energy. You\nbreathe through it.",
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
@@ -1156,7 +1165,7 @@
                                                                 {
                                                                   "command": "EVENT_TEXT",
                                                                   "args": {
-                                                                    "text": "That's $13$ you\nwon't get back.",
+                                                                    "text": "That's $13$ you won't\nget back.",
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
@@ -1305,7 +1314,7 @@
                                                           {
                                                             "command": "EVENT_TEXT",
                                                             "args": {
-                                                              "text": "You lose $13$\nEnergy.",
+                                                              "text": "You lose $13$ Energy.",
                                                               "avatarId": "",
                                                               "clearPrevious": true
                                                             },
@@ -1334,7 +1343,7 @@
                                                                 {
                                                                   "command": "EVENT_TEXT",
                                                                   "args": {
-                                                                    "text": "$13$ Energy.\nYou breathe through it.",
+                                                                    "text": "$13$ Energy. You\nbreathe through it.",
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
@@ -1345,7 +1354,7 @@
                                                                 {
                                                                   "command": "EVENT_TEXT",
                                                                   "args": {
-                                                                    "text": "That's $13$ you\nwon't get back.",
+                                                                    "text": "That's $13$ you won't\nget back.",
                                                                     "avatarId": "",
                                                                     "clearPrevious": true
                                                                   },
@@ -1390,7 +1399,7 @@
                                         {
                                           "command": "EVENT_TEXT",
                                           "args": {
-                                            "text": "It turns off into a\nfield. You are free.\nYou had earned it.",
+                                            "text": "It turns off into a\nfield. You are free. You\nhad earned it.",
                                             "avatarId": "",
                                             "clearPrevious": true
                                           },

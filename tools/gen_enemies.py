@@ -20,6 +20,11 @@ and BattleScript keeps only the loop.
 
 (--draw-bar-art additionally redraws the placeholder bar sprite in assets/.)
 
+Every dialogue line is measured against the Display Text box's real pixel
+width, using the actual glyph widths from assets/fonts/gbs-var.png (GB
+Studio's variable-width font) — a line too wide is word-wrapped automatically
+instead of clipping in-engine unnoticed. See `wrap_line` and `paginate`.
+
 A GB Studio custom script cannot reference a scene actor by id — the compiler
 rejects it with "Unknown arg actor ..." — so the actors the battle touches are
 actor *parameters*: Enemy, and PlayerBar / EnemyBar when bars are configured.
@@ -417,22 +422,124 @@ def as_variants(value, where):
     fail(f"{where}: expected a string or a non-empty list of variant strings")
 
 
-def paginate(text):
+def paginate(text, where):
     """Split one variant's prose into Display Text pages.
 
-    Authors write a variant as flowing "\\n"-separated lines; a box only
-    comfortably fits MAX_TEXT_LINES of them, so every run of that many lines
-    becomes its own Display Text box instead of enemies.yaml hand-nesting a
-    second array to mark the page break.
+    Authors write a variant as flowing prose; any line too wide for the text
+    box is word-wrapped first (see `wrap_line`), using \\n only where a break
+    is wanted on purpose (a \\n\\n pause, say). Every run of MAX_TEXT_LINES of
+    the resulting lines then becomes its own Display Text box — enemies.yaml
+    never hand-nests a second array for either kind of break.
     """
-    lines = text.split("\n")
+    lines = []
+    for line in text.split("\n"):
+        lines.extend(wrap_line(line, where))
     return ["\n".join(lines[i:i + MAX_TEXT_LINES])
             for i in range(0, len(lines), MAX_TEXT_LINES)]
 
 
 def dialogue(value, where, subst):
     """Validate a text field's shape, interpolate placeholders, then paginate."""
-    return [paginate(subst(variant)) for variant in as_variants(value, where)]
+    return [paginate(subst(variant), where) for variant in as_variants(value, where)]
+
+
+# --------------------------------------------------------------- text width
+# The default Display Text box is the full 20-tile screen width with the
+# frame's 1-tile border on each side (no avatar is used anywhere in this
+# battle), leaving 18 tiles = 144px for text.
+TEXT_BOX_WIDTH_PX = 144
+FONT_PATH = os.path.join(ROOT, "assets", "fonts", "gbs-var.png")
+FONT_CELL = 8
+FONT_MAGENTA = (255, 0, 255)
+# {damage}-style placeholders become a GB Studio interpolation token
+# ("$13$"), which the engine prints as the variable's current numeric value —
+# a width this tool can't know ahead of time. Worst-casing every placeholder
+# at 3 digits is simpler than tracking each global's real range, and safely
+# conservative for the Energy/turn-count stats this battle deals with.
+WIDTH_PLACEHOLDER = "999"
+
+_glyph_widths = None
+
+
+def glyph_widths():
+    """Pixel width of each printable ASCII glyph, measured from the font PNG.
+
+    GB Studio's variable-width font format: each glyph sits in its own 8x8
+    cell, ASCII 32 ("space") at cell (0, 0) reading left to right, top to
+    bottom. A glyph's rendered width is however many columns from the left
+    aren't pure magenta (#FF00FF, the format's spacer colour) — the font art
+    itself already bakes in a blank trailing column for spacing, which is why
+    this needs no extra letter-spacing added on top.
+    """
+    global _glyph_widths
+    if _glyph_widths is not None:
+        return _glyph_widths
+    try:
+        from PIL import Image
+    except ImportError:
+        fail("measuring dialogue width needs Pillow: uv sync (or pip install "
+             "pillow)")
+    img = Image.open(FONT_PATH).convert("RGB")
+    cols = img.size[0] // FONT_CELL
+    rows = img.size[1] // FONT_CELL
+    widths = {}
+    for code in range(32, 128):
+        idx = code - 32
+        cx, cy = idx % cols, idx // cols
+        if cy >= rows:
+            break
+        last = -1
+        for x in range(FONT_CELL):
+            for y in range(FONT_CELL):
+                if img.getpixel((cx * FONT_CELL + x,
+                                  cy * FONT_CELL + y)) != FONT_MAGENTA:
+                    last = x
+                    break
+        widths[chr(code)] = last + 1 if last >= 0 else 0
+    _glyph_widths = widths
+    return widths
+
+
+def text_width(s):
+    """Rendered pixel width of `s`, worst-casing any {token} placeholder."""
+    s = re.sub(r"\{\w+\}", WIDTH_PLACEHOLDER, s)
+    widths = glyph_widths()
+    return sum(widths.get(ch, FONT_CELL) for ch in s)
+
+
+_wrap_stats = {"checked": 0, "wrapped": 0}
+
+
+def wrap_line(line, where):
+    """Word-wrap one line to TEXT_BOX_WIDTH_PX if it doesn't already fit.
+
+    Lines that fit come back unchanged — most already do, since authors write
+    short lines by feel. A line that overflows is greedily packed at spaces
+    instead. A single word wider than the box on its own can't be fixed by
+    wrapping, so that fails loudly rather than silently shipping a clipped
+    screen.
+    """
+    _wrap_stats["checked"] += 1
+    if text_width(line) <= TEXT_BOX_WIDTH_PX:
+        return [line]
+    _wrap_stats["wrapped"] += 1
+    words = line.split(" ")
+    lines, current = [], ""
+    for word in words:
+        candidate = f"{current} {word}" if current else word
+        if current and text_width(candidate) > TEXT_BOX_WIDTH_PX:
+            lines.append(current)
+            current = word
+        else:
+            current = candidate
+    if current:
+        lines.append(current)
+    for wrapped in lines:
+        if text_width(wrapped) > TEXT_BOX_WIDTH_PX:
+            fail(f"{where}: {wrapped!r} is {text_width(wrapped)}px, wider "
+                 f"than the {TEXT_BOX_WIDTH_PX}px text box and can't be "
+                 "wrapped any further — shorten it")
+    return lines
 
 
 def parse_range(value, where):
@@ -1411,6 +1518,10 @@ def main():
     if not sprites:
         fail("no sprites found under assets/sprites/")
     cfg = Config(raw, variables, sprites, load_scripts())
+    if _wrap_stats["wrapped"]:
+        print(f"  auto-wrapped {_wrap_stats['wrapped']} of "
+              f"{_wrap_stats['checked']} dialogue lines that were wider than "
+              f"the {TEXT_BOX_WIDTH_PX}px text box")
     V = {name: variables[name] for name in REQUIRED_VARS}
     # Reward stats are only needed when an enemy actually grants them; Config
     # has already checked that each one exists in the project.
