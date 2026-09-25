@@ -75,6 +75,8 @@ flee:
   out_of: 4
   success:
     - - "You walk away. The\nproblem remains, but\nso do you."
+    - - "You quietly leave. \nNoone notices...\n"
+    - - "The rule of the\ntwo legs. You\nproudly leave."
   failed:
     - - "You get as far as the\ndoor and remember you\nneed coffee."
     - - "You take one step.\nSomeone says your name."
@@ -125,9 +127,12 @@ enemies:
     sprite: enemy_dog.png
     energy: 18
     intro:
-      - - "A DOG launches itself\ninto the road.\nIt is thrilled."
+      - - "A DOG launches itself\ninto the road.\nIt is happy\nto see you."
+      - - "A DOG tries to ruin\nyour day! You\ntry your best\nto ignore it."
     look:
       - - "No collar, no owner,\nno plan."
+      - - "It looks cute.\nYou want to\npet it..."
+        - "But you have\nto go to work!"
       - - "It has the face of an\nanimal never once\ntold no."
     defeat:
       - - "The dog loses interest\nand trots off to ruin\nsomeone else's morning."
@@ -209,6 +214,10 @@ enemies:
       - text:
           - - "A second grandmother\njoins her."
         damage: 0-3
+      - text:
+          - - "She wants to\nintroduce you to\nher unnmarried grandkid."
+            - "You are shocked\nby her boldness!"
+        damage: 0-5
 
   - id: 2
     name: Boss Call
