@@ -1,118 +1,82 @@
 <script lang="ts">
-  import { GameKoi } from 'game-koi'
+  import { onDestroy } from 'svelte'
+  import ControlsHelp from './lib/ControlsHelp.svelte'
+  import { Emulator } from './lib/emulator.svelte'
+  import GameBoyScene from './lib/GameBoyScene.svelte'
+  import RomPanel from './lib/RomPanel.svelte'
 
   // BASE_URL, not "/": on GitHub Pages the site lives under /DeskBound/.
   const romUrl = `${import.meta.env.BASE_URL}DeskBound.gb`
 
-  let canvas: HTMLCanvasElement
-  let koi: GameKoi | null = null
-  let romName = $state<string | null>(null)
-  let error = $state<string | null>(null)
+  const emulator = new Emulator()
+  onDestroy(() => emulator.dispose())
+
   let dragOver = $state(false)
-
-  async function loadRom(rom: Uint8Array, name: string) {
-    if (koi) {
-      koi.loadRom(rom)
-    } else {
-      koi = await GameKoi.create({ canvas, rom })
-    }
-    romName = name
-  }
-
-  async function loadRomFile(file: File) {
-    error = null
-    try {
-      await loadRom(new Uint8Array(await file.arrayBuffer()), file.name)
-    } catch (e) {
-      error = e instanceof Error ? e.message : String(e)
-    }
-  }
-
-  async function loadDeskBound() {
-    error = null
-    try {
-      const res = await fetch(romUrl)
-      if (!res.ok) {
-        throw new Error("DeskBound.gb not found — run `just rom` to build it first")
-      }
-      await loadRom(new Uint8Array(await res.arrayBuffer()), 'DeskBound.gb')
-    } catch (e) {
-      error = e instanceof Error ? e.message : String(e)
-    }
-  }
-
-  function onFileInput(e: Event) {
-    const file = (e.target as HTMLInputElement).files?.[0]
-    if (file) loadRomFile(file)
-  }
 
   function onDrop(e: DragEvent) {
     e.preventDefault()
     dragOver = false
     const file = e.dataTransfer?.files?.[0]
-    if (file) loadRomFile(file)
+    if (file) emulator.loadFile(file)
   }
 </script>
 
-<main>
-  <h1>DeskBound</h1>
+<svelte:window
+  ondragover={(e) => {
+    e.preventDefault()
+    dragOver = true
+  }}
+  ondragleave={(e) => {
+    // Only when the drag leaves the window, not when it crosses between elements.
+    if (!e.relatedTarget) dragOver = false
+  }}
+  ondrop={onDrop}
+/>
 
-  <div
-    class="screen"
-    role="region"
-    aria-label="Game screen, drop a ROM here"
-    class:drag-over={dragOver}
-    ondragover={(e) => {
-      e.preventDefault()
-      dragOver = true
-    }}
-    ondragleave={() => (dragOver = false)}
-    ondrop={onDrop}
-  >
-    <canvas bind:this={canvas} width="160" height="144"></canvas>
-    {#if !romName}
-      <p class="hint">Drop a .gb ROM here, or choose a file below</p>
-    {/if}
-  </div>
+<GameBoyScene screen={emulator.screen} onerror={(message) => (emulator.error = message)} />
 
-  <div class="controls">
-    <button class="picker" onclick={loadDeskBound}>Load DeskBound</button>
-    <label class="picker">
-      Load ROM
-      <input type="file" accept=".gb" onchange={onFileInput} />
-    </label>
-    <a class="picker" href={romUrl} download="DeskBound.gb">Download .gb</a>
-  </div>
+<div class="hud top-left">
+  <RomPanel {emulator} {romUrl} />
+</div>
 
-  {#if romName}
-    <p class="rom-name">{romName}</p>
-  {/if}
-  {#if error}
-    <p class="error">{error}</p>
-  {/if}
+<div class="hud bottom-left">
+  <ControlsHelp pressed={emulator.pressed} />
+</div>
 
-  <section class="help">
-    <h2>Controls</h2>
-    <dl>
-      <dt>D-pad</dt>
-      <dd><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></dd>
+{#if dragOver}
+  <div class="drop-hint">Drop a .gb ROM to play it</div>
+{/if}
 
-      <dt>A / B</dt>
-      <dd><kbd>Z</kbd> <kbd>X</kbd></dd>
+<style>
+  .hud {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-      <dt>Start / Select</dt>
-      <dd><kbd>Enter</kbd> <kbd>Right Shift</kbd></dd>
+  .top-left {
+    top: 16px;
+    left: 16px;
+  }
 
-      <dt>Stats overlay</dt>
-      <dd><kbd>~</kbd></dd>
-    </dl>
-    <p class="note">
-      Keys are bound by position, not by label — on a non-QWERTY layout, A and B are
-      wherever <kbd>Z</kbd> and <kbd>X</kbd> sit on a US keyboard.
-    </p>
-    <p class="note">
-      A standard gamepad works too: d-pad or left stick to move, the bottom and
-      right face buttons for B and A, Start and Back for Start and Select.
-    </p>
-  </section>
-</main>
+  .bottom-left {
+    bottom: 16px;
+    left: 16px;
+  }
+
+  .drop-hint {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--text-h);
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    outline: 3px dashed var(--accent);
+    outline-offset: -12px;
+    pointer-events: none;
+  }
+</style>
