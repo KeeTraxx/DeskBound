@@ -313,6 +313,22 @@ upgrade is needed.
 Prebuilt `.gb` ROMs are attached to each
 [release](https://github.com/KeeTraxx/DeskBound/releases).
 
+## Music
+
+Songs are written as code in `bgm/*.gbs`, in
+[gb-strudel](https://github.com/KeeTraxx/gb-strudel)'s pattern notation, and
+compiled to hUGETracker `.uge` files that GB Studio imports:
+
+```sh
+just music                   # every bgm/<song>.gbs -> assets/music/<song>.uge
+just music bgm/<song>.gbs    # only the songs given
+```
+
+Install gb-strudel (1.1 or newer) with `cargo install gb-strudel` or from its
+[releases](https://github.com/KeeTraxx/gb-strudel/releases). The generated
+`.uge` files are committed, so building the ROM does not need it.
+`gb-strudel play bgm/<song>.gbs` previews a song without opening GB Studio.
+
 ## CI builds
 
 [`.github/workflows/build-rom.yml`](.github/workflows/build-rom.yml) compiles a
@@ -398,9 +414,8 @@ pacing all need a real playtest.
 
 ## Known gaps
 
-- Nothing plays music yet. Two original tracks exist — `lounge_elevator.mod`
-  and `coffee_break.mod` (regenerate with `python3 tools/gen_music.py`) — but no
-  scene has a Play Music event, so the game is still silent in-engine
+- Nothing plays music yet. `blinding_lights.uge` exists (see [Music](#music)),
+  but no scene has a Play Music event, so the game is still silent in-engine
 - Enemies point at placeholder sprites (`actor`, `static`) — drop real enemy
   sprite `.png`s into `assets/sprites/` and point `enemies.yaml` at them
 - `energy_bar.png` is a programmer-drawn 17-frame strip; bar placement
