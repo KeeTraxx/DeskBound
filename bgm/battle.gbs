@@ -1,0 +1,42 @@
+name   = DeskBound Battle
+artist = KeeTraxx
+tempo  = 3              # 8 beats per bar -> 150 BPM; 16 steps are eighths, 32 are sixteenths
+
+# Fight music in E minor, in the spirit of the classic handheld battle themes:
+# a chromatic dive to open, octave-bouncing bass, sixteenth-note arpeggios and
+# a syncopated lead. The major V (B) keeps the tension up. Two chords per bar.
+
+# --- Sections -------------------------------------------------------------
+
+# Intro: two chromatic sixteenth dives, then hits climbing to the tune's e5.
+&dive     = 9  | e6 d#6 d6 c#6 c6 b5 a#5 a5 g#5 g5 f#5 f5 e5 d#5 d5 c#5 e6 d#6 d6 c#6 c6 b5 a#5 a5 g#5 g5 f#5 f5 e5 d#5 d5 c#5 | b4 . . b4 . . b4 . c5 . . c5 . . d5 d#5
+# The same dive a minor third below, and the hits a fourth below.
+&dive_lo  = 8  | c#6 c6 b5 a#5 a5 g#5 g5 f#5 f5 e5 d#5 d5 c#5 c5 b4 a#4 c#6 c6 b5 a#5 a5 g#5 g5 f#5 f5 e5 d#5 d5 c#5 c5 b4 a#4 | f#4 . . f#4 . . f#4 . g4 . . g4 . . a4 a#4
+
+# Main tune, Em C | D B | Em C | Am B: syncopated 3+3+2 phrasing.
+&tune_a   = 9  | e5 . . b4 . . e5 . g5 . . e5 . . c5 . | f#5 . . d5 . . a5 . b5 . . a5 . . f#5 d#5 | e5 . . g5 . . b5 . c6 . b5 . g5 . e5 . | a5 . . c6 . . e6 . d#6 . . . b5 . . .
+# Middle, C D | Em | C D | B: climbs, holds, and lands on a long f#6 over B.
+&tune_b   = 9  | g5 . e5 . g5 . c6 . a5 . f#5 . a5 . d6 . | b5 . . . g5 a5 b5 . e6 . . . d6 . b5 . | c6 . b5 . g5 . e5 . d6 . c6 . a5 . f#5 . | d#5 . f#5 . b5 . d#6 . f#6 . . . . . ~ ~
+
+# Sixteenth-note arpeggios under everything.
+&arp_a    = 4  | [e4 g4 b4 g4]*4 [c4 e4 g4 e4]*4 | [d4 f#4 a4 f#4]*4 [b3 d#4 f#4 d#4]*4 | [e4 g4 b4 g4]*4 [c4 e4 g4 e4]*4 | [a3 c4 e4 c4]*4 [b3 d#4 f#4 d#4]*4
+&arp_b    = 4  | [c4 e4 g4 e4]*4 [d4 f#4 a4 f#4]*4 | [e4 g4 b4 g4]*8 | [c4 e4 g4 e4]*4 [d4 f#4 a4 f#4]*4 | [b3 d#4 f#4 d#4]*8
+
+# Saw bass bouncing octaves in eighths; in the intro it hits with the lead.
+&bass_in  = 13 | [e2 e3]*8 | b2 . . b2 . . b2 . c3 . . c3 . . d3 d#3
+&bass_a   = 13 | [e2 e3]*4 [c2 c3]*4 | [d2 d3]*4 [b2 b3]*4 | [e2 e3]*4 [c2 c3]*4 | [a2 a3]*4 [b2 b3]*4
+&bass_b   = 13 | [c2 c3]*4 [d2 d3]*4 | [e2 e3]*8 | [c2 c3]*4 [d2 d3]*4 | [b2 b3]*8
+
+# Drums. One instrument per bar: a snare roll under the dive, snare hits with
+# the intro, sixteenth hats for the tune, and a backbeat with pickups in the middle.
+&roll     = 7  | c5*32
+&hits     = 7  | c5 . . c5 . . c5 . c5 . . c5 . . c5 c5
+&hats     = 1  | c6*32
+&snare    = 7  | ~ c5 ~ c5 ~ c5 ~ [c5 c5]
+
+# --- Arrangement: intro 2, A 4, B 4, A 4 (14 bars, ~45 s, loops) ---------
+
+pulse1 = &dive &tune_a &tune_b &tune_a
+pulse2 = &dive_lo &arp_a &arp_b &arp_a
+wave   = &bass_in &bass_a &bass_b &bass_a
+noise  = &roll &hits &hats*4 &snare*4 &hats*4

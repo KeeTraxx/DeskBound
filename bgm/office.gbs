@@ -1,0 +1,47 @@
+name   = Desk Job Boogie
+artist = KeeTraxx
+tempo  = 2              # 4 beats per bar -> 112.5 BPM
+
+# Office music: a 12-bar boogie-woogie blues in C, played twice.
+#
+# Shuffle: every beat is written as a triplet, `[long . short]`. gb-strudel rounds
+# steps to rows, so the short note lands on row 11 of the beat's 16 — about the
+# 2:1 swing of a real shuffle. A beat written as a single note is a quarter.
+#
+# Form (one chord per bar):  C C C C | F F C C | G F C G
+
+# --- Right hand (pulse1), a fading pulse for a piano-ish decay --------------
+
+# Chorus 1: a blues riff with e-flat -> e slides, answered in each line.
+&rh1_a   = 2  | [c5 . eb5] [e5 . g5] [a5 . g5] [e5 . c5] | [eb5 . e5] c5 ~ [~ . g4] | [c5 . eb5] [e5 . g5] [a5 . g5] [e5 . c5] | [a#4 . c5] [a#4 . g4] e4 ~
+&rh1_b   = 2  | [f5 . a5] [c6 . a5] [f5 . eb5] [c5 . a4] | [ab4 . a4] f4 ~ [~ . c5] | [c5 . eb5] [e5 . g5] [a5 . g5] [e5 . c5] | [eb5 . e5] c5 ~ [~ . d5]
+&rh1_c   = 2  | [d5 . f5] [g5 . b5] [d6 . b5] [g5 . f5] | [eb5 . c5] [a4 . f4] [a4 . c5] [eb5 . e5] | [g5 . e5] [c5 . a4] [c5 . eb5] [e5 . c5] | [d5 . f5] [g5 . f5] [d5 . b4] [g4 . ~]
+
+# Chorus 2: higher, with honky-tonk repeated notes and a descending blues run.
+&rh2_a   = 2  | [g5 . g5] [g5 . g5] [a5 . g5] [e5 . g5] | [eb5 . e5] [g5 . c6] ~ [~ . g5] | [g5 . g5] [g5 . g5] [a5 . g5] [e5 . c5] | [a#5 . a5] [g5 . e5] [eb5 . c5] [a#4 . a4]
+&rh2_b   = 2  | [c6 . c6] [c6 . c6] [d6 . c6] [a5 . f5] | [ab5 . a5] [c6 . a5] f5 [~ . g5] | [g5 . g5] [g5 . g5] [a5 . g5] [e5 . c5] | [eb5 . e5] [g5 . e5] c5 [~ . d5]
+&rh2_c   = 2  | [d5 . f5] [g5 . b5] [d6 . f6] [d6 . b5] | [c6 . a5] [f5 . eb5] [c5 . a4] [c5 . eb5] | [e5 . g5] [c6 . g5] [e5 . c5] [eb5 . d5] | [b4 . d5] [f5 . a5] [g5 . f5] [d5 . b4]
+
+# --- Chord stabs (pulse2): swung off-beats alternating two chord tones ------
+
+&c_comp  = 5  | [~ . e4] [~ . a#4] [~ . e4] [~ . a#4]
+&f_comp  = 5  | [~ . a4] [~ . eb5] [~ . a4] [~ . eb5]
+&g_comp  = 5  | [~ . b4] [~ . f5] [~ . b4] [~ . f5]
+
+# --- Boogie bass (wave): up the chord to the sixth, flat seventh, and back ---
+
+&c_bass  = 12 | [c3 . e3] [g3 . a3] [a#3 . a3] [g3 . e3]
+&f_bass  = 12 | [f2 . a2] [c3 . d3] [d#3 . d3] [c3 . a2]
+&g_bass  = 12 | [g2 . b2] [d3 . e3] [f3 . e3] [d3 . b2]
+
+# --- Drums: shuffle hats for chorus 1; chorus 2 trades hats and backbeat ----
+
+&hats    = 2  | [c6 . c6]*4
+&snare   = 7  | ~ c5 ~ [c5 . c5]
+
+# --- Arrangement: two 12-bar choruses (24 bars, ~51 s, loops) --------------
+
+pulse1 = &rh1_a &rh1_b &rh1_c &rh2_a &rh2_b &rh2_c
+pulse2 = &c_comp*4 &f_comp*2 &c_comp*2 &g_comp &f_comp &c_comp &g_comp &c_comp*4 &f_comp*2 &c_comp*2 &g_comp &f_comp &c_comp &g_comp
+wave   = &c_bass*4 &f_bass*2 &c_bass*2 &g_bass &f_bass &c_bass &g_bass &c_bass*4 &f_bass*2 &c_bass*2 &g_bass &f_bass &c_bass &g_bass
+noise  = &hats*12 &hats &snare &hats &snare &hats &snare &hats &snare &hats &snare &hats &snare

@@ -1,0 +1,45 @@
+name   = Commute
+artist = KeeTraxx
+tempo  = 3              # 8 beats per bar -> 150 BPM; 16 steps per bar are eighths
+
+# An upbeat ride to work in G major. A station chime, then a driving tune over
+# a bass that never stops: straight eighth-note roots from the first bar to the last.
+# Each bar holds two chords (4 beats each).
+
+# --- Sections -------------------------------------------------------------
+
+# Platform ding-dong on a fading pulse.
+&chime    = 2  | b5 . . . g5 . . . a5 . . . d5 . . . | d5 . . . a5 . . . b5 . . . g5 . . .
+
+# Main tune, G D | Em C twice: up the G chord, then an answer that reaches d6.
+&tune_a   = 9  | d5 . g5 . b5 . a5 g5 a5 . f#5 . d5 . . . | e5 . g5 . b5 . d6 . c6 . b5 . g5 . e5 . | d5 . g5 . b5 . a5 g5 a5 . b5 . d6 . a5 . | b5 . a5 g5 . . e5 . g5 . . . . . ~ ~
+# Middle, C D | G Em | C D | G G: repeated notes push it forward, then a pickup
+# (b4 c5 c#5) climbs back into the main tune's d5.
+&tune_b   = 9  | e5 . e5 . g5 . e5 . f#5 . f#5 . a5 . f#5 . | g5 . b5 . d6 . b5 . b5 . g5 . e5 . g5 . | e5 . e5 . g5 . c6 . d6 . c6 . a5 . f#5 . | g5 . . . . . . . ~ ~ b4 . c5 . c#5 .
+
+# Syncopated chord stabs (3+3+2), then eighth-note arpeggios for the reprise.
+&stab_a   = 5  | b4 ~ ~ d5 ~ ~ b4 ~ a4 ~ ~ d5 ~ ~ a4 ~ | b4 ~ ~ e5 ~ ~ b4 ~ g4 ~ ~ c5 ~ ~ g4 ~
+&stab_b   = 5  | g4 ~ ~ c5 ~ ~ g4 ~ a4 ~ ~ d5 ~ ~ a4 ~ | b4 ~ ~ d5 ~ ~ b4 ~ b4 ~ ~ e5 ~ ~ b4 ~ | g4 ~ ~ c5 ~ ~ g4 ~ a4 ~ ~ d5 ~ ~ a4 ~ | b4 ~ ~ d5 ~ ~ b4 ~ ~ ~ ~ ~ ~ ~ ~ ~
+&arp_a    = 4  | [g4 b4 d5 b4]*2 [a4 d5 f#5 d5]*2 | [e4 g4 b4 g4]*2 [c5 e5 g5 e5]*2
+
+# The steady bass: square wave, one root per eighth note, never a gap.
+&bass_in  = 6  | g2*16
+&bass_a   = 6  | g2*8 d2*8 | e2*8 c2*8
+&bass_b   = 6  | c2*8 d2*8 | g2*8 e2*8 | c2*8 d2*8 | g2*16
+
+# Drums. One instrument per bar: quarter-note ticks while waiting on the
+# platform, eighth hats once moving, a backbeat in the middle, and sixteenth
+# "chugging" hats for the reprise.
+&tick     = 1  | c6*8
+&hats     = 1  | c6*16
+&beat     = 7  | ~ c5 ~ c5 ~ c5 ~ c5
+&chug     = 2  | c6*32
+
+&rest     = ~
+
+# --- Arrangement: intro 2, A 4, B 4, A 4 (14 bars, ~45 s, loops) ----------
+
+pulse1 = &chime &tune_a &tune_b &tune_a
+pulse2 = 5 | &rest*2 &stab_a*2 &stab_b &arp_a*2
+wave   = &bass_in*2 &bass_a*2 &bass_b &bass_a*2
+noise  = &tick*2 &hats*4 &beat*4 &chug*4

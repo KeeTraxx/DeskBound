@@ -1,0 +1,39 @@
+name   = Good Morning
+artist = KeeTraxx
+tempo  = 2              # 4 beats per bar -> 112.5 BPM; 8 steps per bar are eighths
+
+# A lighthearted wake-up theme in C major. Intro is the alarm clock, then a
+# bouncy I-vi-IV-V tune, and a middle section that lifts before coming home.
+
+# --- Sections -------------------------------------------------------------
+
+# Alarm-clock chime on a fading pulse, over C then G.
+&chime   = 1  | c6 . g5 . e6 . g5 . | d6 . g5 . b5 . g5 .
+
+# Main tune, C | Am | F | G twice: a question, then an answer that climbs.
+&tune_a  = 8  | g4 . c5 . e5 . d5 c5 | e5 . . . c5 . a4 . | a4 . c5 . f5 . e5 d5 | d5 . . . b4 . g4 . | g4 . c5 . e5 . g5 . | a5 . g5 e5 c5 . e5 . | f5 . e5 d5 c5 . a4 . | b4 . c5 d5 . . ~ ~
+# Middle, F | G | Em | Am | F | G | C | C: higher, broken chords, then home.
+&tune_b  = 8  | c6 . a5 . f5 . a5 . | b5 . g5 . d5 . g5 . | g5 . e5 . b4 . e5 . | a5 . . . e5 . c5 . | a5 . c6 . a5 . f5 . | g5 . b5 . d6 . b5 . | c6 . . . g5 e5 c5 . | c5 . . . ~ ~ ~ ~
+
+# Plucky off-beat chord stabs, one chord tone pair per bar.
+&comp_a  = 4  | ~ e4 ~ g4 ~ e4 ~ g4 | ~ e4 ~ a4 ~ e4 ~ a4 | ~ f4 ~ a4 ~ f4 ~ a4 | ~ d4 ~ g4 ~ d4 ~ g4
+&comp_b  = 4  | ~ f4 ~ a4 ~ f4 ~ a4 | ~ d4 ~ g4 ~ d4 ~ g4 | ~ g4 ~ b4 ~ g4 ~ b4 | ~ e4 ~ a4 ~ e4 ~ a4 | ~ f4 ~ a4 ~ f4 ~ a4 | ~ d4 ~ g4 ~ d4 ~ b4 | ~ e4 ~ g4 ~ e4 ~ g4 | ~ e4 ~ g4 ~ ~ ~ ~
+
+# Soft triangle bass: held roots for the intro, then root-fifth bounce.
+&bass_in = 11 | c3 | g2
+&bass_a  = 11 | c3 . g3 . c3 . g3 . | a2 . e3 . a2 . e3 . | f2 . c3 . f2 . c3 . | g2 . d3 . g2 . b2 .
+&bass_b  = 11 | f2 . c3 . f2 . c3 . | g2 . d3 . g2 . d3 . | e2 . b2 . e2 . b2 . | a2 . e3 . a2 . e3 . | f2 . c3 . f2 . c3 . | g2 . d3 . g2 . b2 . | c3 . g3 . e3 . g3 . | c3 . . . g2 . . .
+
+# Drums. One instrument per bar: a tick-tock clock, off-beat hats, then a backbeat.
+&clock   = 3  | c6 c5 c6 c5
+&hats    = 2  | ~ c6 ~ c6 ~ c6 ~ c6
+&beat    = 7  | ~ c5 ~ c5
+
+&rest    = ~
+
+# --- Arrangement: intro 2, tune A 8, tune B 8 (18 bars, ~38 s, loops) ------
+
+pulse1 = &chime &tune_a &tune_b
+pulse2 = 4 | &rest*2 &comp_a*2 &comp_b
+wave   = &bass_in &bass_a*2 &bass_b
+noise  = &clock*2 &hats*8 &beat*8
