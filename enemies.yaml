@@ -359,7 +359,7 @@ enemies:
           - "The detour sign points at another detour sign."
         damage: 4-8
 
-  # --- The office (ids 10-12) -------------------------------------------
+  # --- The office (ids 10-13) -------------------------------------------
   - id: 10
     name: Coffee Machine
     sprite: enemy_coffee_machine.png
@@ -507,6 +507,48 @@ enemies:
           - "Any other business? Someone has other business."
           - "Can everyone see my screen? Nobody can see the screen."
         damage: 6-9
+
+  - id: 13
+    name: The Fridge
+    sprite: enemy_the_fridge.png
+    energy: 30
+    intro:
+      - "THE FRIDGE. Somebody's yogurt is open. It was not yours. It is now everyone's problem."
+    look:
+      - "Nine containers, one labelled DO NOT TOUCH (DAVE). Dave left in March."
+    defeat:
+      - "The door closes. It stays closed for almost a minute."
+    reward:
+      energy: 5
+      text:
+        - "Nothing in there was yours. You feel better anyway.\n\n+5 Energy."
+    take_damage:
+      THINK:
+        damage: 10-15
+        text:
+          - "You check the dates. The oldest item is from 2019."
+      TALK:
+        damage: 3-6
+        text:
+          - "You ask who owns the yogurt. Nobody answers. Nobody has ever answered."
+      EMAIL:
+        damage: 3-6
+        text:
+          - "You email all-staff about fridge etiquette. You get four replies."
+      INTERACT:
+        damage: 9-14
+        text:
+          - "You clear the shelves and bin everything that is not yours."
+    moves:
+      - text:
+          - "A Post-it: WHOEVER TOOK MY OAT MILK. It has been up since spring."
+        damage: 3-6
+      - text:
+          - "The door will not fully close. It never has."
+        damage: 2-5
+      - text:
+          - "The light inside flickers. Something in the back has its own weather."
+        damage: 0-3
 
   # --- Office tasks (ids 20-24) -----------------------------------------
   # The work itself, taken on at your own desk. Short fights, no story flags:

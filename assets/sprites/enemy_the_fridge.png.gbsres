@@ -1,0 +1,207 @@
+{
+  "_resourceType": "sprite",
+  "id": "b8f9f231-74aa-50c7-a246-b830af6f19a1",
+  "name": "enemy_the_fridge",
+  "symbol": "sprite_enemy_the_fridge",
+  "states": [
+    {
+      "id": "c0094d2f-48e2-56d6-8ac6-fd365080a375",
+      "name": "",
+      "animationType": "fixed",
+      "flipLeft": false,
+      "animations": [
+        {
+          "id": "763397f5-ba6d-5de3-be83-583f691e29ec",
+          "frames": [
+            {
+              "id": "f57bc673-8de7-5369-82e6-9f3e794600e0",
+              "tiles": [
+                {
+                  "id": "1dc1c700-1544-56c6-a555-7826fb4869af",
+                  "x": -8,
+                  "y": 16,
+                  "sliceX": 0,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "a130f203-ec10-5660-ac8f-6fd1722cf0cf",
+                  "x": -8,
+                  "y": 0,
+                  "sliceX": 0,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "c18e3e09-13df-5af0-a267-acd3c7e6f3e1",
+                  "x": 0,
+                  "y": 16,
+                  "sliceX": 8,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "30fdba23-eca4-5759-8f25-4848ad39270e",
+                  "x": 0,
+                  "y": 0,
+                  "sliceX": 8,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "64160caf-46f5-5ec6-aadf-8ac775c556f7",
+                  "x": 8,
+                  "y": 16,
+                  "sliceX": 16,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "38daad8f-e109-52cb-aafe-97a173317e73",
+                  "x": 8,
+                  "y": 0,
+                  "sliceX": 16,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "a4b21933-01c2-52f2-a947-24d8154dd3db",
+                  "x": 16,
+                  "y": 16,
+                  "sliceX": 24,
+                  "sliceY": 0,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                },
+                {
+                  "id": "5df6146a-19c4-578c-930c-edadb451ff8b",
+                  "x": 16,
+                  "y": 0,
+                  "sliceX": 24,
+                  "sliceY": 16,
+                  "flipX": false,
+                  "flipY": false,
+                  "palette": 0,
+                  "paletteIndex": 0,
+                  "objPalette": "OBP0",
+                  "priority": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c9c15269-03cb-5ba4-b6d2-d5b290f9f242",
+          "frames": [
+            {
+              "id": "5ff22d66-dfb6-5bab-9d3b-5f4d65223a2d",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "4cd2d1c1-d55a-5cf2-a9eb-fca4f3bcb62b",
+          "frames": [
+            {
+              "id": "4f31e8c9-2bac-5d15-b14c-a32b49907f09",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "dde25cde-7631-53ed-9266-5117d126bffd",
+          "frames": [
+            {
+              "id": "036c13ce-e6a7-5f69-adf0-109eeb2fe569",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "9274061f-f8d8-50e0-8b22-9050ab600852",
+          "frames": [
+            {
+              "id": "b84f14e2-66de-507c-a77f-745d7fe9321f",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "44c340bd-4c7a-5cb4-b119-4cba9a5a5ff8",
+          "frames": [
+            {
+              "id": "56071830-f7d9-51b5-9eff-31c5ee31b13b",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "ba78f13f-44d8-5ee8-bb0f-ad27f44aee2c",
+          "frames": [
+            {
+              "id": "a9380292-c525-5a43-85b8-c91efae9ec16",
+              "tiles": []
+            }
+          ]
+        },
+        {
+          "id": "8dba9d88-2d6a-5787-a6f0-f1f81db354c2",
+          "frames": [
+            {
+              "id": "1df78f1e-cd5f-58c4-9742-1c23b5d439cb",
+              "tiles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "canvasOriginX": 0,
+  "canvasOriginY": 0,
+  "boundsX": 0,
+  "boundsY": -8,
+  "boundsWidth": 16,
+  "boundsHeight": 16,
+  "animSpeed": 255,
+  "checksum": "",
+  "numTiles": 7,
+  "canvasWidth": 32,
+  "canvasHeight": 32,
+  "filename": "enemy_the_fridge.png",
+  "width": 32,
+  "height": 32
+}
